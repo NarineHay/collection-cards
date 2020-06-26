@@ -32,7 +32,7 @@ else{
     </form>
     
 <div class="d-flex ml-auto" id="header-right">
-    <div >Register or Log in</div>
+     <div><a href = "login-register.php" class="register">Register or Log in</a></div>
     <!-- <div >Rus</div> -->
     <!-- -------------------------- -->
     <div data-google-lang="<?php if($lng=='ru'){

@@ -1,0 +1,70 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.divimg{
+    position: relative;
+    width: 49px;
+    height: 26px;
+}
+.disc{   
+    width: 30px; 
+    position: absolute;
+}
+.oxak{
+    position: absolute;
+    width: 27px;
+    left: 1px;
+    top: 1px;
+}
+.discdiv > img{
+    width: 200px;
+    height: 200px;
+}
+.divspan{
+    position: absolute;
+    font-size: 8px;
+    left: 20px;
+    top: 5px;
+}
+.register{
+    color: white;
+}
+.register:hover{
+    text-decoration: none;
+    color: white;
+}
+#container-nav .dropdown-menu{
+    min-width: auto;
+    text-align: center;
+    padding: 0 0;
+    margin-top: 11px;
+    background: #94c6ce;
+}
+
+#container-nav .dropdown-item{
+    border-bottom: 1px solid #133960;
+    margin: 0 auto;
+    padding: 0 0;
+    white-space: pre-line;
+    padding: 6px 6px;
+}
+#container-nav .drit:last-child .dropdown-item{
+    border: none;
+}
+.drit{
+}
+#container-nav .nav-pills .show>.nav-link{
+    background-color: #6ea4ae!important; 
+}
+.drit > a{
+    color: #133960;
+}
+.drit > a:hover{
+    background: #fad565;
+}
+@media (max-width: 1000px){
+    .dvbtn{
+       text-align: left; 
+    }
+}

@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.dvbtn{
+    text-align: right;
+    margin-top: 200px;
+    margin-right: 31px;
+}
+.log-in{ 
+    width: 180px;
+    height: 40px;
+    border-radius: 9px;
+    background: #fad565;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #fad565;
+}
+.discdiv{
+    margin: 115px auto;
+    width: 400px;
+    height: 200px;
+}
+.collect{
+    font-family: "Archive Regular", serif !important ;
+    font-size: 42px;
+    color: #c90e36;
+    margin-top: 32px;
+}
+@media (max-width: 600px){
+    .dvbtn{
+    margin-left: 10px;
+    margin-top: 10px;   
+    }
+    .discdiv{
+        margin-left: 10px;
+    }
+}
