@@ -2,6 +2,10 @@
     padding: 0;
     margin: 0;
 }
+@font-face {
+    font-family: "Tahoma Regular";
+    src: url("../fonts/911Fonts.com_TahomaRegular__-_911fonts.com_fonts_ADPX.ttf") format("ttf");
+  }
 .divimg{
     position: relative;
     width: 49px;

@@ -1,6 +1,8 @@
 <?php
 include "header.php";
-?>
+?>  
+<link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+<script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/index.css">
@@ -8,7 +10,6 @@ include "header.php";
 </head>
 <body>
     <?php include "navbar.php"; ?>
-
 <section class="log-reg">
 	<div class="container">
 		<div class="row">
@@ -54,32 +55,38 @@ include "header.php";
 			 		<div class="header-log">
 			 			<p class="first-par">REGISTER</p>
 			 		</div>
-			 		<dir class="divpad">
+			 		<div class="divpad">
 			 			<form>
-				 			<br>
 				 			<p class="parag-log">Let's get you in board</p>
 				 			<div class="input-group dvlog">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fa fa-user inp7" aria-hidden="true"></i></span>
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-user inp7" aria-hidden="true"></i></span>
+								</div>
+								<input type="text" placeholder="Name/Nickname" class="form-control" name="register_name"  pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="" class="inpname">
 							</div>
-							<input type="text" placeholder="Name/Nickname" class="form-control" name="register_name"  pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="" class="inpname">
+							
+							<div class="input-group dvlog dvmarg">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-map-marker inp7" aria-hidden="true"></i></span>
+								</div>
+								<select class="selectpicker countrypicker selpiker" data-flag="true"></select>
 							</div>
-							<br>
-							<div class="input-group dvlog">
+							
+							<div class="input-group dvlog dvmarg">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fa fa-envelope-o inp7" aria-hidden="true"></i></span>
 							</div>
 							<input type="email" placeholder="Email" class="form-control" name="register_email"  pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="" class="inpname">
 							</div>
-							<br>
-							<div class="input-group dvlog">
+							
+							<div class="input-group dvlog dvmarg">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fa fa-lock inp7" aria-hidden="true"></i></i></span>
 							</div>
 							<input type="password" name="register_password" class="form-control " placeholder="Password" pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="">
 							</div>
-							<br>
-							<div class="input-group dvlog">
+							
+							<div class="input-group dvlog dvmarg">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fa fa-lock inp7" aria-hidden="true"></i></i></span>
 							</div>
@@ -91,15 +98,17 @@ include "header.php";
 							<br>
 							<p class="label">If you don't receive email, please try again</p>
 						</form>
-			 		</dir>
+			 		</div>
 			 	</div>
 			 </div>
 		</div>
 	</div>
 </section>
-
 <?php
 include "footer.php";
 ?>
+<script>
+    $('.countrypicker').countrypicker();
+  </script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+}
+.real{
+	margin-top: 150px;
+}
+.section1{
+	text-align: center;
+}
+.carusel{	
+	margin: 47px;
+}
+.image{
+	width: 200px;
+	height: 190px;
+	border-radius: 110px;
+}
+.image img{
+	width: 100%;
+	height: 100%;
+	border-radius: 110px;
+} 
+.color{
+	color: #133960;
+}
