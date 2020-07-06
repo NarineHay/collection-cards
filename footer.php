@@ -35,3 +35,35 @@
 </section>
 <script src="js/footer.js"></script>
 <script src="googleTranslate/googleTranslate.js"></script>
+<script>
+     // dropdown-toggle class not added for submenus by current WP Bootstrap Navwalker as of November 15, 2017.
+$('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+// $('.dropdown-item').on('mouseover', function() {
+//   $(this).addClass('kk')
+// })
+// $('.dropdown-item').on('mouseover', function() {
+//   $(this).addClass('kk')
+// })
+$('.dropdown-menu a.dropdown-toggle').on('mouseover', function(e) {
+ 
+  if (!$(this).next().hasClass('show')) {
+    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+  }
+  var $subMenu = $(this).next(".dropdown-menu");
+  $subMenu.toggleClass('show');
+  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    $('.dropdown-menu > .dropdown .show').removeClass("show");
+  });
+  return false;
+});
+// $('.dropdown-menu a.dropdown-toggle').on('mouseout', function(e) {
+  
+//   $(this).next().find('li >a').each(function(){
+//     if(!$(this).hasClass('kk')){
+//    console.log('ok')
+
+//       // $('.dropdown-menu > .dropdown .show').removeClass("show");
+//     }
+//  })
+// })
+</script>

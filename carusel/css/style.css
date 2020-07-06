@@ -43,9 +43,9 @@
 
 #testimonials .testimonial-item {
   box-sizing: content-box;
-  padding: 30px 30px 0 30px;
+  /* padding: 30px 30px 0 30px; */
   margin: 30px 15px;
-  text-align: center;
+  /* text-align: center; */
   min-height: 350px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
 }
@@ -91,11 +91,6 @@
   width: 37px;
 }
 
-#testimonials .testimonial-item p {
-  font-style: italic;
-  margin: 0 auto 15px auto;
-}
-
 #testimonials .owl-nav, #testimonials .owl-dots {
   margin-top: 5px;
   text-align: center;
@@ -114,3 +109,40 @@
   background-color: #50d8af;
 }
 
+/* -------------------my style-------------- */
+#clients .owl-nav, #testimonials .owl-nav{
+    position: absolute;
+    font-size: 95px;
+    top: 10px;
+    width: 100%;
+    display: block;
+}
+#testimonials .owl-nav{
+  top: 136px;
+  left: -30px;
+    width: 106%;
+}
+.owl-prev{
+  display: block !important;
+  position: absolute;
+    left: 0;
+  outline: none !important;
+}
+.owl-next{
+  display: block !important;
+  right: 0;
+    position: absolute;
+  outline: none !important;
+}
+.owl-prev>span, .owl-next>span{
+  color: #bbd4d9;
+}
+.owl-dots{
+  display: none;
+}
+@media (max-width:425px){
+	#testimonials .owl-nav{
+		
+		left: -12px;
+	}
+}
