@@ -20,12 +20,14 @@
     margin: 115px auto;
     width: 400px;
     height: 200px;
+    text-align: center;
 }
 .collect{
-    font-family: "Archive Regular", serif !important ;
+    font-family:  "Tahoma Regular", serif !important ;
     font-size: 42px;
     color: #c90e36;
     margin-top: 32px;
+    font-weight: 700;
 }
 @media (max-width: 600px){
     .dvbtn{
@@ -33,6 +35,6 @@
     margin-top: 10px;   
     }
     .discdiv{
-        margin-left: 10px;
+        margin-left: 10px
     }
 }
