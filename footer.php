@@ -1,28 +1,28 @@
 <section id="footer">
     <div class="container">
         <div class="row row-collection">
-            <div class="col-md-2 col-sm-6 col-xs-12 row-div">
+            <div class="col-md-3 col-sm-6 col-xs-12 row-div">
                 <p>About us</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-12 row-div">
+            <div class="col-md-3 col-sm-6 col-xs-12 row-div">
             <p>Collections</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-12 row-div">
+            <div class="col-md-3 col-sm-6 col-xs-12 row-div">
             <p>Contact</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
             </div>
-            <div class="col-md-5 col-sm-6 col-xs-12 row-div social-col d-flex justify-content-center">
+            <div class="col-md-3 col-sm-6 col-xs-12 row-div social-col d-flex justify-content-center">
                 <div classs="social-center">
                 <p>Social media</p>
                 <div class="d-flex justify-content-center">
                      <div class="social-div"><i id="i-facebook" class="fa fa-facebook"></i></div>
                      <div class="social-div"><i class="fa fa-twitter"></i></div>
                      <div class="social-div"><i class="fa fa-instagram"></i></div>
-                     <div class="social-div i-telegram"><i class='fab fa-telegram-plane'></i></div>
+                     <div class="social-div i-telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i></div>
                 </div>
-                <button class="social-button">Subscribe to update</button>
+                <button class="social-button" data-toggle="modal" data-target="#exampleModal">Subscribe to update</button>
               </div>
             </div>
         </div>
@@ -33,17 +33,34 @@
     <p>&copy WEBEX TECHNOLOGIES LLC &copy<span id="year"></span><p>
     </div>
 </section>
+<!----------------------------modal for subscribe------------------------------->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subscribe to update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please enter your email address below to subscribe from FollowMyCollection email updates.</p>
+        <input class="mail subscribe_mail form-control place_inp" placeholder="email">
+               <p></p>
+              <button class="submi subscribe_btn btn subscribe">Subscribe to update</button>
+             <div class="result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------------------------------------------------------------------->
 <script src="js/footer.js"></script>
+<script src="js/subscribe.js"></script>
 <script src="googleTranslate/googleTranslate.js"></script>
 <script>
-     // dropdown-toggle class not added for submenus by current WP Bootstrap Navwalker as of November 15, 2017.
+    
 $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
-// $('.dropdown-item').on('mouseover', function() {
-//   $(this).addClass('kk')
-// })
-// $('.dropdown-item').on('mouseover', function() {
-//   $(this).addClass('kk')
-// })
+
 $('.dropdown-menu a.dropdown-toggle').on('mouseover', function(e) {
  
   if (!$(this).next().hasClass('show')) {
@@ -56,14 +73,5 @@ $('.dropdown-menu a.dropdown-toggle').on('mouseover', function(e) {
   });
   return false;
 });
-// $('.dropdown-menu a.dropdown-toggle').on('mouseout', function(e) {
-  
-//   $(this).next().find('li >a').each(function(){
-//     if(!$(this).hasClass('kk')){
-//    console.log('ok')
 
-//       // $('.dropdown-menu > .dropdown .show').removeClass("show");
-//     }
-//  })
-// })
 </script>

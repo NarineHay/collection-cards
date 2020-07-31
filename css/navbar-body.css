@@ -4,7 +4,7 @@
 }
 .dvbtn{
     text-align: right;
-    margin-top: 200px;
+    margin-top: 115px;
     margin-right: 31px;
 }
 .log-in{ 
@@ -17,16 +17,16 @@
     border: 1px solid #fad565;
 }
 .discdiv{
-    margin: 115px auto;
-    width: 400px;
+    margin: 92px auto;
+    width: 88%;
     height: 200px;
     text-align: center;
 }
 .collect{
-    font-family:  "Tahoma Regular", serif !important ;
-    font-size: 42px;
+   font-family: "Tahoma Regular", serif !important;
+    font-size: 32px;
     color: #c90e36;
-    margin-top: 32px;
+    margin-top: 11px;
     font-weight: 700;
 }
 @media (max-width: 600px){
@@ -36,5 +36,15 @@
     }
     .discdiv{
         margin-left: 10px
+    }
+}
+@media (max-width: 375px){
+    .collect{
+        font-size: 41px;
+    }
+}
+@media (max-width: 320px){
+    .collect{
+        font-size: 35px;
     }
 }

@@ -1,0 +1,62 @@
+.checklist{
+    margin:150px 0;
+}
+ h1{
+    font-weight:bold;
+    color: #133960;
+}
+form label{
+    font-weight:bold;
+     color: #133960;
+}
+.btn_check{
+    width:150px;
+    background: #fad565;
+}
+#ard {
+    font-weight:bold;
+    color: #133960;
+}
+
+button{
+    color: #133960;
+}
+/* custom_checklist_checklist*/
+  table th  {
+      width:60px;
+      line-height:20px;
+      text-align:center;
+     
+    }
+    table  tr:nth-child(1){
+        height:70px;
+    }
+    th{
+   
+    font-size:10px;
+    position:relative;
+}
+th>select{
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+    .personImg{
+       /* position:absolute;*/
+        height:100%;
+        width:100%;
+    }
+   .textcheck{
+       padding:0 50px;
+   }
+   @media only screen and (max-width: 600px){
+        .textcheck{
+           
+        padding:20px;
+        }
+    }
+   
+    
+
+   
+    

@@ -2,20 +2,25 @@
 /* Clients Section
 --------------------------------*/
 #clients {
-  padding: 30px 0;
+  padding: 10px 0 0;
+}
+#clients .container {
+  padding-top: 24px;
 }
 
 #clients img {
   max-width: 100%;
   opacity: 0.5;
   transition: 0.3s;
-  padding: 15px 0;
+  
 }
 
 #clients img:hover {
   opacity: 1;
 }
-
+#clients .row{
+    margin-left: 0 !important;
+}
 #clients .owl-nav, #clients .owl-dots {
   margin-top: 5px;
   text-align: center;
@@ -38,16 +43,16 @@
 /* Testimonials Section
 --------------------------------*/
 #testimonials {
-  padding: 30px 0;
+  padding: 4px 0 30px;
 }
 
 #testimonials .testimonial-item {
   box-sizing: content-box;
   /* padding: 30px 30px 0 30px; */
-  margin: 30px 15px;
+  margin: 5px 10px;
   /* text-align: center; */
-  min-height: 350px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  min-height: 332px;
+  /*box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);*/
 }
 
 @media (max-width: 767px) {
@@ -118,7 +123,7 @@
     display: block;
 }
 #testimonials .owl-nav{
-  top: 136px;
+  top: 74px;
   left: -30px;
     width: 106%;
 }
@@ -140,9 +145,39 @@
 .owl-dots{
   display: none;
 }
+@media (max-width:2560px) and (min-width:1440px){
+	#testimonials .owl-nav{
+	    top: 96px;
+		width: 106%;
+		left: -34px;
+	}
+
+}
+@media (max-width:1440px) and (min-width:1240px){
+	#testimonials .owl-nav{
+	    top: 96px;
+		width: 106%;
+		left: -32px;
+	}
+}
+@media (max-width:768px) and (min-width:425px){
+	#testimonials .owl-nav{
+	     top: 142px;
+		width: 105%;
+		left: -17px;
+	}
+}
 @media (max-width:425px){
 	#testimonials .owl-nav{
-		
-		left: -12px;
+	     top: 142px;
+		width: 108%;
+		left: -4%;
+	}
+}
+@media (max-width:425px) and (min-width: 375px){
+	#testimonials .owl-nav{
+	     top: 176px;
+		width: 108%;
+		left: -4%;
 	}
 }

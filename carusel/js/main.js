@@ -21,10 +21,10 @@
         items: 3
       },
       1024: {
-        items: 4
+        items: 5
       },
       1440: {
-        items: 4
+        items: 5
       }
     }
   });

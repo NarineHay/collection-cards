@@ -11,6 +11,27 @@
     width: 49px;
     height: 26px;
 }
+.row-collection {
+    padding-bottom: 60px;
+}
+.fab {
+    font-family: "Font Awesome 5 Brands";
+}
+.userdiv{
+    display: inline-block;
+    width: 42px;
+    height: 29px;
+}
+.logout{
+    margin-left:21px;
+}
+.logout > a{
+    color: white;
+}
+.user{
+    width: 100%;
+    height: 100%;
+}
 .disc{   
     width: 30px; 
     position: absolute;
@@ -22,8 +43,8 @@
     top: 1px;
 }
 .discdiv > img{
-    width: 200px;
-    height: 200px;
+   width: 180px;
+    height: 184px;
 }
 .divspan{
     position: absolute;
@@ -37,35 +58,6 @@
 .register:hover{
     text-decoration: none;
     color: white;
-}
-#container-nav .dropdown-menu{
-    min-width: auto;
-    text-align: center;
-    padding: 0 0;
-    margin-top: 11px;
-    background: #94c6ce;
-}
-
-#container-nav .dropdown-item{
-    border-bottom: 1px solid #133960;
-    margin: 0 auto;
-    padding: 0 0;
-    white-space: pre-line;
-    padding: 6px 6px;
-}
-#container-nav .drit:last-child .dropdown-item{
-    border: none;
-}
-.drit{
-}
-#container-nav .nav-pills .show>.nav-link{
-    background-color: #6ea4ae!important; 
-}
-.drit > a{
-    color: #133960;
-}
-.drit > a:hover{
-    background: #fad565;
 }
 @media (max-width: 1000px){
     .dvbtn{

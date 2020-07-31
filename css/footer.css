@@ -4,7 +4,6 @@
 }
 .row-div{
     margin-top: 60px;
-    margin-right: 15px;
 }
 .row-div p:first-child, .social-p{
     font-size: 22px;
@@ -40,7 +39,8 @@
     outline: none;
     background: #fad565;
     border-radius: 5px;
-    font-size: 12x !important;
+    font-size: 15px !important;
+    cursor: pointer;
 }
 #under-footer{
     background: rgb(110,164,174);
@@ -54,4 +54,28 @@
 }
 #year{
     font-size: 12px;
+}
+/*--------------modal--------------------*/
+.modal-header{
+    background: #133960;
+}
+.modal-header h5{
+    color: #fff !important;
+}
+.modal-body{
+    padding: 30px 60px !important;
+}
+.modal-body input{
+    border: 1px solid #6ea4ae;
+}
+.close span{
+    color: #fff;
+}
+.subscribe{
+    width: 100%;
+    background: #fad565;
+}
+.result{
+    text-align: center;
+    padding-top: 14px;
 }

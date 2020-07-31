@@ -6,11 +6,6 @@
     font-family: "Tahoma Regular";
     src: url("../fonts/911Fonts.com_TahomaRegular__-_911fonts.com_fonts_ADPX.ttf") format("ttf");
 }
-@font-face{
-    font-family: "Archive Regular";
-    src: url("../fonts/Archive-Regular.ttf") format("ttf"),
-         url("../fonts/Archive-Regular.otf") format("otf");
-}
 body{
 font-family: "Tahoma Regular", serif !important; 
 }
@@ -20,10 +15,12 @@ font-family: "Tahoma Regular", serif !important;
 }
 .selpiker{
     color: #6ea4ae;
-    width: 280px;
+    width: 282px;
     height: 38px;
     border-color: #6ea4ae;
     padding-left: 8px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 .log-reg{
     padding-top: 165px;
@@ -33,7 +30,7 @@ font-family: "Tahoma Regular", serif !important;
     width: 475px;
     height: 520px;
     border: 1px solid #6ea4ae;
-    margin-top: 20px;
+    margin-top: 8px;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -51,8 +48,16 @@ font-family: "Tahoma Regular", serif !important;
 .inpname{
     font-size: 20px;
 }
-::placeholder {
-  color: #6ea4ae!important;
+.place_inp::-webkit-input-placeholder{ 
+   color: #6ea4ae;  
+}
+
+.place_inp::-moz-placeholder { 
+   color: #6ea4ae;  
+}
+
+.place_inp:-ms-input-placeholder { 
+   color: #6ea4ae;  
 }
 .check{
     margin-top: 26px;
@@ -72,6 +77,9 @@ font-family: "Tahoma Regular", serif !important;
     font-size: 15px;
     border: none;
 }
+.log-in:hover {
+    cursor: pointer;
+}
 .first-par{
     font-size: 25px;
     color: white;
@@ -90,6 +98,7 @@ font-family: "Tahoma Regular", serif !important;
 form .input-group-text{
     background: #6ea4ae;  
     text-align: center;
+    border: none;
 }
 form .input-group-text .fa{
     color: #94c6ce;
@@ -97,8 +106,34 @@ form .input-group-text .fa{
 form .input-group-text .inp7{
      width: 18px;
 }
-form input{
+.divpad form input{
     border: 1px solid #6ea4ae!important; 
+}
+.forgot-p{
+    margin: 0 !important;
+}
+#forgot-pass-a:hover {
+    color: #6ea4ae;
+}
+/*--------------modal--------------------*/
+.modal-header{
+    background: #133960;
+}
+.modal-header h5{
+    color: #fff !important;
+}
+.modal-body{
+    padding: 30px 60px;
+}
+.modal-body input{
+    border: 1px solid #6ea4ae;
+}
+.close span{
+    color: #fff;
+}
+.result{
+    text-align: center;
+    padding-top: 14px;
 }
 @media (max-width:1200px){
     .log{
@@ -122,6 +157,34 @@ form input{
     }
     .parag-log{
         font-size: 20px;
+    }
+}
+@media (max-width:425px){
+   .selpiker{
+        width: 242px; 
+   }
+   .label{
+     font-size: 17px;
+   }
+}
+@media (max-width:375px){
+   .selpiker{
+        width: 192px; 
+   }
+   .label{
+     font-size: 14px;
+   }
+}
+@media (max-width:320px){
+   .selpiker{
+        width: 137px; 
+        font-size: 15px;
+   }
+   .label{
+     font-size: 13px;
+   }
+   form input{
+    font-size: 15px!important; 
     }
 }
 
