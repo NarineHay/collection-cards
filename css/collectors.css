@@ -4,12 +4,13 @@
 }
 .real{
 	margin-top: 150px;
+	font-size:36px;
 }
 .section1{
 	text-align: center;
 }
 .carusel{	
-	margin: 47px;
+	margin: 40px;
 }
 .image{
 	width: 200px;
@@ -23,4 +24,9 @@
 } 
 .color{
 	color: #133960;
+}
+.point{
+	font-size: 20px;
+    color: #e20a0a;
+    font-weight: 700;
 }

@@ -11,7 +11,7 @@ else{
 <section id="fix">
 <header class="navbar navbar-expand-lg navbar-light bg-light" id="head-er">
 <div class="container ">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="/test/collection-cards/">
     <div id="logo"> 
     <img src="logo-png.png" id="logo">
     </div> 
@@ -58,7 +58,7 @@ else{
   <div class="collapse navbar-collapse multi-collapse" id="navbarSupportedContent2">
     <ul class="navbar-nav nav-pills nav-fill" id="nav-ul">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/test/collection-cards/">Home <span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Collections</a>
@@ -147,15 +147,11 @@ else{
                                </ul>
                            </li>
                            <li class="dropdown">
-                               <a class="dropdown-item" href="#">Other sports</a>
+                               <a class="dropdown-item" href="#">Add collection</a>
                                <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
+                                   <li><a class="dropdown-item" href="#">Base</a></li>
+                                   <li><a class="dropdown-item" href="#">Custom</a></li>
+                                   <li><a class="dropdown-item" href="#">Personal</a></li>
                                </ul>
                            </li>
                        </ul>
@@ -238,22 +234,18 @@ else{
                                </ul>
                            </li>
                            <li class="dropdown">
-                               <a class="dropdown-item" href="#">Other sports</a>
+                               <a class="dropdown-item" href="#">Add collection</a>
                                <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
+                                   <li><a class="dropdown-item" href="#">Base</a></li>
+                                   <li><a class="dropdown-item" href="#">Custom</a></li>
+                                   <li><a class="dropdown-item" href="#">Personal</a></li>
                                </ul>
                            </li>
                        </ul>
                    </li>
                    <!-- ----------------New releases calendar--------------------- -->
-                   <li class="dropdown">
-                       <a class="dropdown-item" href="#">New releases calendar</a>
+                   <li class="">
+                       <a class="dropdown-item" href="#">New releases<p>calendar</p> </a>
                    </li>
                </ul>
         <!-- -------------------- -->
@@ -264,18 +256,24 @@ else{
       <!-- ---------------------------------- -->
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Checklists</a>
-      </li> -->
+      </li>-->
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Template</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Store</a>
-      </li><li class="nav-item">
+      </li>
+      <li class="nav-item">
         <a class="nav-link disabled" href="#">Statistics</a>
-      </li><li class="nav-item">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">News</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link disabled" href="#">About</a>
       </li>
-      </li><li class="nav-item">
+      </li>
+      <li class="nav-item">
         <a class="nav-link disabled" href="#">Contact us</a>
       </li>
     </ul>

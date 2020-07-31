@@ -17,7 +17,7 @@ font-family: "Tahoma Regular", serif !important;
 }
 h2,h3,h4,h5,h6{
     font-family:  "Tahoma Regular", serif !important ;
-    padding: 30px 0 20px;
+    padding: 2px 0 0;
     color: #133960 !important;
     font-weight: 700 !important;
 
@@ -37,15 +37,22 @@ h2,h3,h4,h5,h6{
     padding: 30px 0;
     background: rgb(19,57,96) !important;
     color: #fff;
-    height: 88px;
+    height: 68px;
    
 }
 #header-right > div{
-padding: 0 10px;
-cursor: pointer;
+    padding: 0 5px;
+    cursor: pointer;
 }
 #head-search{
     width: 424px ;
+    height:34px;
+}
+#head-search input{
+   height: 34px; 
+}
+#head-search>div{
+   height: 34px; 
 }
 #icon-search{
     font-size: 26px;
@@ -71,13 +78,13 @@ cursor: pointer;
 }
 #nav{
     background: rgb(110,164,174);
-    height: 60px;
+    height: 42px;
     
 } 
 #sub-nav{
     background: rgb(110,164,174) !important;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
+    /*padding-right: 0;*/
     
 }
 .navbar-nav {

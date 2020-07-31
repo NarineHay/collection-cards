@@ -12,7 +12,7 @@ include "header.php";
   <link href="carusel/css/style.css" rel="stylesheet">
 </head>
 <body class="page_fix">
-    <?php include "navbar.php"; ?>
+    <?php include "cookie.php";?>
 <section id="banner">
     <div class="container">
         <div class="banner-text">
@@ -22,232 +22,172 @@ include "header.php";
         </div>
     </div>
 </section>
-<!-- ------------------------new collection---------------------------------- -->
-
-<section id="new-collection">
-    <div class="container">
-        <h2 class="text-center text-uppercase">new collection</h2>
-        <div class="row row-collection">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d" >
-                <div class="collect-card">
-                <div class="img-card">
-                    <img src="images/11.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/22.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/33.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/44.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/55.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/66.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/77.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">
-            <div class="img-card">
-                    <img src="images/88.png"> 
-                </div>
-                <div class="description-card">
-                  <div class="d-flex justify-content-between">
-                      <span>Description</span>
-                      <div class="plus-icon">+</div>
-                  </div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>
-                </div>
-                <div class="d-flex collector-cad bd-highlight mb-3">
-                    <div class="author-avatar p-2 bd-highlight"></div>
-                    <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
-                    </div>
-                    <div class="align-self-center ml-auto p-2 bd-highlight">
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                        <span class="star"><i class="fa fa-star-o"></i></span>
-                    </div>
-                </div>
-            </div></div>
-        </div>
-    </div>
-</section>
 <!-- ------------------------section top 20 collections---------------------------------- -->
 
 
    <?php
        include "carusel/carusel-top-20-collections.php";
-       include "carusel/carusel.php";
+       include "carusel/carusel-top-20-collectors.php";
+       include "carusel/carusel-new_releases.php";
+       include "carusel/carusel-store-rating.php";
+       
     ?> 
+<!-- ------------------------new releases---------------------------------- -->
+
+<!--<section id="new-collection">-->
+<!--    <div class="container">-->
+<!--        <h2 class="text-center text-uppercase">new collection</h2>-->
+<!--        <div class="row row-collection">-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d" >-->
+<!--                <div class="collect-card">-->
+<!--                <div class="img-card">-->
+<!--                    <img src="images/11.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/22.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/33.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/44.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/55.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/66.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/77.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-7 row-d"><div class="collect-card">-->
+<!--            <div class="img-card">-->
+<!--                    <img src="images/88.png"> -->
+<!--                </div>-->
+<!--                <div class="description-card">-->
+<!--                  <div class="d-flex justify-content-between">-->
+<!--                      <span>Description</span>-->
+<!--                  </div>-->
+<!--                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi laudantium </p>-->
+<!--                </div>-->
+<!--                <div class="d-flex collector-cad bd-highlight mb-3">-->
+<!--                    <div class="author-avatar p-2 bd-highlight"></div>-->
+<!--                    <div class="p-2 bd-highlight">-->
+<!--                        <p class="author-name">Author name</p>-->
+<!--                        <p class="country">Country</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
    <?php
        include "footer.php";
    ?>

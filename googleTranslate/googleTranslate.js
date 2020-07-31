@@ -3,7 +3,7 @@ const googleTranslateConfig = {
 };
 
 function TranslateInit() {
-
+console.log($.cookie('googtrans'))
     let code = TranslateGetCode();
     // Находим флаг с выбранным языком для перевода и добавляем к нему активный класс
     // $('[data-google-lang="' + code + '"]').addClass('language__img_active');
@@ -13,6 +13,11 @@ function TranslateInit() {
         // То очищаем куки
         TranslateClearCookie();
     }
+    if( $.cookie('googtrans')=='/auto/ru'){
+            $('.owl-next>span').css("font-size","58px")
+            $('.owl-prev>span').css("font-size","58px")
+        console.log('ooo')
+        }
 
     // Инициализируем виджет с языком по умолчанию
     new google.translate.TranslateElement({
@@ -52,4 +57,7 @@ function TranslateSetCookie(code) {
     $.cookie("googtrans", "/auto/" + code, {
         domain: "." + document.domain,
     });
+    console.log($.cookie('googtrans'))
+    
+        
 }
