@@ -94,29 +94,33 @@
                                         <span class="sidebar-normal">Sport Type</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </div>
-                    </li>
-              
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                            <i class="nc-icon nc-puzzle-10"></i>
-                            <p>
-                                Pages
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse " id="pagesExamples">
-                            <ul class="nav">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="../login/login.php">
-                                        <span class="sidebar-mini">LP</span>
-                                        <span class="sidebar-normal">Login Page</span>
+                                    <a class="nav-link" href="../banner/banner.php">
+                                        <span class="sidebar-mini">B</span>
+                                        <span class="sidebar-normal">Banner</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?out">
+                            <i class="nc-icon nc-button-power"></i>
+                            <p>
+                               Log Out
+                                
+                            </p>
+                        </a>
+                        <!--<div class="collapse " id="pagesExamples">-->
+                        <!--    <ul class="nav">-->
+                        <!--        <li class="nav-item ">-->
+                        <!--            <a class="nav-link" href="../login/login.php">-->
+                        <!--                <span class="sidebar-mini">LP</span>-->
+                        <!--                <span class="sidebar-normal">Login Page</span>-->
+                        <!--            </a>-->
+                        <!--        </li>-->
+                        <!--    </ul>-->
+                        <!--</div>-->
                     </li>
                 </ul>
             </div>
@@ -203,3 +207,15 @@
                     </div> -->
                 </div>
             </nav>
+            <?php
+            if(isset($_GET['out'])){
+                unset($_SESSION['login']);
+                ?>
+                <script> 
+                location.href="../index.php"
+               </script>
+                <?php
+            }
+            
+            
+            ?>

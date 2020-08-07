@@ -51,7 +51,7 @@ else{
 </div>
 </header>
   <!-- --------------------------- -->
-  
+
   <div id="nav" >
     <div class="container" id="container-nav">
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center" id="sub-nav">
@@ -67,10 +67,10 @@ else{
         <a class="nav-link dropdown-toggle" id="nav-products" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Products
         </a>
-        
+
         <!-- -------- -->
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                   
+
                    <li class="dropdown">
                        <a class="dropdown-item" href="#">Checklists</a>
                        <ul class="dropdown-menu">
@@ -157,7 +157,7 @@ else{
                        </ul>
                    </li>
                    <!-- -----------------------SETS----------------------- -->
-                   
+
                    <li class="dropdown">
                        <a class="dropdown-item" href="#">Sets</a>
                        <ul class="dropdown-menu">
@@ -249,10 +249,10 @@ else{
                    </li>
                </ul>
         <!-- -------------------- -->
-        
+
       </li>
       <!-- ----------------------------- -->
-     
+
       <!-- ---------------------------------- -->
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Checklists</a>
@@ -271,7 +271,6 @@ else{
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">About</a>
-      </li>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Contact us</a>

@@ -1,5 +1,9 @@
 <?php
            include "../heder.php";
+           if(empty($_SESSION['login']) || $_SESSION['login']!="admin"){
+          
+               header('location:../index.php');
+          }
 
         ?>
     <body>
