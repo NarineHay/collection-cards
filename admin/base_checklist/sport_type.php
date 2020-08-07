@@ -45,8 +45,8 @@
                                                     while($row=mysqli_fetch_assoc($result)){
                                                         $count++;
                                                         echo "  <tr>
-                                                               <td class='year_releases'>".$count."</td>
-                                                               <td class='c_producer'>".$row['sport_type']."</td>
+                                                               <td class=''>".$count."</td>
+                                                               <td class='sport_type'>".$row['sport_type']."</td>
                                                                <td class='name_collection'></td>
                                                                
                                                                 <td class='text-right'>
