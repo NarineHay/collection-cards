@@ -2,12 +2,15 @@
 	box-sizing: border-box;
 	margin: 0;
 }
+ul li{
+    font-size:21px;
+}
 .section1{
 	margin-top: 150px;
 	margin-bottom: 140px;
 }
 .releases{
-    font-size:36px;
+    font-size:32px;
 }
 .style{
 	margin-top: 33px;
@@ -16,7 +19,7 @@
 	padding: 13px; 
 }
 .title{
-	font-size: 31px;
+	font-size: 27px;
 	color: #133960;
 }
 .releases-item-img{
@@ -30,12 +33,13 @@
 	height: 100%;
 }
 .contentimage{
-	height: 252px;
+	height: 222px;
 }
 .releases-item-text ul{
-	font-size: 20px;
-	margin-top: 30px;
-	padding-left: 61px;
+	font-size: 17px;
+	margin-top: 19px;
+	padding-left: 35px;
+	display: inline-block;
 }
 .pictures{
 	text-align: right;
@@ -43,8 +47,8 @@
 	;
 }
 .smallimg{
-	width: 60px;
-    height: 60px;
+	width: 55px;
+    height: 55px;
     display: inline-block;
     margin-left: 5px;
 }

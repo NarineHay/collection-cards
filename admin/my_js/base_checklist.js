@@ -34,25 +34,28 @@
                      $(this).parent().parent().find('td').css("border","none")
                      var t=$(this).parent().parent()
                                           var c_id=$(this).attr('name')
-                                          var year_releases=t.find('.year_releases').html()
-                                          var c_producer=t.find('.c_producer').html()
-                                          var name_collection=t.find('.name_collection').html()
                                           var c_number=t.find('.c_number').html() 
                                           var c_name=t.find('.c_name').html()       
                                           var c_team=t.find('.c_team').html()
                                           var c_set_type=t.find('.c_set_type').html()
-                                          var c_sport_type=t.find('.c_sport_type').html()
                                           var c_parallel=t.find('.c_parallel').html()
                                           var c_print_run=t.find('.c_print_run').html()
                                      
                                           $.ajax({
                                              type: "post",
                                              url: "save_changed_base_checklist.php",
-                                             data: {card_id: c_id, year_of_releases: year_releases, producer: c_producer, name_of_collection: name_collection,
-                                                    card_number: c_number, card_name: c_name, team: c_team, set_type: c_set_type, sport_type: c_sport_type,
-                                                    parallel: c_parallel, print_run: c_print_run },
+                                             data: {card_id: c_id, card_number: c_number, card_name: c_name, team: c_team, set_type: c_set_type, 
+                                              parallel: c_parallel, print_run: c_print_run },
                                              success: function(){
-                                                 location.reload()
+                                                //  location.reload()
+                                                 var table = $('#example').DataTable();
+                                                 var tr = $('#example tbody tr:eq(0)');
+ 
+                                                 tr.find('td:eq(0)').html( 'Updated' );
+                                                 table
+                                             .rows( tr )
+                                             .invalidate()
+                                             .draw();
                                              }
                                             })
 
@@ -65,6 +68,34 @@
                     $(this).find('i').toggleClass('fa-save').toggleClass('fa-edit')
             
         });
+
+        // ---------copy row--------------------
+        table.on('click', '.copy', function(e) {
+            e.preventDefault();
+            console.log('copy')
+              var t=$(this).parent().parent()
+                var rel_id=t.attr('name')
+                console.log(rel_id)
+                  var c_id=$(this).attr('name')
+                  var c_number=t.find('.c_number').html() 
+                  var c_name=t.find('.c_name').html()       
+                  var c_team=t.find('.c_team').html()
+                  var c_set_type=t.find('.c_set_type').html()
+                  var c_parallel=t.find('.c_parallel').html()
+                  var c_print_run=t.find('.c_print_run').html()
+
+                   $.ajax({
+                          type: "post",
+                          url: "copy_row_base_checklist.php",
+                          data: {realese_id: rel_id, card_id: c_id, card_number: c_number, card_name: c_name, team: c_team, set_type: c_set_type,
+                                 parallel: c_parallel, print_run: c_print_run },
+                          success: function(){
+                             location.reload()
+                          }
+                        })
+           
+
+          })
 
         // Delete a record
         table.on('click', '.remove', function(e) {

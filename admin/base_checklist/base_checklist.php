@@ -5,11 +5,13 @@
                header('location:../index.php');
           }
 
+
         ?>
     <body>
         <?php
            include "../menu.php";
            include "../../config/con1.php";
+           
         ?>
             
             <!-- End Navbar -->
@@ -23,18 +25,32 @@
                                         <!--        Here you can write extra buttons/actions for the toolbar              -->
                                     </div>
                                     <div class="fresh-datatables">
+                                        <div class='col-md-12 text-center'>
+                                            <div class='col-md-7 mx-auto'>
+                                                <form method="post" action=''>
+                                                <div class="form-group">
+                                                  <label>Year of releases</label>
+                                                  <select onchange="this.form.submit()" class="form-control select" id="select_name_collection" name='nnn'>
+                                                    <!-- ------------------ -->
+                                                    <?php include "select_name_collection.php"; ?>
+                                                  </select>
+                                                  <!-- <button name='oooo'>ooooo</button> -->
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                                 <tr>
                                                      <th>#</th>
-                                                    <th>YEAR OF RELEASES</th>
-                                                    <th>PRODUCER</th>
-                                                    <th>NAME OF COLLECTION</th>
+                                                    <!-- <th>YEAR OF RELEASES</th>
+                                                    <th>PRODUCER</th> -->
+                                                    <!-- <th>NAME OF COLLECTION</th> -->
                                                     <th>CARD NUMBER</th>
                                                     <th>CARD NAME</th>
                                                     <th>TEAM</th>
                                                     <th>SET TYPE</th>
-                                                    <th>SPORT TYPE</th>
+                                                    <!-- <th>SPORT TYPE</th> -->
                                                     <th>PARALLEL</th>
                                                     <th>PRINT RUN</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
@@ -43,14 +59,14 @@
                                             <tfoot>
                                                 <tr>
                                                      <th>#</th>
-                                                     <th>YEAR OF RELEASES</th>
+                                                     <!-- <th>YEAR OF RELEASES</th>
                                                     <th>PRODUCER</th>
-                                                    <th>NAME OF COLLECTION</th>
+                                                    <th>NAME OF COLLECTION</th> -->
                                                     <th>CARD NUMBER</th>
                                                     <th>CARD NAME</th>
                                                     <th>TEAM</th>
                                                     <th>SET TYPE</th>
-                                                    <th>SPORT TYPE</th>
+                                                    <!-- <th>SPORT TYPE</th> -->
                                                     <th>PARALLEL</th>
                                                     <th>PRINT RUN</th>
                                                     <th class="text-right">Actions</th>
@@ -59,28 +75,60 @@
                                             <tbody id="sortable">
                                                
                                                     <?php 
+                                                    
+                                                    if(isset($_POST['nnn'])){
+                                                       $collection_id=$_SESSION['realese_id'];
+
                                                     $count=0;
-                                                    $sql="SELECT * FROM base_checklist ORDER BY sort_number ASC";
+                                                    // $sql="SELECT * FROM base_checklist ORDER BY sort_number ASC";
+                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ";
                                                     $result=mysqli_query($con, $sql);
                                                     while($row=mysqli_fetch_assoc($result)){
                                                         $count++;
-                                                        echo "  <tr><td class='first_td'>".$count."<input  type='hidden' value='".$row['id']."' /></td>
-                                                               <td class='year_releases'>".$row['year_of_releases']."</td>
-                                                               <td class='c_producer'>".$row['producer']."</td>
-                                                               <td class='name_collection'>".$row['name_of_collection']."</td>
+                                                        echo "  <tr name=".$row['realese_id']."><td class='first_td'>".$count."<input  type='hidden' value='".$row['id']."' /></td>
                                                                <td class='c_number'>".$row['card_number']."</td>
                                                                <td class='c_name'>".$row['card_name']."</td>
                                                                <td class='c_team'>".$row['team']."</td>
                                                                <td class='c_set_type'>".$row['set_type']."</td>
-                                                               <td class='c_sport_type'>".$row['sport_type']."</td>
                                                                <td class='c_parallel'>".$row['parallel']."</td>
                                                                <td class='c_print_run'>".$row['print_run']."</td>
                                                                 <td class='text-right'>
                                                         <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
+                                                        <a href='#' class='btn btn-link btn-info copy' name=".$row['id']."><i class='fa fa-copy'></i></a>
                                                         <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
                                                     </td>
                                                                </tr>";
                                                     }
+                                                    }
+                                                    else{
+                                                        if(isset($_SESSION['realese_id'])){
+                                                    
+                                                      $collection_id=$_SESSION['realese_id'];
+    
+                                                  $count=0;
+                                                    // $sql="SELECT * FROM base_checklist ORDER BY sort_number ASC";
+                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ";
+                                                    $result=mysqli_query($con, $sql);
+                                                    while($row=mysqli_fetch_assoc($result)){
+                                                        $count++;
+                                                        echo "  <tr name=".$row['realese_id']."><td class='first_td'>".$count."<input  type='hidden' value='".$row['id']."' /></td>
+                                                               <td class='c_number'>".$row['card_number']."</td>
+                                                               <td class='c_name'>".$row['card_name']."</td>
+                                                               <td class='c_team'>".$row['team']."</td>
+                                                               <td class='c_set_type'>".$row['set_type']."</td>
+                                                               <td class='c_parallel'>".$row['parallel']."</td>
+                                                               <td class='c_print_run'>".$row['print_run']."</td>
+                                                                <td class='text-right'>
+                                                        <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
+                                                        <a href='#' class='btn btn-link btn-info copy' name=".$row['id']."><i class='fa fa-copy'></i></a>
+                                                        <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
+                                                    </td>
+                                                               </tr>";
+                                                    }
+                                                    }else{
+   echo "<p class='text-cnter'>No Selected Collection Name </p>";
+}
+}
                                                     ?>
                                                     
                                             </tbody>

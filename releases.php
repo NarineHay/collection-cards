@@ -1,6 +1,13 @@
 <?php
 // session_start();
+include "config/con1.php";
 include "header.php";
+
+    $sql="select*from realeses WHERE id=3";
+    $query=mysqli_query($con,$sql);
+    $tox=mysqli_fetch_assoc($query);
+    
+        
 ?>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,7 +28,7 @@ include "header.php";
                         <div class="col-md-12">
                     <div class="row ">
                         <div class="col-md-8 col-sm-12 col-xs-12">
-                            <h1 class="title">2018-19 Upper Deck The Cup Hockey Cards</h1>
+                            <h1 class="title"><?php echo $tox['year_of_releases']." ".$tox['name_of_collection'];?></h1>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <div class="pictures">
@@ -32,7 +39,7 @@ include "header.php";
                                     <img src="images/releases/info-icon.png" data-toggle="modal" data-target="#exampleModall">
                                 </div>
                                 <div class="smallimg">
-                                    <img src="images/releases/checklist-icon.png">
+                                   <a href="base_checklist.php"><img src="images/releases/checklist-icon.png"></a>
                                 </div>
                             </div>
                         </div>
@@ -40,21 +47,24 @@ include "header.php";
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12 col-xs-12 contentimage">
+                        <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
                             <div class="releases-item-img">
-                                <img src="images/1.jpg">
-                                <div><b>October 23,2019</b></div>
+                                <img src="images/<?php echo $tox['image'];?>">
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
                              <div class="releases-item-text">
-                                 <ul>
-                                    <li>One Autographed Patch Rookie Card Per Box Rookie Card</li>
-                                    <li>One Autographed Patch Rookie Card Per Box Rookie Card</li>
-                                    <li>One Autographed Patch Rookie Card Per Box Rookie Card</li>
-                                    <li>One Autographed Patch Rookie Card Per Box Rookie Card</li>
-                                    <li>One Autographed Patch Rookie Card Per Box Rookie Card</li>                                                                    
-                                </ul>     
+                                 <?php
+                                    $desc = $tox['description'];
+                                    $description = explode(",",$desc);
+                                    $htmllis = '';
+                                    foreach($description as $key => $value){ 
+                                         $htmllis .= "<li value=".$value.">".$value."</li>";
+                                    }
+                                
+                                   echo  "<ul>".$htmllis."</ul>";
+                                   
+                                 ?>
                              </div>
                         </div>
                     </div>
@@ -595,7 +605,7 @@ include "header.php";
         </button>
       </div>
       <div class="modalbody2">
-      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+      <?php echo $tox['info'];?>
       </div>
     </div>
   </div>
