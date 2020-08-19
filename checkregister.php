@@ -1,17 +1,17 @@
 <?php
 include "config/con1.php";
-
+	
 
 if(isset($_POST['register'])){
 	
-	
+
 	$name = $con-> real_escape_string($_POST['name']);
-		$country = $con-> real_escape_string($_POST['country']);
+	$country = $con-> real_escape_string($_POST['country']);
 	$email = $con-> real_escape_string($_POST['email']);
 	$password = $con-> real_escape_string($_POST['password']);
 	$cPassword =$con-> real_escape_string($_POST['confirm_password']);
 	
-//echo $name.$country.$email.$password.$cPassword;
+// echo $name.$country.$email.$password.$cPassword;
 	if(empty($name) || empty($email) ||empty($password)|| empty($cPassword)){
 		echo 1;
 	}

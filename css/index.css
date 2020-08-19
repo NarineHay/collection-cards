@@ -68,7 +68,7 @@ h2{
 }
 
 .description-card span{
-	font-size: 20px;
+	font-size: 16px;
 	color: #133960;
 	font-weight: bold;
 }
@@ -93,7 +93,7 @@ h2{
 	width: 100%;
     color: #fff;
     /*margin: 7px 0 0;*/
-    padding: 5px 10px 0;
+    padding: 5px 10px 5px;
 	background: #ffffff5c;
 }
 .collector-cad>div{

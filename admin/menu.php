@@ -44,6 +44,12 @@
                                         <span class="sidebar-normal">Add Base Checklist</span>
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="../base_checklist/infographic.php">
+                                        <span class="sidebar-mini">IG</span>
+                                        <span class="sidebar-normal">Infographic</span>
+                                    </a>
+                                </li>
                                 
                             </ul>
                         </div>

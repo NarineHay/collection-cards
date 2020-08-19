@@ -1,336 +1,226 @@
 <?php
-include "header.php";
 include "config/con1.php";
-?>  
+include "header.php";
+?>
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/base_checklist.css">
+<!-- ---------------------------------- -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />-->
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />-->
+<!--     CSS Files-->
+<!--     <link href="admin/assets/css/bootstrap.min.css" rel="stylesheet" />-->
+<!--     <link href="admin/assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />-->
+<!--     CSS Just for demo purpose, don't include it in your project-->
+<!-- <script src="admin/assets/js/core/bootstrap.min.js" type="text/javascript"></script>-->
 
+<!--    <link href="admin/assets/css/demo.css" rel="stylesheet" />-->
+<!--     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
+ -->
+
+<style>
+    /*.table.table-hover.dataTable.no-footer.fixedHeader-locked{*/
+        /*display: none;*/
+    /*}*/
+</style>
 </head>
-<body>
-     <?php include "cookie.php";?>
-   <section class="custom_checklist">
-       <div class="container">
-            <h1 class="text-center my-5">BASE CHECKLIST</h1>
-           <div class="row">
-               <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12">
-                   <div class = "imgdiv">
-                      <img src="images/Capture.png" class="personImg" > 
-                   </div>
-                   
-                </div>
-               <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 textcheck">
-                   <div>
-                                          <h6>What is Lorem Ipsum?</h6>
-                   <p>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-<h6>What is Lorem Ipsum?</h6>
-Why do we use it?
-ill uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-</p>
-                   </div>
+    <body class="page_fix">
+        <?php include "cookie.php";?>
+        <section>
+            <div class="container">
 
-               </div>
-               <div class="col-md-3"></div>
-           </div>
-           <div class="row my-3">
-               <div class="col-md-4"></div>
-               <div class="col-md-4"></div>
-               <div class="col-md-4 k">
-                   <div class="input-group">
-                        <input  class="form-control" type="text" placeholder="Search something" aria-label="Search">
-                        <button class="btn" style="border-radius:0;">
-                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                        </button>
+                <div class="row rowheight">
+                    <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 " align="center" >
+                        <div class = "imgdiv">
+                            <img src="images/Capture.png" class="personImg" >
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " align="center" >
+                        <div class="about">
+                            <h6>What is Lorem Ipsum?</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<h6>What is Lorem Ipsum?</h6>Why do we use it?ill uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+            <!-- End Navbar -->
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collectionNameDiv" align="center" >
+                      <h2 class ="collectionName">PANINI Евро 2020 Preview</h2>
                   </div>
-                   
+
+
+                 <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="card bootstrap-table">
+
+                                <div class="card-body table-full-width table-responsive filterable">
+
+                                    <table id="bootstrap-table-2" class="table">
+                                        <thead>
+                                        <!--<th data-field="state" data-checkbox="true"></th>-->
+                                        <th data-field="id" class="text-center">ID</th>
+                                        <th data-field="Card number">Card number</th>
+                                        <th data-field="Card name">Card name</th>
+                                        <th data-field="Team">Team</th>
+                                        <th data-field="Parallel">Parallel</th>
+                                        <th data-field="Print run">Print run</th>
+                                        </thead>
+                                        <tbody>
+                                             <?php
+                                                $sql="select*from base_checklist";
+                                                $query=mysqli_query($con,$sql);
+                                                $count = 0;
+                                                while($tox=mysqli_fetch_assoc($query)){
+                                                    $count++;
+
+//                                            echo "<pre>";
+//                                            print_r($tox);die;
+                                            echo"
+                                                <tr>
+                                                  <td>".$count."<input  type='hidden' value='".$tox['id']."'/></td>
+                                                  <td>".$tox['card_number']."</td>
+                                                  <td>".$tox['card_name']."</td>
+                                                  <td>".$tox['team']."</td>
+                                                  <td>".$tox['parallel']."</td>
+                                                  <td>".$tox['print_run']."</td>
+                                                </tr>";
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-           </div>
-           <div class="content">
-               <div class="container">
-                   <div class="row">
-                       <div class="col-md-12">
-                           <div class="card bootstrap-table">
-                               <div class="card-body table-full-width">
-                                   <div class="collectiondiv">
-                                       <div class="collectiondiv">
-                                           <h2>PANINI Евро 2020 Preview</h2>
-                                       </div>
-                                   </div>
+            </div>
 
-                                   <table id="bootstrap-table" class="table">
-                                       <thead>
+            <?php
+                include "footer.php";
+            ?>
 
-                                       <th data-field="NO" class="text-center">NO</th>
-                                       <th data-field="Year of releases" data-sortable="true">Year of releases</th>
-                                       <th data-field="Producer" data-sortable="true">Producer</th>
-                                       <th data-field="Name of collection" data-sortable="true">Name of collection</th>
-                                       <th data-field="Card number" data-sortable="true">Card number</th>
-                                       <th data-field="Card name" data-sortable="true">Card name</th>
-                                       <th data-field="Team" data-sortable="true">Team</th>
-                                       <th data-field="Set type" data-sortable="true">Set type</th>
-                                       <th data-field="Parallel" data-sortable="true">Parallel</th>
-                                       <th data-field="Print_run" data-sortable="true">Print_run</th>
-                                       <th></th>
-                                       </thead>
-                                       <tbody>
-                                       <tr>
+<!-- <script src="admin/assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script> -->
+<script src="admin/assets/js/core/popper.min.js" type="text/javascript"></script>
+<!-- <script src="admin/assets/js/core/bootstrap.min.js" type="text/javascript"></script> -->
 
-                                           <td>1</td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
-                                           <td>
-                                               <form class="form-inline searchinput" >
-                                                   <div class="input-group">
-                                                       <input  class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                       <button class="btn" style="border-radius:0;">
-                                                           <i class="fa fa-search btn" aria-hidden="true"></i>
-                                                       </button>
-                                                   </div>
-                                               </form>
-                                           </td>
+<script src="admin/assets/js/plugins/bootstrap-table.js"></script>
+<!--  DataTable Plugin -->
+<script src="admin/assets/js/plugins/jquery.dataTables.min.js"></script>
+<!--  Full Calendar   -->
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the bootstrap-table pages etc -->
+<!-- <script src="admin/assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script> -->
+<!-- Light Dashboard DEMO methods, don't include it in your project! -->
+<script src="admin/assets/js/demo.js"></script>
 
-                                       </tr>
-                                       <tr>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
 
-                                           <td>2</td>
-                                           <td>Minerva Hooper</td>
-                                           <td>$23,789</td>
-                                           <td>Curaçao</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
+        // demo.showNotification();
 
-                                           <td>3</td>
-                                           <td>Sage Rodriguez</td>
-                                           <td>$56,142</td>
-                                           <td>Netherlands</td>
-                                           <td>Baileux</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
+        // demo.initVectorMap();
 
-                                           <td>4</td>
-                                           <td>Philip Chaney</td>
-                                           <td>$38,735</td>
-                                           <td>Korea, South</td>
-                                           <td>Overland Park</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-
-                                           <td>5</td>
-                                           <td>Doris Greene</td>
-                                           <td>$63,542</td>
-                                           <td>Malawi</td>
-                                           <td>Feldkirchen in Kärnten</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-
-                                           <td>5</td>
-                                           <td>Doris Greene</td>
-                                           <td>$63,542</td>
-                                           <td>Malawi</td>
-                                           <td>Feldkirchen in Kärnten</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-
-                                           <td>5</td>
-                                           <td>Doris Greene</td>
-                                           <td>$63,542</td>
-                                           <td>Malawi</td>
-                                           <td>Feldkirchen in Kärnten</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-
-                                           <td>5</td>
-                                           <td>Doris Greene</td>
-                                           <td>$63,542</td>
-                                           <td>Malawi</td>
-                                           <td>Feldkirchen in Kärnten</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-
-                                           <td>5</td>
-                                           <td>Doris Greene</td>
-                                           <td>$63,542</td>
-                                           <td>Malawi</td>
-                                           <td>Feldkirchen in Kärnten</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td>Sinaai-Waas</td>
-                                           <td></td>
-                                       </tr>
-
-                                       </tbody>
-                                   </table>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-   </section>
-
-<?php
-include "footer.php";
-?>
-     <script>
-         var $table = $('#bootstrap-table');
-         $().ready(function() {
-             $table.bootstrapTable({
-                 toolbar: ".toolbar",
-                 clickToSelect: true,
-                 search: true,
-                 showToggle: true,
-                 showColumns: true,
-                 pagination: true,
-                 searchAlign: 'left',
-                 pageSize: 8,
-                 clickToSelect: false,
-                 pageList: [8, 10, 25, 50, 100],
-
-                 icons: {
-
-                     toggle: 'fa fa-th-list',
-                     columns: 'fa fa-columns',
-                     detailOpen: 'fa fa-plus-circle',
-                     detailClose: 'fa fa-minus-circle'
-                 }
-             });
+    });
+</script>
+<script type="text/javascript">
+    var $table = $('#bootstrap-table-2');
 
 
+    $(document).ready(function() {
+
+        $table.bootstrapTable({
+            toolbar: ".toolbar",
+            clickToSelect: true,
+
+            search: true,
+            showColumns: true,
+            pagination: true,
+            searchAlign: 'left',
+            pageSize: 8,
+            clickToSelect: false,
+            pageList: [8, 10, 25, 50, 100],
+
+            formatShowingRows: function(pageFrom, pageTo, totalRows) {
+                //do nothing here, we don't want to show the text "showing x of y from..."
+            },
+            formatRecordsPerPage: function(pageNumber) {
+                return pageNumber + " rows visible";
+            },
+            icons: {
+                columns: 'fa fa-columns',
+                detailOpen: 'fa fa-plus-circle',
+                detailClose: 'fa fa-minus-circle'
+            }
+        });
+
+        //activate the tooltips after the data table is initialized
+        $('[rel="tooltip"]').tooltip();
+
+        $(window).resize(function() {
+            $table.bootstrapTable('resetView');
+        });
 
 
+    });
+</script>
+    <script>
+        $(document).ready(function() {
 
-         });
-     </script>
+            $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' ).addClass('filters');
+            $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
+                var title = $(this).text();
+                if (i > 0){
+                    $(this).html(`<div class="input-group">
+                                   <input  class="form-control inpt2" type="text" placeholder="Search" aria-label="Search">
+                                   <button class="btn" style="border-radius:0;">
+                                       <i class="fa fa-search btn" aria-hidden="true"></i>
+                                   </button>
+                               </div>`);
+                }else {
+                    $(this).html('')
+                }
 
+            } );
 
+            $('.filterable .filters input').keyup(function(e){
+                /* Ignore tab key */
+                var code = e.keyCode || e.which;
+                if (code == '9') return;
+                /* Useful DOM data and selectors */
+                var $input = $(this),
+                    inputContent = $input.val().toLowerCase(),
+                    $panel = $input.parents('.filterable'),
+                    column = $panel.find('.filters th').index($input.parents('th')),
+                    $table = $panel.find('.table'),
+                    $rows = $table.find('tbody tr');
+                /* Dirtiest filter function ever ;) */
+                var $filteredRows = $rows.filter(function(){
+                    var value = $(this).find('td').eq(column).text().toLowerCase();
+                    return value.indexOf(inputContent) === -1;
+                });
+                /* Clean previous no-result if exist */
+                $table.find('tbody .no-result').remove();
+                /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+                $rows.show();
+                $filteredRows.hide();
+                /* Prepend no-result row if all rows are filtered */
+                if ($filteredRows.length === $rows.length) {
+                    $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+                }
+            });
 
+        } );
+
+    </script>
 </body>
 </html>
