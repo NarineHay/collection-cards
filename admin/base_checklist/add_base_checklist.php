@@ -73,7 +73,7 @@
                                         </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Name of collection   </label>
+                                            <label>Select image  </label>
                                             <input type="file" placeholder="" class="form-control" name="img">
                                         </div>
                                         <div class="form-group">
@@ -113,6 +113,20 @@ $sql="SELECT id, name_of_collection FROM realeses";
 $result=mysqli_query($con, $sql);
 while ($row=mysqli_fetch_assoc($result)) {
     echo "<option value='".$row['id']."'>".$row['name_of_collection']."</option>";
+}
+
+
+?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                            <label>Year of releases</label>
+                                <select class="form-control" id="sel_rel_year" name='opt_year_name'>
+                                    <?php
+$sql1="SELECT id, year_of_releases, name_of_collection FROM realeses";
+$result1=mysqli_query($con, $sql1);
+while ($row1=mysqli_fetch_assoc($result1)) {
+    echo "<option value='".$row1['name_of_collection']."'>".$row1['year_of_releases']."</option>";
 }
 
 

@@ -2,11 +2,6 @@
 // session_start();
 include "config/con1.php";
 include "header.php";
-
-    $sql="select*from realeses WHERE id=3";
-    $query=mysqli_query($con,$sql);
-    $tox=mysqli_fetch_assoc($query);
-    
         
 ?>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -23,23 +18,36 @@ include "header.php";
                 <div class="col-md-12">
                     <h2 class = "releases" align="center">NEW RELEASES</h2>
                 </div>
-                <div class="col-md-12">
-                    <div class="row style">
-                        <div class="col-md-12">
+                
+                   
+                   <?php 
+                    $sql="SELECT * FROM realeses";
+                    $query=mysqli_query($con,$sql);
+                    while($tox=mysqli_fetch_assoc($query)){
+                            $desc = $tox['description'];
+                            $description = explode(",",$desc);
+                            $htmllis = '';
+                            foreach($description as $key => $value){ 
+                                $htmllis .= "<li>".$value."</li>";
+                            }
+                   echo '  <div class="col-md-12">
+                          <div class="row style">
+                          <div class="col-md-12">
                     <div class="row ">
                         <div class="col-md-8 col-sm-12 col-xs-12">
-                            <h1 class="title"><?php echo $tox['year_of_releases']." ".$tox['name_of_collection'];?></h1>
+                            <h1 class="title">'. $tox['year_of_releases'].' '.$tox['name_of_collection'].'</h1>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="pictures">
-                                <div class="smallimg">
-                                    <img src="images/releases/infographic-icon.png" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        
+                            <div class="pictures" >
+                                <div class="smallimg rel_id"  name="'.$tox['id'].'" data-name="infographic">
+                                   <img src="images/releases/infographic-icon.png" data-toggle="modal" data-target=".bd-example-modal-lg" >
                                 </div>
-                                <div class="smallimg">
-                                    <img src="images/releases/info-icon.png" data-toggle="modal" data-target="#exampleModall">
+                                <div class="smallimg rel_id" name="'.$tox['id'].'" data-name="info">
+                                    <img src="images/releases/info-icon.png" data-toggle="modal" data-target="#exampleModall" >
                                 </div>
-                                <div class="smallimg">
-                                   <a href="base_checklist.php"><img src="images/releases/checklist-icon.png"></a>
+                                <div class="smallimg rel_id" name="'.$tox['id'].'" >
+                                   <a href="base_checklist.php"><img src="images/releases/checklist-icon.png" ></a>
                                 </div>
                             </div>
                         </div>
@@ -49,29 +57,19 @@ include "header.php";
                     <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
                             <div class="releases-item-img">
-                                <img src="images/<?php echo $tox['image'];?>">
+                                <img src="images/'.$tox['image'].'">
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
-                             <div class="releases-item-text">
-                                 <?php
-                                    $desc = $tox['description'];
-                                    $description = explode(",",$desc);
-                                    $htmllis = '';
-                                    foreach($description as $key => $value){ 
-                                         $htmllis .= "<li value=".$value.">".$value."</li>";
-                                    }
-                                
-                                   echo  "<ul>".$htmllis."</ul>";
-                                   
-                                 ?>
+                             <div class="releases-item-text"><ul>'.$htmllis.'</ul>
                              </div>
                         </div>
                     </div>
                 </div>
-                    </div>
-                </div>
-                
+                </div></div>';
+              }
+                    ?>
+                    
             </div>
         </div>
     </section>
@@ -86,8 +84,8 @@ include "header.php";
                 <h3 align="center">Set Includes</h3>
             </div>
                 <div class="col-md-12" align="center">
-                  <div class="row">
-                      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
+                  <div class="row" id='releases_id_modal'>
+                      <!-- <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
                         <i>Base: 200 cards</i>
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
@@ -95,11 +93,13 @@ include "header.php";
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
                         <i>Pharallel: 30 cards</i>
-                      </div> 
-                      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content">
+                      </div>  -->
+                      <!-- <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content">
                         <br>
-                        <div class="contentdiv">
-                          <span class="modalspan"><i>1.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
+                        <div class="contentdiv"> -->
+                          <!-- ------------------------------------------------ -->
+                         
+                          <!-- <span class="modalspan"><i>1.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
                           <div class="contentimg-all">
                             <div class="contentimg">
                                 <div class="div_image box">
@@ -158,8 +158,8 @@ include "header.php";
                                   </div>
                                 </div>
                             </div> 
-                          </div>
-                           <span class="modalspan"><i>2.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
+                          </div> -->
+                           <!-- <span class="modalspan"><i>2.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
                            <div class="contentimg-all">
                             <div class="contentimg">
                                 <div class="div_image box">
@@ -523,8 +523,8 @@ include "header.php";
                                   </div>
                                 </div>
                             </div> 
-                          </div> 
-                           <span class="modalspan"><i>8.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
+                          </div>  -->
+                         <!--   <span class="modalspan"><i>8.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
                            <div class="contentimg-all">
                             <div class="contentimg">
                                 <div class="div_image box">
@@ -583,7 +583,7 @@ include "header.php";
                                   </div>
                                 </div>
                             </div> 
-                          </div>                        
+                          </div> -->                        
                         </div>  
                       </div>                   
                   </div>
@@ -605,11 +605,33 @@ include "header.php";
         </button>
       </div>
       <div class="modalbody2">
-      <?php echo $tox['info'];?>
+      
       </div>
     </div>
   </div>
 </div>
 	<?php include "footer.php"; ?>	
+   <script type="text/javascript">
+    $('.rel_id').click(function(){
+      var rel_id=$(this).attr('name')
+      var d_name=$(this).attr('data-name')
+console.log(d_name)
+      $.ajax({
+        type: 'post',
+        url: 'releases_id_modal.php',
+        data: {releases_id: rel_id, data_name: d_name},
+        success: function(a){
+          if(d_name=='infographic'){
+               $('#releases_id_modal').html(a)
+
+          }
+          else{
+               $('.modalbody2').html(a)
+          }
+        }
+      })
+            
+    })
+  </script>
 </body>
 </html>

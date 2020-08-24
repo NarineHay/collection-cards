@@ -73,7 +73,6 @@
                                                 </tr>
                                             </tfoot>
                                             <tbody id="sortable">
-                                               
                                                     <?php 
                                                     
                                                     if(isset($_POST['nnn'])){
@@ -81,9 +80,14 @@
 
                                                     $count=0;
                                                     // $sql="SELECT * FROM base_checklist ORDER BY sort_number ASC";
-                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ";
+                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ORDER BY sort_id ASC ";
                                                     $result=mysqli_query($con, $sql);
                                                     while($row=mysqli_fetch_assoc($result)){
+
+                                                      $sql1="SELECT MAX(id) AS 'max_id' FROM base_checklist WHERE realese_id=$collection_id ";
+                                                      $res1=mysqli_query($con, $sql1);
+                                                      $row1=mysqli_fetch_assoc($res1);
+                                                      $max_id=$row1['max_id'];
                                                         $count++;
                                                         echo "  <tr name=".$row['realese_id']."><td class='first_td'>".$count."<input  type='hidden' value='".$row['id']."' /></td>
                                                                <td class='c_number'>".$row['card_number']."</td>
@@ -94,8 +98,9 @@
                                                                <td class='c_print_run'>".$row['print_run']."</td>
                                                                 <td class='text-right'>
                                                         <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
-                                                        <a href='#' class='btn btn-link btn-info copy' name=".$row['id']."><i class='fa fa-copy'></i></a>
+                                                        <a href='#' class='btn btn-link btn-info copy' data-id=".$max_id." name=".$row['id']."><i class='fa fa-copy'></i></a>
                                                         <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
+                                                        
                                                     </td>
                                                                </tr>";
                                                     }
@@ -107,10 +112,16 @@
     
                                                   $count=0;
                                                     // $sql="SELECT * FROM base_checklist ORDER BY sort_number ASC";
-                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ";
+                                                    $sql="SELECT * FROM base_checklist WHERE realese_id=$collection_id ORDER BY sort_id ASC ";
                                                     $result=mysqli_query($con, $sql);
                                                     while($row=mysqli_fetch_assoc($result)){
                                                         $count++;
+
+                                                        $sql1="SELECT MAX(id) AS 'max_id' FROM base_checklist WHERE realese_id=$collection_id ";
+                                                      $res1=mysqli_query($con, $sql1);
+                                                      $row1=mysqli_fetch_assoc($res1);
+                                                      $max_id=$row1['max_id'];
+
                                                         echo "  <tr name=".$row['realese_id']."><td class='first_td'>".$count."<input  type='hidden' value='".$row['id']."' /></td>
                                                                <td class='c_number'>".$row['card_number']."</td>
                                                                <td class='c_name'>".$row['card_name']."</td>
@@ -120,8 +131,10 @@
                                                                <td class='c_print_run'>".$row['print_run']."</td>
                                                                 <td class='text-right'>
                                                         <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
-                                                        <a href='#' class='btn btn-link btn-info copy' name=".$row['id']."><i class='fa fa-copy'></i></a>
+                                                        <a href='#' class='btn btn-link btn-info copy' data-id=".$max_id." name=".$row['id']."><i class='fa fa-copy'></i></a>
                                                         <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
+                                                        <a href='#' class='btn btn-link btn-danger ins' data_name=".$row['id'].">ins</a>
+
                                                     </td>
                                                                </tr>";
                                                     }
