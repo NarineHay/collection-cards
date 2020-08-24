@@ -1,6 +1,14 @@
 <?php
 include "config/con1.php";
 include "header.php";
+if(isset($_GET['id'])){
+    $realise_id = $_GET['id'];
+    $sql = "SELECT * FROM `base_checklist`,`realeses` WHERE realese_id = '$realise_id'";
+    $rezult = mysqli_query($con,$sql);
+    $tox = mysqli_fetch_assoc($rezult);
+
+
+}
 ?>
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -39,8 +47,11 @@ include "header.php";
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " align="center" >
                         <div class="about">
-                            <h6>What is Lorem Ipsum?</h6>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<h6>What is Lorem Ipsum?</h6>Why do we use it?ill uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+                            <p><?php echo $tox['info']?></p>
+                            <br>
+                            <br>
+                            <p>Why do we use it?ill uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +62,7 @@ include "header.php";
 
             <!-- End Navbar -->
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collectionNameDiv" align="center" >
-                      <h2 class ="collectionName">PANINI Евро 2020 Preview</h2>
+                      <h2 class ="collectionName"><?php echo $tox['name_of_collection']?></h2>
                   </div>
 
 
@@ -76,7 +87,7 @@ include "header.php";
                                         </thead>
                                         <tbody>
                                              <?php
-                                                $sql="select*from base_checklist";
+                                                $sql="select*from base_checklist WHERE realese_id = '$realise_id' ";
                                                 $query=mysqli_query($con,$sql);
                                                 $count = 0;
                                                 while($tox=mysqli_fetch_assoc($query)){
