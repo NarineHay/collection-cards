@@ -159,371 +159,392 @@ include "header.php";
                                 </div>
                             </div> 
                           </div>
-                           <span class="modalspan"><i>2.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                           <div class="contentimg-all">
+                            <?php
+                            $sql="SELECT *, count(*) AS 'count'
+                              FROM `base_checklist` WHERE realese_id=61
+                              GROUP BY set_type, parallel, print_run
+                              HAVING count(*) > 1 ORDER BY id ASC";
+                            $result=mysqli_query($con, $sql);
+                            while($row=mysqli_fetch_assoc($result)){
+                                echo '   <div class="contentimg-all">
                             <div class="contentimg">
                                 <div class="div_image box">
                                   <div class="div_image_number_blok"> 
                                     <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
+                                    <span class="boxspan">'.$row['print_run'].'</span>
                                   </div>
                                 </div>
                                     <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
+                  
                             </div> 
-                          </div>
-                           <span class="modalspan"><i>3.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                           <div class="contentimg-all">
-                            <div class="contentimg">
-                                <div class="div_image box">
-                                  <div class="div_image_number_blok"> 
-                                    <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                            </div> 
-                          </div>
-                           <span class="modalspan"><i>4.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                          <div class="contentimg-all">
-                            <div class="contentimg">
-                                <div class="div_image box">
-                                  <div class="div_image_number_blok"> 
-                                    <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                            </div> 
-                          </div>                         
-                        </div>                        
-                      </div>
-                      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content1">
-                        <br>
-                          <div class="contentdiv">
-                          <span class="modalspan"><i>5.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                          <div class="contentimg-all">
-                            <div class="contentimg">
-                                <div class="div_image box">
-                                  <div class="div_image_number_blok"> 
-                                    <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                            </div> 
-                          </div>
-                           <span class="modalspan"><i>6.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                          <div class="contentimg-all">
-                            <div class="contentimg">
-                                <div class="div_image box">
-                                  <div class="div_image_number_blok"> 
-                                    <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                            </div> 
-                          </div>
-                           <span class="modalspan"><i>7.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
-                           <div class="contentimg-all">
-                            <div class="contentimg">
-                                <div class="div_image box">
-                                  <div class="div_image_number_blok"> 
-                                    <img src="images/modal/1.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line">
-                                <div class="div_image box1">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/2.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line1">
-                                <div class="div_image box2">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/3.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line2">
-                                <div class="div_image box3">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/4.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line3">
-                                <div class="div_image box4">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/5.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line4">
-                                <div class="div_image box5">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/6.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-2.png" class="line5">
-                                <div class="div_image box6">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/7.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                                    <img src="images/modal/line-1.png" class="line6">
-                                <div class="div_image box7">
-                                  <div class="div_image_number_blok">
-                                    <img src="images/modal/8.png" >
-                                    <span class="boxspan">25</span>
-                                  </div>
-                                </div>
-                            </div> 
-                          </div> 
+                          </div>';
+                            }
+                            ?>
+<!--                           <span class="modalspan"><i>2.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                           <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div>-->
+<!--                           <span class="modalspan"><i>3.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                           <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div>-->
+<!--                           <span class="modalspan"><i>4.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                          <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div>                         -->
+<!--                        </div>                        -->
+<!--                      </div>-->
+<!--                      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 content1">-->
+<!--                        <br>-->
+<!--                          <div class="contentdiv">-->
+<!--                          <span class="modalspan"><i>5.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                          <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div>-->
+<!--                           <span class="modalspan"><i>6.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                          <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div>-->
+<!--                           <span class="modalspan"><i>7.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>-->
+<!--                           <div class="contentimg-all">-->
+<!--                            <div class="contentimg">-->
+<!--                                <div class="div_image box">-->
+<!--                                  <div class="div_image_number_blok"> -->
+<!--                                    <img src="images/modal/1.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line">-->
+<!--                                <div class="div_image box1">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/2.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line1">-->
+<!--                                <div class="div_image box2">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/3.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line2">-->
+<!--                                <div class="div_image box3">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/4.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line3">-->
+<!--                                <div class="div_image box4">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/5.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line4">-->
+<!--                                <div class="div_image box5">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/6.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-2.png" class="line5">-->
+<!--                                <div class="div_image box6">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/7.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                    <img src="images/modal/line-1.png" class="line6">-->
+<!--                                <div class="div_image box7">-->
+<!--                                  <div class="div_image_number_blok">-->
+<!--                                    <img src="images/modal/8.png" >-->
+<!--                                    <span class="boxspan">25</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                            </div> -->
+<!--                          </div> -->
                            <span class="modalspan"><i>8.Absolute Rookies Spectrum Set Checklist,20 Cards</i></span>
                            <div class="contentimg-all">
                             <div class="contentimg">

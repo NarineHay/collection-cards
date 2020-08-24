@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="25143238-6d72-46f3-a1a5-e2d4a561ad7d" name="collection" url="http://followmycollection.com">
-        <fileTransfer host="followmycollection.com" port="21">
+      <webServer id="424d63fc-8164-4c0b-9f37-aceaf764ae3e" name="followmycollection" url="http://followmycollection.com">
+        <fileTransfer host="followmycollection.com" port="21" rootFolder="/collection-cards">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

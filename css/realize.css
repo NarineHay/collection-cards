@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 }
-ul li{
+.releases-item-text ul li{
     font-size:21px;
 }
 .section1{

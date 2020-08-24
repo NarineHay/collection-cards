@@ -109,11 +109,11 @@
                                             <label>Select Collection name</label>
                                 <select class="form-control" id="sel_rel_name" name='opt_name'>
                                     <?php
-$sql="SELECT id, name_of_collection FROM realeses";
-$result=mysqli_query($con, $sql);
-while ($row=mysqli_fetch_assoc($result)) {
-    echo "<option value='".$row['id']."'>".$row['name_of_collection']."</option>";
-}
+                                $sql="SELECT id, name_of_collection FROM realeses";
+                                $result=mysqli_query($con, $sql);
+                                while ($row=mysqli_fetch_assoc($result)) {
+                                    echo "<option value='".$row['id']."'>".$row['name_of_collection']."</option>";
+                            }
 
 
 ?>
