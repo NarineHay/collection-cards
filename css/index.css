@@ -66,9 +66,19 @@ h2{
 	height: 85px;
 	padding: 0 14px;
 }
+.releases .description-card{
+	width: 100%;
+	height: 60px;
+	padding: 0 14px;
+}
 
 .description-card span{
 	font-size: 16px;
+	color: #133960;
+	font-weight: bold;
+}
+.releases .description-card span{
+	font-size: 14px;
 	color: #133960;
 	font-weight: bold;
 }
@@ -109,6 +119,12 @@ h2{
 	font-size: 10px;
 	padding: 0 5px;
 	margin-bottom: 0;
+}
+.releases .author-name{
+	font-size: 11px;
+	padding: 10px 2px;
+	margin-bottom: 0;
+	color: #133960;
 }
 .country{
 	font-size: 10px;
