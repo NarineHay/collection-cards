@@ -94,6 +94,13 @@
                                             <label>Info collection</label>
                                             <textarea rows="10" cols="60" class="form-control" style="height:unset" name="info"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Select product type </label>
+                                            <p><input type="radio" class="form-contro" value="new" name="product_type">
+                                            NEW</p>
+                                            <p><input type="radio" class="form-contro" value="set" name="product_type" >
+                                            SET</p>
+                                        </div>
                                     
                                 </div>
                                 <div class="card-footer ">
