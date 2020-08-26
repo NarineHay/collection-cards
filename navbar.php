@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include "config/con1.php";
 if(isset($_SESSION['language'])){
   $lng=$_SESSION['language'];
@@ -80,14 +80,14 @@ else{
                         $res=mysqli_query($con, $sql);
                         while($row=mysqli_fetch_assoc($res)){
                           echo '<li class="dropdown">
-                               <a class="dropdown-item" href="#">'.$row['sport_type'].'</a>
+                               <a class="dropdown-item s_type" href="#">'.$row['sport_type'].'</a>
                                <ul class="dropdown-menu">
                                    <li><a class="dropdown-item" href="#" name="checklist">1900-1949</a></li>
                                    <li><a class="dropdown-item" href="#" name="checklist">1950-1979</a></li>
                                    <li><a class="dropdown-item" href="#" name="checklist">1980-1999</a></li>
                                    <li><a class="dropdown-item" href="#" name="checklist">2000-2009</a></li>
                                    <li><a class="dropdown-item" href="#" name="checklist">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#" name="checklist">2019-2020</a></li>
+                                   <li><a class="dropdown-item" href="" name="checklist">2019-2020</a></li>
                                </ul>
                            </li>';
                         }
@@ -184,7 +184,7 @@ else{
                         $res=mysqli_query($con, $sql);
                         while($row=mysqli_fetch_assoc($res)){
                           echo '<li class="dropdown">
-                               <a class="dropdown-item" href="#">'.$row['sport_type'].'</a>
+                               <a class="dropdown-item s_type" href="#">'.$row['sport_type'].'</a>
                                <ul class="dropdown-menu">
                                    <li><a class="dropdown-item" href="#" name="set">1900-1949</a></li>
                                    <li><a class="dropdown-item" href="#" name="set">1950-1979</a></li>

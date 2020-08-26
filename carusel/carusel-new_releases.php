@@ -14,7 +14,7 @@
           <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card" style="height:230px">
-                    <img src="images/'.$row['image'].'"> 
+                    <img src="images_realeses/'.$row['image'].'"> 
                 </div>
                 <div class="description-card">
                   <div class="d-flex justify-content-between">

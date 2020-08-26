@@ -21,7 +21,7 @@ include "header.php";
 
 
             <?php
-            $sql="SELECT * FROM realeses";
+            $sql="SELECT * FROM realeses WHERE product_type='new'";
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){
                 $desc = $tox['description'];
@@ -59,7 +59,7 @@ include "header.php";
                     <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
                             <div class="releases-item-img">
-                                <img src="images/'.$tox['image'].'">
+                                <img src="images_realeses/'.$tox['image'].'">
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
