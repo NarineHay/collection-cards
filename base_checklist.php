@@ -3,7 +3,7 @@ include "config/con1.php";
 include "header.php";
 if(isset($_GET['id'])){
     $realise_id = $_GET['id'];
-    $sql = "SELECT * FROM `base_checklist`,`realeses` WHERE realese_id = '$realise_id'";
+    $sql = "SELECT * FROM `realeses` WHERE id = '$realise_id'";
     $rezult = mysqli_query($con,$sql);
     $tox = mysqli_fetch_assoc($rezult);
 
@@ -42,7 +42,7 @@ if(isset($_GET['id'])){
                 <div class="row rowheight">
                     <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 " align="center" >
                         <div class = "imgdiv">
-                            <img src="images/Capture.png" class="personImg" >
+                            <img src="images/<?php echo $tox['image']?>" class="personImg" >
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " align="center" >
