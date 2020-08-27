@@ -19,6 +19,7 @@ include "header.php";
             <div class="col-md-12">
                 <h2 class = "releases" align="center">SETS</h2>
             </div>
+           
 
 
             <?php
@@ -26,14 +27,39 @@ if(isset($_SESSION['product'])){
   $product=$_SESSION['product'];
   $sport_type=$_SESSION['sport_type'];
   $year_prod=$_SESSION['year_prod'];
-}
-else{
-  echo 'no sessia';
-}
-            $year=explode('-', $year_prod);
+  $year=explode('-', $year_prod);
             $a=$year[0];
             $b=$year[1];
+
+  echo '<div class="col-md-12 text-center">
+  <div class="col-md-5 mx-auto">
+                <label>Select year of sets</label>
+               <form action="" method="post" >
+               <select onchange="this.form.submit()" class="form-control select" id="select_name_collection" name="sel">';
+               for($i=$a; $i<=$b; $i++){
+            
+if(isset($_POST['sel']) && $_POST['sel']==$i){
+              echo '<option value='.$i.' selected>'.$i.'</option>';
+  
+}
+else{
+  echo '<option value='.$i.'>'.$i.'</option>';
+}
+}
+                                                    
+echo '</select></form> 
+       </div>
+    </div>';
+            if(isset($_POST['sel'])){
+              
+              $sel=$_POST['sel'];
+             $sql="SELECT * FROM realeses WHERE product_type='$product' AND sport_type='$sport_type' AND year_of_releases='$sel'";
+            // $query=mysqli_query($con,$sql);
+            }
+
+            else{
             $sql="SELECT * FROM realeses WHERE product_type='$product' AND sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
+          }
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){
                 $desc = $tox['description'];
@@ -83,6 +109,11 @@ else{
                 </div>
                 </div></div>';
             }
+          // }
+}
+else{
+  echo 'no sessia';
+}
             ?>
 
         </div>

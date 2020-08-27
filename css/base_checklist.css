@@ -3,6 +3,10 @@
     padding:10px 0;
     font-size:22px;
 }
+.section1{
+    margin-top: 150px;
+    margin-bottom: 20px;
+}
 .collectionNameDiv{
     background: #133960;
     height:50px;
@@ -81,6 +85,12 @@
     height: 340px;
     margin-bottom: 25px;
 }
+}
+@media (max-width: 600px){
+   .section1{
+    margin-top: 0px;
+    margin-bottom: 50px;
+    }
 }
 @media (max-width: 768px){
    .imgdiv {
