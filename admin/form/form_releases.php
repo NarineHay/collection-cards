@@ -1,7 +1,7 @@
 <?php
 include "../../config/con1.php";
 if(isset($_POST['btn-add-releases'])){
-   
+   $product_type='';
     if(empty($_POST['other-sport-type'])){
         $sport_type=mysqli_real_escape_string($con, $_POST['sport-type']);
     }
@@ -9,8 +9,7 @@ if(isset($_POST['btn-add-releases'])){
         $sport_type=mysqli_real_escape_string($con, $_POST['other-sport-type']);
        
     }
-     // echo "<meta http-equiv='refresh' content='2'>";
-         
+
    if(!empty($_POST['year-of-releases']) && !empty($_POST['producer']) && !empty($_POST['name-collection']) && !empty($_POST['desc']) && !empty($_POST['info']) && !empty($_POST['number_base_cards']) && !empty($_POST['number_rookie_cards']) && !empty($_POST['number_pharallel_cards']) && !empty($sport_type) && $_FILES["img"]["name"] != '' && !empty($_POST['product_type'])){
      $year_of_releases=mysqli_real_escape_string($con, $_POST['year-of-releases']);
     
@@ -21,13 +20,16 @@ if(isset($_POST['btn-add-releases'])){
      $number_base_cards=mysqli_real_escape_string($con, $_POST['number_base_cards']);
      $number_rookie_cards=mysqli_real_escape_string($con, $_POST['number_rookie_cards']);
      $number_pharallel_cards=mysqli_real_escape_string($con, $_POST['number_pharallel_cards']);
-     $product_type=mysqli_real_escape_string($con, $_POST['product_type']);
 
      $desc=json_encode($desc);
-    
      $info=mysqli_real_escape_string($con, $_POST['info']);
+     foreach ($_POST['product_type'] as $value) {
+          $product_type.=$value.',';
+          
+        }
+      $product_type=substr($product_type, 0, strlen($product_type)-1);
      
-              // ==========uploaded image banner===============                 
+            // ==========uploaded image banner===============                 
              $img=$_FILES['img']['name'];
              $tmp=$_FILES['img']['tmp_name'];
                                   
@@ -46,8 +48,6 @@ if(isset($_POST['btn-add-releases'])){
                     move_uploaded_file($tmp, $folder);
                                    echo "Image moved";
               }
-         
-     
      $sel_sport_type="SELECT sport_type FROM sports_type";
      $sel_res=mysqli_query($con, $sel_sport_type);
      $arr=array();
@@ -70,7 +70,7 @@ if(isset($_POST['btn-add-releases'])){
      foreach($_POST['desc'] as $name) {
       $description.=$name.',';
 }
-$description=substr($description,0, strlen($description)-1);
+     $description=substr($description,0, strlen($description)-1);
      $end_id="SELECT id FROM realeses GROUP BY id DESC LIMIT 1";
      $res=mysqli_query($con, $end_id);
      $row=mysqli_fetch_assoc($res);
