@@ -94,12 +94,17 @@
                                             <label>Info collection</label>
                                             <textarea rows="10" cols="60" class="form-control" style="height:unset" name="info"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Select product type </label>
-                                            <p><input type="radio" class="form-contro" value="new" name="product_type">
-                                            NEW</p>
-                                            <p><input type="radio" class="form-contro" value="set" name="product_type" >
-                                            SET</p>
+                                        <div class="form-check">
+                                             <label class="form-check-label" style="font-size: 22px">
+                                                    <input class="form-check-input" type="checkbox" value="new" name="product_type[]">
+                                                    <span class="form-check-sign"></span>NEW
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                             <label class="form-check-label" style="font-size: 22px">
+                                                    <input class="form-check-input" type="checkbox" value="set" name="product_type[]">
+                                                    <span class="form-check-sign"></span>SET
+                                            </label>
                                         </div>
                                     
                                 </div>
@@ -116,31 +121,14 @@
                                             <label>Select Collection name</label>
                                 <select class="form-control" id="sel_rel_name" name='opt_name'>
                                     <?php
-                                $sql="SELECT id, name_of_collection FROM realeses";
+                                $sql="SELECT id, name_of_collection, year_of_releases FROM realeses";
                                 $result=mysqli_query($con, $sql);
                                 while ($row=mysqli_fetch_assoc($result)) {
-                                    echo "<option value='".$row['id']."'>".$row['name_of_collection']."</option>";
-                            }
-
-
-?>
+                                    echo "<option value='".$row['id']."'>".$row['name_of_collection']."-".$row['year_of_releases']."</option>";
+                                }
+                            ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                            <label>Year of releases</label>
-                                <select class="form-control" id="sel_rel_year" name='opt_year_name'>
-                                    <?php
-$sql1="SELECT id, year_of_releases, name_of_collection FROM realeses";
-$result1=mysqli_query($con, $sql1);
-while ($row1=mysqli_fetch_assoc($result1)) {
-    echo "<option value='".$row1['name_of_collection']."'>".$row1['year_of_releases']."</option>";
-}
-
-
-?>
-                                </select>
-                            </div>
-                                 <!-- <form method="post" id="import_excel_form" enctype="multipart/form-data"> -->
                                     <div class="form-group">
                                             <label>Select excel file</label>
                                     <input type="file" name="import_excel" class="form-control" />

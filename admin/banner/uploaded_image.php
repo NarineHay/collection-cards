@@ -1,5 +1,5 @@
 <?php
- include "../config/con1.php";
+ include "../../config/con1.php";
   if(isset($_POST['btn'])){
      echo "<meta http-equiv='refresh' content='2'>";
         

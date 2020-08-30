@@ -84,9 +84,6 @@
                                 <?php 
                                          include "uploaded_image.php";
                                        ?>
-                                <?php 
-                                         include "form.php";
-                                       ?>
                                      </div>
                                  </div>
                                  <div class="col-md-8">

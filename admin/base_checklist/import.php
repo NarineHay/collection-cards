@@ -1,23 +1,21 @@
 <?php
-
-//import.php
-
 include '../import_excel/vendor/autoload.php';
            include "../../config/con1.php";
 
 
 $connect = new PDO("mysql:host=localhost;dbname=collection", "collection", "collection@2020");
 // $message='';
+
 if($_FILES["import_excel"]["name"] != '')
 {
 	$realese_name_id=$_POST['opt_name'];
-	$realese_year=$_POST['opt_year_name'];
-	$sql="SELECT id, name_of_collection FROM realeses WHERE name_of_collection='$realese_year' AND id=$realese_name_id";
+	$sql="SELECT id, name_of_collection FROM realeses WHERE id=$realese_name_id";
     $result=mysqli_query($con, $sql);
     $row_num=mysqli_num_rows($result);
-    $row=mysqli_fetch_assoc($result);
     if($row_num==1){
-    	$realese_id=$row['id'];
+    $row_id=mysqli_fetch_assoc($result);
+
+    	$realese_id=$row_id['id'];
     }
 	else{
 		$message="Name and ear don't match";
@@ -32,6 +30,7 @@ if($_FILES["import_excel"]["name"] != '')
 		move_uploaded_file($_FILES['import_excel']['tmp_name'], $file_name);
 		$file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
 		$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
+		
 
 		$spreadsheet = $reader->load($file_name);
 
@@ -39,6 +38,12 @@ if($_FILES["import_excel"]["name"] != '')
 
 		$data = $spreadsheet->getActiveSheet()->toArray();
         $c=0;
+        $query = "
+			INSERT INTO base_checklist
+			(sort_id, realese_id, card_number, card_name, team, set_type, parallel, color, print_run) 
+			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :parallel, '', :print_run)";
+             
+             $statement = $connect->prepare($query);
 		foreach($data as $row)
 		// for($row=1; $row<count($data); $row++)
 		{
@@ -67,7 +72,7 @@ if($_FILES["import_excel"]["name"] != '')
 			// );
 $insert_data = array(
 				':sort_id'		    =>	$c,
-				':realese_id'		    =>	$realese_id,
+				':realese_id'		=>	$realese_id,
 				':card_number'		=>	$row[0],
 				':card_name'		=>	$row[1],
 				':team'		=>	$row[2],
@@ -76,13 +81,7 @@ $insert_data = array(
 				':print_run'		=>	$data_row5
 			);
 
-			$query = "
-			INSERT INTO base_checklist
-			(sort_id, realese_id, card_number, card_name, team, set_type, parallel, color, print_run) 
-			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :parallel, '', :print_run)
-			";
-             
-             $statement = $connect->prepare($query);
+			
 			if($statement->execute($insert_data)){
 				$message='<div class="alert alert-success">Successfully added</div>';
 			}
