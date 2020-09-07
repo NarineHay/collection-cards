@@ -1,11 +1,9 @@
- <?php
-           include "../heder.php";
-
-        ?>
+<?php
+     include "../heder.php";
+?>
     <body>
         <?php
            include "../menu.php";
-
         ?>
             <div class="content">
                 <div class="container-fluid">
@@ -22,27 +20,27 @@
                                 </div>
                                 
                                 <div class="card-body ">
-                                    <form method="post" action="add_base_checklist.php" enctype="multipart/form-data">
+                                    <form method="post" enctype="multipart/form-data" action="">
                                         <div class="form-group">
                                             <label>Name of collection   </label>
-                                            <input type="text" placeholder="Name of collection  " class="form-control" name="name-collection">
+                                            <input type="text" placeholder="Name of collection  " class="form-control" name="name-collection" value="<?php echo isset($_POST["name-collection"]) ? $_POST["name-collection"] : ""; ?>" >
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Producer</label>
-                                            <input type="text" placeholder="Producer" class="form-control"name="producer">
+                                            <input type="text" placeholder="Producer" class="form-control"name="producer" value="<?php echo isset($_POST["producer"]) ? $_POST["producer"] : ""; ?>">
                                         </div>
                                         <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                             <label>Year of releases</label>
-                                            <input type="text" placeholder="Year of releases" class="form-control" name="year-of-releases">
+                                            <input type="text" placeholder="Year of releases" class="form-control" name="year-of-releases" value="<?php echo isset($_POST["year-of-releases"]) ? $_POST["year-of-releases"] : ""; ?>">
                                         </div>
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Sport Type </label>
-                                            <select class="form-control select" name="sport-type">
+                                            <select class="form-control select" name="sport-type" >
                                                 <?php 
                                                 include "select_sport_for_base_checklist.php";
                                                 ?>
@@ -52,26 +50,7 @@
                                         </div>
                                         </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                            <div class="form-group">
-                                            <label>Number of Base cards</label>
-                                            <input type="text" placeholder="Number cards" class="form-control" name="number_base_cards">
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                            <label>Number of Rookie set cards</label>
-                                            <input type="text" placeholder="Number cards" class="form-control" name="number_rookie_cards">
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                            <label>Number of Pharallel cards</label>
-                                            <input type="text" placeholder="Number cards" class="form-control" name="number_pharallel_cards">
-                                        </div>
-                                        </div>
-                                        </div>
+                            
                                         <div class="form-group">
                                             <label>Select image  </label>
                                             <input type="file" placeholder="" class="form-control" name="img">
@@ -82,18 +61,11 @@
                                                 <li>
                                                     <input type="text" placeholder="" class="form-control" name="desc[]">
                                                </li>
-                                               <li>
-                                                    <input type="text" placeholder="" class="form-control" name="desc[]">
-                                               </li>
                                             </ul>
                                             <div class="text-right" id="add_input">
-                                               <i class="fa fa-plus" style="color: #133690;cursor: pointer;"></i>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Info collection</label>
-                                            <textarea rows="10" cols="60" class="form-control" style="height:unset" name="info"></textarea>
-                                        </div>
+                                       
                                         <div class="form-check">
                                              <label class="form-check-label" style="font-size: 22px">
                                                     <input class="form-check-input" type="checkbox" value="new" name="product_type[]">
@@ -112,32 +84,18 @@
                                     <button type="submit" class="btn btn-fill btn-add" name="btn-add-releases">Submit</button>
                                 </div>
                                 </form>
-                                <!-- -------------------------import excel to mysql----------------------------- -->
-                                <div class="container">
-                                <span id="message"></span>
-                                 <form method="post" id="import_excel_form" enctype="multipart/form-data">
+                            </div>
+                        </div>
+                        
 
-                                <div class="form-group">
-                                            <label>Select Collection name</label>
-                                <select class="form-control" id="sel_rel_name" name='opt_name'>
-                                    <?php
-                                $sql="SELECT id, name_of_collection, year_of_releases FROM realeses";
-                                $result=mysqli_query($con, $sql);
-                                while ($row=mysqli_fetch_assoc($result)) {
-                                    echo "<option value='".$row['id']."'>".$row['name_of_collection']."-".$row['year_of_releases']."</option>";
-                                }
-                            ?>
-                                </select>
-                            </div>
-                                    <div class="form-group">
-                                            <label>Select excel file</label>
-                                    <input type="file" name="import_excel" class="form-control" />
-                                </div>
-                                    <input type="submit" name="import" id="import" class="btn btn-primary btn-add" value="Import" />
-                                </form>
-                                </div>
-                            </div>
-                        </div>   
+                                <!-- -------------------------import excel to mysql----------------------------- -->
+                                
+                        <?php 
+                            include "import_excel_to_mysql.php"; 
+                            include "realese_info.php"; 
+                            include "realese_cards_name.php"; 
+                        ?>
+
                         <!-- ------------------------------------base checklist -------------------------- -->
                         <div class="col-sm-10 add-bs" style="margin: 0 auto">
                             <div class="card stacked-form">
@@ -193,12 +151,14 @@
             include "../footer.php";
             ?>
             <script>
+                // --------------change sport-type-----------------------
                 $('.select').change(function(){
                     if($(this).val()=='Other sport'){
                          $('html select').after("<input type='text' placeholder='Enter sport type' class='form-control' name='other-sport-type'>");
                          $(this).remove()
                     }
                 })
+                // ---------------------------------------------
                 $('#add_input').click(function(){
                    $('#ul').append('<li><input type="text" placeholder="" class="form-control" name="desc[]"></li>')
                 })
@@ -232,6 +192,42 @@ $(document).ready(function(){
       }
     })
   });
+// ------------------------add collection info-------------------------
+  $('#realese_info').on('submit', function(event){
+    event.preventDefault();
+      $.ajax({
+      url:"../form/form_release_info.php",
+      method:"POST",
+      data:new FormData(this),
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data)
+      {
+        $('#message_info').html(data);
+        
+      }
+    })
+  })
+
+// -------------------------cards number and cards name collection-----------------------
+
+  $('#cards_name_and_number').on('submit', function(event){
+    event.preventDefault();
+      $.ajax({
+      url:"../form/form_release_card_name_number.php",
+      method:"POST",
+      data:new FormData(this),
+      contentType:false,
+      cache:false,
+      processData:false,
+      success:function(data)
+      {
+        $('#message_cards').html(data);
+        
+      }
+    })
+  })
 });
             </script>
                                 
