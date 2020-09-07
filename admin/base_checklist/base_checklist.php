@@ -133,8 +133,6 @@
                                                         <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
                                                         <a href='#' class='btn btn-link btn-info copy' data-id=".$max_id." name=".$row['id']."><i class='fa fa-copy'></i></a>
                                                         <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
-                                                        <a href='#' class='btn btn-link btn-danger ins' data_name=".$row['id'].">ins</a>
-
                                                     </td>
                                                                </tr>";
                                                     }

@@ -62,12 +62,18 @@ echo '</select></form>
           }
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){
+                $r_id=$tox['id'];
                 $desc = $tox['description'];
-                $description = explode(",",$desc);
+                $description = explode("^",$desc);
                 $htmllis = '';
                 foreach($description as $key => $value){
                     $htmllis .= "<li>".$value."</li>";
                 }
+
+                $sql_base_checklist_true="SELECT id FROM base_checklist WHERE realese_id=$r_id";
+                $res=mysqli_query($con, $sql_base_checklist_true);
+                if(mysqli_num_rows($res)!=0){
+
                 echo '  <div class="col-md-12">
                           <div class="row style">
                           <div class="col-md-12">
@@ -109,7 +115,33 @@ echo '</select></form>
                 </div>
                 </div></div>';
             }
-          // }
+            else{
+                echo '<div class="col-md-12">
+                          <div class="row style">
+                          <div class="col-md-12">
+                    <div class="row ">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <h1 class="title">'. $tox['year_of_releases'].' '.$tox['name_of_collection'].'</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
+                            <div class="releases-item-img">
+                                <img src="images_realeses/'.$tox['image'].'">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                             <div class="releases-item-text">
+                                <ul>'.$htmllis.'</ul>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                </div></div>';
+            }
+        }
 }
 else{
   echo 'no sessia';

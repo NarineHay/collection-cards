@@ -4,17 +4,17 @@ if(isset($_POST['releases_id'])){
 	$data_name=$_POST['data_name'];
 	$id=$_POST['releases_id'];
 	if($data_name=='infographic'){
-	$sql_cards="SELECT id, number_base_cards, number_rookie_cards, number_pharallel_cards FROM realeses WHERE id=$id";
+	$sql_cards="SELECT id, number_card_1, name_card_1, number_card_2, name_card_2, number_card_3, name_card_3 FROM realeses WHERE id=$id";
 	$result_cards=mysqli_query($con, $sql_cards);
 	$row_cards=mysqli_fetch_assoc($result_cards);
 	               echo '<div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
-                          <i>Base: '.$row_cards['number_base_cards'].' cards</i>
+                          <i>'.$row_cards['name_card_1'].': '.$row_cards['number_card_1'].' cards</i>
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
-                          <i>Rookie set: '.$row_cards['number_rookie_cards'].' cards</i>
+                          <i>'.$row_cards['name_card_2'].': '.$row_cards['number_card_2'].' cards</i>
                       </div>
                       <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 ">
-                           <i>Pharallel: '.$row_cards['number_pharallel_cards'].' cards</i>
+                           <i>'.$row_cards['name_card_3'].': '.$row_cards['number_card_3'].' cards</i>
                       </div> ';
                       // -------------------------------------------------------------
 

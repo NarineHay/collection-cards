@@ -42,7 +42,7 @@ if(isset($_GET['id'])){
                 <div class="row rowheight">
                     <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 " align="center" >
                         <div class = "imgdiv">
-                            <img src="images/<?php echo $tox['image']?>" class="personImg" >
+                            <img src="images_realeses/<?php echo $tox['image']?>" class="personImg" >
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " align="center" >

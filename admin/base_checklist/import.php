@@ -8,25 +8,15 @@ $connect = new PDO("mysql:host=localhost;dbname=collection", "collection", "coll
 
 if($_FILES["import_excel"]["name"] != '')
 {
-	$realese_name_id=$_POST['opt_name'];
-	$sql="SELECT id, name_of_collection FROM realeses WHERE id=$realese_name_id";
-    $result=mysqli_query($con, $sql);
-    $row_num=mysqli_num_rows($result);
-    if($row_num==1){
-    $row_id=mysqli_fetch_assoc($result);
-
-    	$realese_id=$row_id['id'];
-    }
-	else{
-		$message="Name and ear don't match";
-	}
+	$realese_id=mysqli_real_escape_string($con, $_POST['opt_name']);
+   
 	$allowed_extension = array('xls', 'csv', 'xlsx');
 	$file_array = explode(".", $_FILES["import_excel"]["name"]);
 	$file_extension = end($file_array);
 
 	if(in_array($file_extension, $allowed_extension))
 	{
-		$file_name = time() . '.' . $file_extension;
+		$file_name ='../import_excel/upload/'. time() . '.' . $file_extension;
 		move_uploaded_file($_FILES['import_excel']['tmp_name'], $file_name);
 		$file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($file_name);
 		$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type);
@@ -38,12 +28,7 @@ if($_FILES["import_excel"]["name"] != '')
 
 		$data = $spreadsheet->getActiveSheet()->toArray();
         $c=0;
-        $query = "
-			INSERT INTO base_checklist
-			(sort_id, realese_id, card_number, card_name, team, set_type, parallel, color, print_run) 
-			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :parallel, '', :print_run)";
-             
-             $statement = $connect->prepare($query);
+       
 		foreach($data as $row)
 		// for($row=1; $row<count($data); $row++)
 		{
@@ -81,7 +66,12 @@ $insert_data = array(
 				':print_run'		=>	$data_row5
 			);
 
-			
+			 $query = "
+			INSERT INTO base_checklist
+			(sort_id, realese_id, card_number, card_name, team, set_type, parallel, color, print_run) 
+			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :parallel, '', :print_run)";
+             
+             $statement = $connect->prepare($query);
 			if($statement->execute($insert_data)){
 				$message='<div class="alert alert-success">Successfully added</div>';
 			}
