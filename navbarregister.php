@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "config/con1.php";
 if(isset($_SESSION['language'])){
   $lng=$_SESSION['language'];
 }
@@ -96,78 +97,23 @@ if(isset($_GET['log_out'])){
                                    <li><a class="dropdown-item" href="#">Custom</a></li>
                                </ul>
                            </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Baseball</a>
+                           <?php
+                        $sql="SELECT * FROM sports_type";
+                        $res=mysqli_query($con, $sql);
+                        while($row=mysqli_fetch_assoc($res)){
+                          echo '<li class="dropdown">
+                               <a class="dropdown-item s_type" href="#">'.$row['sport_type'].'</a>
                                <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="checklist">1900-1949</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="checklist">1950-1979</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="checklist">1980-1999</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="checklist">2000-2009</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="checklist">2010-2018</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="" name="checklist">2019-2020</a></li>
                                </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Football</a>
-                               <ul class="dropdown-menu">
-                               <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Basketball</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Hockey</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Soccerl</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Fighting</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
+                           </li>';
+                        }
+                        ?>
                            <li class="dropdown">
                                <a class="dropdown-item" href="#">Add collection</a>
                                <ul class="dropdown-menu">
@@ -183,78 +129,23 @@ if(isset($_GET['log_out'])){
                    <li class="dropdown">
                        <a class="dropdown-item" href="#">Sets</a>
                        <ul class="dropdown-menu">
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Baseball</a>
+                           <?php
+                        $sql="SELECT * FROM sports_type";
+                        $res=mysqli_query($con, $sql);
+                        while($row=mysqli_fetch_assoc($res)){
+                          echo '<li class="dropdown">
+                               <a class="dropdown-item s_type" href="#">'.$row['sport_type'].'</a>
                                <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">1900-1949</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">1950-1979</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">1980-1999</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">2000-2009</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">2010-2018</a></li>
+                                   <li><a class="dropdown-item nav_dr_item" href="#" name="set">2019-2020</a></li>
                                </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Football</a>
-                               <ul class="dropdown-menu">
-                               <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Basketball</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Hockey</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Soccerl</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
-                           <li class="dropdown">
-                               <a class="dropdown-item" href="#">Fighting</a>
-                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">1900-1949</a></li>
-                                   <li><a class="dropdown-item" href="#">1950-1979</a></li>
-                                   <li><a class="dropdown-item" href="#">1980-1999</a></li>
-                                   <li><a class="dropdown-item" href="#">2000-2009</a></li>
-                                   <li><a class="dropdown-item" href="#">2010-2018</a></li>
-                                   <li><a class="dropdown-item" href="#">2019</a></li>
-                                   <li><a class="dropdown-item" href="#">2020</a></li>
-                               </ul>
-                           </li>
+                           </li>';
+                        }
+                        ?>
                            <li class="dropdown">
                                <a class="dropdown-item" href="#">Add collection</a>
                                <ul class="dropdown-menu">

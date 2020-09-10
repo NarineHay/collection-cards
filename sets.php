@@ -19,6 +19,7 @@ include "header.php";
             <div class="col-md-12">
                 <h2 class = "releases" align="center">SETS</h2>
             </div>
+           
 
 
             <?php
@@ -26,22 +27,53 @@ if(isset($_SESSION['product'])){
   $product=$_SESSION['product'];
   $sport_type=$_SESSION['sport_type'];
   $year_prod=$_SESSION['year_prod'];
-}
-else{
-  echo 'no sessia';
-}
-            $year=explode('-', $year_prod);
+  $year=explode('-', $year_prod);
             $a=$year[0];
             $b=$year[1];
-            $sql="SELECT * FROM realeses WHERE product_type='$product' AND sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
+
+  echo '<div class="col-md-12 text-center">
+  <div class="col-md-5 mx-auto">
+                <label>Select year of sets</label>
+               <form action="" method="post" >
+               <select onchange="this.form.submit()" class="form-control select" id="select_name_collection" name="sel">';
+               for($i=$a; $i<=$b; $i++){
+            
+if(isset($_POST['sel']) && $_POST['sel']==$i){
+              echo '<option value='.$i.' selected>'.$i.'</option>';
+  
+}
+else{
+  echo '<option value='.$i.'>'.$i.'</option>';
+}
+}
+                                                    
+echo '</select></form> 
+       </div>
+    </div>';
+            if(isset($_POST['sel'])){
+              
+              $sel=$_POST['sel'];
+             $sql="SELECT * FROM realeses WHERE sport_type='$sport_type' AND year_of_releases='$sel'";
+            // $query=mysqli_query($con,$sql);
+            }
+
+            else{
+            $sql="SELECT * FROM realeses WHERE sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
+          }
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){
+                $r_id=$tox['id'];
                 $desc = $tox['description'];
-                $description = explode(",",$desc);
+                $description = explode("^",$desc);
                 $htmllis = '';
                 foreach($description as $key => $value){
                     $htmllis .= "<li>".$value."</li>";
                 }
+
+                $sql_base_checklist_true="SELECT id FROM base_checklist WHERE realese_id=$r_id";
+                $res=mysqli_query($con, $sql_base_checklist_true);
+                if(mysqli_num_rows($res)!=0){
+
                 echo '  <div class="col-md-12">
                           <div class="row style">
                           <div class="col-md-12">
@@ -83,6 +115,37 @@ else{
                 </div>
                 </div></div>';
             }
+            else{
+                echo '<div class="col-md-12">
+                          <div class="row style">
+                          <div class="col-md-12">
+                    <div class="row ">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <h1 class="title">'. $tox['year_of_releases'].' '.$tox['name_of_collection'].'</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
+                            <div class="releases-item-img">
+                                <img src="images_realeses/'.$tox['image'].'">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                             <div class="releases-item-text">
+                                <ul>'.$htmllis.'</ul>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                </div></div>';
+            }
+        }
+}
+else{
+  echo 'no sessia';
+}
             ?>
 
         </div>
