@@ -7,6 +7,7 @@ if(isset($_SESSION['language'])){
 else{
   $lng='en';
 }
+
 ?>
 
 <section id="fix">

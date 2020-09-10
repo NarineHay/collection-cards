@@ -40,6 +40,18 @@
                                         <span class="sidebar-normal">Infographic</span>
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="../footer/add_footer.php">
+                                        <span class="sidebar-mini">AF</span>
+                                        <span class="sidebar-normal">Add footer</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="../store_rating/add_store_rating.php">
+                                        <span class="sidebar-mini">SR</span>
+                                        <span class="sidebar-normal">Add Store Rating</span>
+                                    </a>
+                                </li>
                                 
                             </ul>
                         </div>

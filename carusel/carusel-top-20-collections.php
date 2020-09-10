@@ -10,7 +10,7 @@
           <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
-                    <img src="images/11.png"> 
+                    <img src="images/11.PNG">
                 </div>
                 <div class="description-card">
                   <div class="d-flex justify-content-between">

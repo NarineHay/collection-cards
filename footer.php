@@ -1,26 +1,47 @@
+<?php
+$sql="SELECT * FROM footer";
+$res=mysqli_query($con, $sql);
+$row=mysqli_fetch_assoc($res);
+?>
 <section id="footer">
     <div class="container">
         <div class="row row-collection">
             <div class="col-md-3 col-sm-6 col-xs-12 row-div">
-                <p>About us</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
+                <p><?php echo $row['title1']?></p>
+                <p><?php echo $row['text1']?></p>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12 row-div">
-            <p>Collections</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
+                <p><?php echo $row['title2']?></p>
+                <p><?php echo $row['text2']?></p>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12 row-div">
-            <p>Contact</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate sunt, quos maxime nihil accusamus nam quo provident repellendus error, sed tenetur, iusto ex et nostrum officiis illum eius. Impedit, accusamus!</p>
+                <p><?php echo $row['title3']?></p>
+                <p><?php echo $row['text3']?></p>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12 row-div social-col d-flex justify-content-center">
                 <div classs="social-center">
                 <p>Social media</p>
                 <div class="d-flex justify-content-center">
-                     <div class="social-div"><i id="i-facebook" class="fa fa-facebook"></i></div>
-                     <div class="social-div"><i class="fa fa-twitter"></i></div>
-                     <div class="social-div"><i class="fa fa-instagram"></i></div>
-                     <div class="social-div i-telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i></div>
+                     <div class="social-div">
+                         <a href="https://www.facebook.com/Card-Collection-268222843700522/" target="_blank">
+                             <i id="i-facebook" class="fa fa-facebook"></i>
+                         </a>
+                     </div>
+                     <div class="social-div">
+                         <a href="https://twitter.com/" target="_blank">
+                             <i class="fa fa-twitter"></i>
+                         </a>
+                     </div>
+                     <div class="social-div">
+                         <a href="https://www.instagram.com/" target="_blank">
+                             <i class="fa fa-instagram"></i>
+                         </a>
+                     </div>
+                     <div class="social-div i-telegram">
+                         <a href="https://web.telegram.org/#/login" target="_blank">
+                             <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                         </a>
+                     </div>
                 </div>
                 <button class="social-button" data-toggle="modal" data-target="#exampleModal">Subscribe to update</button>
               </div>
