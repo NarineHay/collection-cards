@@ -84,6 +84,12 @@
                                         <span class="sidebar-normal">Banner</span>
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link"  href="../store_rating/changeStoreRating.php">
+                                        <span class="sidebar-mini">CS</span>
+                                        <span class="sidebar-normal">Change Store</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
