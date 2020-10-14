@@ -9,7 +9,6 @@ include "../heder.php";
 <body>
 <?php
 include "../menu.php";
-
 ?>
 <div class="content">
     <div class="container-fluid">
@@ -19,12 +18,7 @@ include "../menu.php";
                     <div class="card-header ">
                         <h4 class="card-title">Add Store Rating</h4>
                         <p></p>
-                        <div>
-                            <div class="text-success">
-                                <h5><?php echo $_SESSION['success']; ?></h5>
-                            </div>
 
-                        </div>
                     </div>
                     <form method="post" action="change_store.php" enctype="multipart/form-data">
                         <div class="form-group">
@@ -56,55 +50,9 @@ include "../menu.php";
                         </div>
                     </form>
                 </div>
-                <?php
-                $sql = "SELECT * FROM store_rating";
-                $res=mysqli_query($con, $sql);
-                while($row=mysqli_fetch_assoc($res)){
-                            echo " <div class='card-header '>                     
-                                        <div>
-                                            <div class'text-success'>
-                                                <h5>".$_SESSION['success']."</h5>
-                                            </div>
-                
-                                        </div>
-                                    </div>
-                            <form method='post' action='change_store.php' enctype='multipart/form-data'>
-                             <div class='form-group'>
-                                <ul id='ul'>
-                                    <label>Title</label>
-                                    <li>
-                                        <textarea  class='form-control' name='z1'>".$row['title']."</textarea>
-                                    </li>
-                                    <label>Intotitle1</label>
-                                    <li>
-                                        <textarea  class='form-control' name='z2'>".$row['intotitle1']."</textarea>
-                                    </li>
-                                    <label>Intotitle2</label>
-                                    <li>
-                                        <textarea  class='form-control' name='z3'>".$row['intotitle2']."</textarea>
-                                    </li>
-                                    <label>Text</label>
-                                    <li>
-                                        <textarea  class='form-control' name='z4'>".$row['text']."</textarea>
-                                    </li>
-                                    <br>
-                                    <div class='form-group'>
-                                        <label>Add</label>
-                                        <input type='file' name='store' class='inp1'>
-                                    </div>
-                                    <input type='hidden' name='picture' value='".$row["id"]."'/>
-                                    <div class='card-footer '>
-                                        <button type='submit' class='btn btn-fill btn-add' name='send'>Update</button>
-                                    </div>
-                                </ul>                             
-                            </div>
-                            </form>
-                            <br>
-                            <hr>";
-                }
-                ?>
 
-            </div>
+
+
         </div>
     </div>
 </div>
@@ -113,15 +61,27 @@ include "../menu.php";
 include "../footer.php";
 ?>
 <script>
-    $('.select').change(function(){
-        if($(this).val()=='Other sport'){
-            $('html select').after("<input type='text' placeholder='Enter sport type' class='form-control' name='other-sport-type'>");
-            $(this).remove()
-        }
-    })
-    $('#add_input').click(function(){
-        $('#ul').append('<li><input type="text" placeholder="" class="form-control" name="desc[]"></li>')
-    })
+        $(".search").click(function(){
+            var search = $(".searchValue").val();
+
+            $.post(
+                "change_store.php",
+                {search:search},
+                function (ard) {
+                    $(".status").html(ard)
+                }
+            )
+        })
+        $('.select').change(function(){
+            if($(this).val()=='Other sport'){
+                $('html select').after("<input type='text' placeholder='Enter sport type' class='form-control' name='other-sport-type'>");
+                $(this).remove()
+            }
+        })
+        $('#add_input').click(function(){
+            $('#ul').append('<li><input type="text" placeholder="" class="form-control" name="desc[]"></li>')
+        })
+
 
 
 </script>
