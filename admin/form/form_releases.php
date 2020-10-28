@@ -66,15 +66,16 @@ if(isset($_POST['btn-add-releases'])){
                               $description.=$name.'^';
                         }
                         $description=substr($description,0, strlen($description)-1);
-                        $end_id="SELECT id FROM realeses GROUP BY id DESC LIMIT 1";
+                        $end_id="SELECT id FROM collections GROUP BY id DESC LIMIT 1";
                         $res=mysqli_query($con, $end_id);
                         $row=mysqli_fetch_assoc($res);
      
                         $sort_number= $row['id']+1;
-                        $sql_insert="INSERT INTO realeses (sort_number, name_of_collection, year_of_releases, producer, sport_type, image, description, product_type) VALUES ($sort_number, '$name_collection', '$year_of_releases', '$producer', '$sport_type', '$newname', '$description', '$product_type')";
+                        $sql_insert="INSERT INTO collections (sort_number, name_of_collection, year_of_releases, producer, sport_type, image, description, product_type) VALUES ($sort_number, '$name_collection', '$year_of_releases', '$producer', '$sport_type', '$newname', '$description', '$product_type')";
     
                          if(mysqli_query($con, $sql_insert)){
                                 $message="<h5 class='text-success'>Successfully added </h5>";
+                                echo("<meta http-equiv='refresh' content='1'>");
                           }
             }
             else{

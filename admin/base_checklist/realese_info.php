@@ -11,7 +11,7 @@
                          <label>Select Collection name</label>
                          <select class="form-control" id="" name='opt_name'>
                             <?php
-                                 $sql="SELECT id, name_of_collection, year_of_releases FROM realeses";
+                                 $sql="SELECT id, name_of_collection, year_of_releases FROM collections";
                                  $result=mysqli_query($con, $sql);
                                     while ($row=mysqli_fetch_assoc($result)) {
                                          echo "<option value='".$row['id']."'>".$row['name_of_collection']."-".$row['year_of_releases']."</option>";

@@ -53,12 +53,12 @@ echo '</select></form>
             if(isset($_POST['sel'])){
               
               $sel=$_POST['sel'];
-             $sql="SELECT * FROM realeses WHERE sport_type='$sport_type' AND year_of_releases='$sel'";
+             $sql="SELECT * FROM collections WHERE sport_type='$sport_type' AND year_of_releases='$sel'";
             // $query=mysqli_query($con,$sql);
             }
 
             else{
-            $sql="SELECT * FROM realeses WHERE sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
+            $sql="SELECT * FROM collections WHERE sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
           }
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){

@@ -1,6 +1,6 @@
 <?php
 
-$sql_n_c="SELECT id, name_of_collection FROM realeses";
+$sql_n_c="SELECT id, name_of_collection FROM collections";
 $result_n_c=mysqli_query($con, $sql_n_c);
 while($row=mysqli_fetch_assoc($result_n_c)){
 	if(isset($_POST['nnn']) && $row['id']==$_POST['nnn']){

@@ -63,6 +63,7 @@
                                                </li>
                                             </ul>
                                             <div class="text-right" id="add_input">
+                                              <i class="fa fa-plus" style="color: #133690;cursor: pointer;"></i>
                                             </div>
                                         </div>
                                        

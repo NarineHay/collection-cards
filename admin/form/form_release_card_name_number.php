@@ -13,7 +13,7 @@ include "../../config/con1.php";
 
      $realese_name_id=mysqli_real_escape_string($con, $_POST['opt_name']);
     
-          $add_card_na_nu="UPDATE realeses SET name_card_1='$name_card_1', number_card_1=$number_card_1, name_card_2='$name_card_2', number_card_2=$number_card_2, name_card_3='$name_card_3', number_card_3=$number_card_3 WHERE id=$realese_name_id";
+          $add_card_na_nu="UPDATE collections SET name_card_1='$name_card_1', number_card_1=$number_card_1, name_card_2='$name_card_2', number_card_2=$number_card_2, name_card_3='$name_card_3', number_card_3=$number_card_3 WHERE id=$realese_name_id";
           if(mysqli_query($con, $add_card_na_nu)){
                 $message="<h5 class='text-success'>Card name and number successfully added </h5>";
           }

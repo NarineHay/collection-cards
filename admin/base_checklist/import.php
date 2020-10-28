@@ -39,11 +39,11 @@ if($_FILES["import_excel"]["name"] != '')
             // else{
             // 	$data_row5=$data[$row][5];
             // }
-            if($row[5]==''){
-            	$data_row5="";
+            if($row[6]==''){
+            	$data_row6="";
             }
             else{
-            	$data_row5=$row[5];
+            	$data_row6=$row[6];
             }
             
 			// $insert_data = array(
@@ -62,14 +62,16 @@ $insert_data = array(
 				':card_name'		=>	$row[1],
 				':team'		=>	$row[2],
 				':set_type'		=>	$row[3],
-				':parallel'		=>	$row[4],
-				':print_run'		=>	$data_row5
+				':variation'		=>	$row[4],
+				':parallel'		=>	$row[5],
+				':print_run'		=>	$data_row6,
+
 			);
 
 			 $query = "
 			INSERT INTO base_checklist
-			(sort_id, realese_id, card_number, card_name, team, set_type, parallel, color, print_run) 
-			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :parallel, '', :print_run)";
+			(sort_id, realese_id, card_number, card_name, team, set_type, variation, parallel, color, print_run) 
+			VALUES (:sort_id, :realese_id, :card_number, :card_name, :team, :set_type, :variation, :parallel, '', :print_run)";
              
              $statement = $connect->prepare($query);
 			if($statement->execute($insert_data)){
