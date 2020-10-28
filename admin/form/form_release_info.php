@@ -5,7 +5,7 @@ include "../../config/con1.php";
      $info=mysqli_real_escape_string($con, $_POST['info']);
      $realese_name_id=mysqli_real_escape_string($con, $_POST['opt_name']);
     
-          $add_info="UPDATE realeses SET info='$info' WHERE id=$realese_name_id";
+          $add_info="UPDATE collections SET info='$info' WHERE id=$realese_name_id";
           if(mysqli_query($con, $add_info)){
                 $message="<h5 class='text-success'>Info successfully added </h5>";
           }

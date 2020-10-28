@@ -3,7 +3,7 @@ include "config/con1.php";
 include "header.php";
 if(isset($_GET['id'])){
     $realise_id = $_GET['id'];
-    $sql = "SELECT * FROM `realeses` WHERE id = '$realise_id'";
+    $sql = "SELECT * FROM `collections` WHERE id = '$realise_id'";
     $rezult = mysqli_query($con,$sql);
     $tox = mysqli_fetch_assoc($rezult);
 
@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
                 	<?php
                 	if(isset($_POST['sel'])){
                 		$sel=$_POST['sel'];
-                        $sql="SELECT * FROM realeses WHERE id='$sel'";
+                        $sql="SELECT * FROM collections WHERE id='$sel'";
                         $query=mysqli_query($con,$sql);
                                                 
                         $tox=mysqli_fetch_assoc($query);
@@ -58,7 +58,7 @@ if(isset($_SESSION['product'])){
             $a=$year[0];
             $b=$year[1];
 
-$sql_sel="SELECT * FROM realeses WHERE sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
+$sql_sel="SELECT * FROM collections WHERE sport_type='$sport_type' AND SUBSTRING(year_of_releases, 1, 4) BETWEEN $a AND $b";
      $res_sel=mysqli_query($con, $sql_sel);
 
   echo '<div class="col-md-12 text-center">
@@ -88,7 +88,7 @@ echo '</select></form>
             }
 
             else{
-            $sql="SELECT bs.*, rl.id FROM base_checklist bs, realeses rl WHERE rl.sport_type='$sport_type' AND SUBSTRING(rl.year_of_releases, 1, 4) BETWEEN $a AND $b AND bs.realese_id=rl.id";
+            $sql="SELECT bs.*, rl.id FROM base_checklist bs, collections rl WHERE rl.sport_type='$sport_type' AND SUBSTRING(rl.year_of_releases, 1, 4) BETWEEN $a AND $b AND bs.realese_id=rl.id";
           }
           ?>
 

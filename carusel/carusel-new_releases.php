@@ -7,7 +7,7 @@
         <div class="owl-carousel testimonials-carousel">
           <?php
            include "config/con1.php";
-        $sql="SELECT re.name_of_collection, re.year_of_releases, re.sport_type, re.image, sp.sport_type, sp.sport_logo AS 'sport_logo' FROM realeses re, sports_type sp WHERE sp.sport_type=re.sport_type";
+        $sql="SELECT re.name_of_collection, re.year_of_releases, re.sport_type, re.image, sp.sport_type, sp.sport_logo AS 'sport_logo' FROM collections re, sports_type sp WHERE sp.sport_type=re.sport_type";
         $result=mysqli_query($con, $sql);
         while($row=mysqli_fetch_assoc($result)){
           echo '<div class="testimonial-item">

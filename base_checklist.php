@@ -3,7 +3,7 @@ include "config/con1.php";
 include "header.php";
 if(isset($_GET['id'])){
     $realise_id = $_GET['id'];
-    $sql = "SELECT * FROM `realeses` WHERE id = '$realise_id'";
+    $sql = "SELECT * FROM `collections` WHERE id = '$realise_id'";
     $rezult = mysqli_query($con,$sql);
     $tox = mysqli_fetch_assoc($rezult);
 

@@ -21,7 +21,7 @@ include "header.php";
 
 
             <?php
-            $sql="SELECT * FROM realeses WHERE SUBSTRING(product_type, 1, 3)='new'";
+            $sql="SELECT * FROM collections WHERE SUBSTRING(product_type, 1, 3)='new'";
             $query=mysqli_query($con,$sql);
             while($tox=mysqli_fetch_assoc($query)){
                 $desc = $tox['description'];
@@ -29,7 +29,9 @@ include "header.php";
                 $description = explode("^",$desc);
                 $htmllis = '';
                 foreach($description as $key => $value){
-                    $htmllis .= "<li>".$value."</li>";
+                    if($value!=''){
+                        $htmllis .= "<li>".$value."</li>";
+                    }
                 }
 
                 $sql_base_checklist_true="SELECT id FROM base_checklist WHERE realese_id=$r_id";
@@ -112,7 +114,7 @@ include "header.php";
 
 <!-- ------------------------Modal infographics------------------------------------------- -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="container">
                 <div class="row">
@@ -120,7 +122,7 @@ include "header.php";
                         <h3 align="center">Set Includes</h3>
                     </div>
                     <div class="col-md-12" align="center">
-                        <div class="row" id='releases_id_modal'>
+                        <div class="x-scroll" id='releases_id_modal'>
                             
                         </div>
                     </div>
