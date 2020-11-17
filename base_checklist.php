@@ -193,7 +193,7 @@ if(isset($_GET['id'])){
                 if (i > 0){
                     $(this).html(`<div class="input-group">
                                    <input  class="form-control inpt2" type="text" placeholder="Search" aria-label="Search">
-                                   <button class="btn" style="border-radius:0;">
+                                   <button class="btn btn-srch" style="border-radius:0;">
                                        <i class="fa fa-search btn" aria-hidden="true"></i>
                                    </button>
                                </div>`);
