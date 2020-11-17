@@ -8,7 +8,7 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
 }
 if(isset($_GET['id'])){
     $realise_id = mysqli_real_escape_string($con, $_GET['id']);
-    $sql = "SELECT * FROM `custom_name_checklist` WHERE id = '$realise_id'";
+    $sql = "SELECT * FROM `personal_name_checklist` WHERE id = '$realise_id'";
     $rezult = mysqli_query($con, $sql);
     $tox = mysqli_fetch_assoc($rezult);
 }
@@ -114,7 +114,7 @@ if(isset($_GET['id'])){
                                         <tbody>
                                              <?php
                                                 $cid = $tox['id'];
-                                                $sql="SELECT * FROM `custom_checklist` WHERE cid = '$cid' ORDER BY id DESC";
+                                                $sql="SELECT * FROM `personal_checklist` WHERE cid = '$cid' ORDER BY id DESC";
                                                 $query=mysqli_query($con,$sql);
                                                 $count = 0;
                                                 while($row=mysqli_fetch_assoc($query)){
@@ -192,7 +192,7 @@ if(isset($_GET['id'])){
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                  <form action="custom_form.php" method="post" enctype="multipart/form-data">
+                  <form action="personal_form.php" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -369,63 +369,63 @@ if(isset($_GET['id'])){
                     var print_run = $(this).parents('tr').find('.print_run')
 
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {rid:rid,id:id},
                         function(ard){
                             base.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {sport_type:id},
                         function(ard){
                             sport_type.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {set_type:id,rid_set:rid},
                         function(ard){
                             set_type.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {card_number:id,rid_number:rid},
                         function(ard){
                             card_number.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {card_name:id,rid_name:rid},
                         function(ard){
                             card_name.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {card_name:id,rid_name:rid},
                         function(ard){
                             card_name.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {team:id,rid_team:rid},
                         function(ard){
                             team.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {parallel:id,rid_parallel:rid},
                         function(ard){
                             parallel.html(ard)
                         }
                     )
                     $.post(
-                        'custom3.php',
+                        'personal3.php',
                         {print_run:id,rid_print:rid},
                         function(ard){
                             print_run.html(ard)
@@ -448,7 +448,7 @@ if(isset($_GET['id'])){
                     var parallel =    $(this).parents('tr').find('.parallel1').val()
                     var print_run =   $(this).parents('tr').find('.print_run1').val()
                     $.post(
-                        "custom_form.php",
+                        "personal_form.php",
                         {upd_id:upd_id,base:base,set_type:set_type,sport_type:sport_type,card_number:card_number,card_name:card_name,team:team,parallel:parallel,print_run:print_run},
                         function(){
                             location.reload()
@@ -480,7 +480,7 @@ if(isset($_GET['id'])){
                 var d2          = $(this).parents('tr').find('.d2').text().trim()
                 var d3          = $(this).parents('tr').find('.d3').text().trim()
                 $.post(
-                    'custom_form.php',
+                    'personal_form.php',
                     {basename:base,rrid:rid,sport_type:sport_type,card_number:card_number,card_name:card_name,parallel:parallel,print_run:print_run,team:team,set_type:set_type,d1:d1,d2:d2,d3:d3,copy:copy},
                     function(ard){
                        // location.reload()
@@ -489,7 +489,7 @@ if(isset($_GET['id'])){
             })
             $('.remove').click(function(){
                 var del_id = $(this).attr('name');
-                var form = '<form action="custom_form.php" method="post"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><input type="hidden" value="<?php echo $tox['id'] ?>" name="id"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="del_td" value='+del_id+'>Delete</button></div></form>';
+                var form = '<form action="personal_form.php" method="post"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><input type="hidden" value="<?php echo $tox['id'] ?>" name="id"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="del_td" value='+del_id+'>Delete</button></div></form>';
                 $('.del_modal').html(form)
             })
         });

@@ -67,21 +67,21 @@ if(isset($_POST['login'])){
   <div class="container">
     <div class="row">
     <div class="col-md-12">
-    <a href="personal.php" class="float-right hr">Add Checklist</a>
+    <a href="custom.php" class="float-right hr">Add Checklist</a>
     </div>
     <?php
       $uid=$_SESSION['user'];
-      $sql = "SELECT * FROM `personal_name_checklist` WHERE `user_id`=$uid ORDER BY `id` DESC";
+      $sql = "SELECT * FROM `custom_name_checklist` WHERE `user_id`=$uid ORDER BY `id` DESC";
       $res = mysqli_query($con, $sql);
       @$rows = mysqli_num_rows($res);
       if($rows==0){
     ?>
     <div class="card-body ">
         <div class="custom_img_div">
-          <img src="images/no-persona-checklist.png" class="custom_img">
+          <img src="images/no-custom-checklist.png" class="custom_img">
         </div>
       <h4 class="header-log">
-        <center class="no_custom">No Personal Checklist</center>
+        <center class="no_custom">No Custom Checklist</center>
       </h4>
     </div>
     <?php   
@@ -103,7 +103,7 @@ if(isset($_POST['login'])){
                 </button>
             </div>
             <div class="releases-item-text">
-              <h1 class="title"><a href="personalchecklist.php?id=<?php echo $tox['id']; ?>"><?php echo $tox['name_of_checklist']; ?></a></h1>
+              <h1 class="title"><a href="customchecklist.php?id=<?php echo $tox['id']; ?>"><?php echo $tox['name_of_checklist']; ?></a></h1>
               <p><?php echo $tox['description']; ?></p>
             </div>
           </div>
@@ -122,21 +122,23 @@ if(isset($_POST['login'])){
     
   </div>
 </div>
+
+<?php
+include "footer.php";
+?>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="js/personal_checklist.js"></script>
+<script src="js/custom_checklist.js"></script>
 <script>
 
   $('.delite').click(function(){
     var id = $(this).attr('name')
     var name = $(this).parents('.col-sm-12').find('.title').text()
-    var k = '<div class="modal-content" style="border:0"><form action="personal_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn" value="'+id+'">Delete</button></div></form></div>';
+    var k = '<div class="modal-content" style="border:0"><form action="custom_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn" value="'+id+'">Delete</button></div></form></div>';
     $('.delite_modal').html(k)
   })
 
 </script>
-<?php
-include "footer.php";
-?>
+
 </body>
 </html>
