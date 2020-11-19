@@ -129,7 +129,7 @@
                                                                <td class='c_set_type'>".$row['set_type']."</td>
                                                                <td class='c_parallel'>".$row['parallel']."</td>
                                                                <td class='c_print_run'>".$row['print_run']."</td>
-                                                                <td class='text-right'>
+                                                               <td class='text-right'>
                                                         <a href='#' class='btn btn-link btn-warning edit a_edit' name=".$row['id']."><i class='fa fa-edit'></i></a>
                                                         <a href='#' class='btn btn-link btn-info copy' data-id=".$max_id." name=".$row['id']."><i class='fa fa-copy'></i></a>
                                                         <a href='#' class='btn btn-link btn-danger remove' data_name=".$row['id']."><i class='fa fa-times'></i></a>
