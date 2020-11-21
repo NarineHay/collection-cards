@@ -39,6 +39,11 @@ if(isset($_POST['login'])){
 }	
 ?>
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+ 
+  <link href="carusel/css/style.css" rel="stylesheet">
 </head>
 <body>
 	 <?php include "navbarregister.php";
@@ -46,7 +51,16 @@ if(isset($_POST['login'])){
 	 	$sql = "SELECT * FROM users where id = '$id'";
 	 	$res = mysqli_query($con,$sql);
 	 	$ard = mysqli_fetch_assoc($res);
-	 	
+
+    $sql1 = "SELECT * FROM custom_name_checklist WHERE user_id = $id";
+    $res1 = mysqli_query($con,$sql1);
+    $row = mysqli_num_rows($res1);
+
+    $sql2 = "SELECT * FROM personal_name_checklist WHERE user_id = $id";
+    $res2 = mysqli_query($con,$sql2);
+    $row2 = mysqli_num_rows($res2);
+
+    
 
 	  ?> 
 <div class="dvbtn">
@@ -85,11 +99,140 @@ if(isset($_POST['login'])){
       </div>
   </div>
 </div>
+<div class="discdiv">
+    <section id="testimonials" class="top-collections">
+      <h2 class="text-center text-uppercase">CUSTOM CHECKLIST</h2>
+    <div class="container">
+       
+        <div class="owl-carousel testimonials-carousel">
 
+          
+          
+<?php if($row >= 1):
+  while($tox1=mysqli_fetch_assoc($res1)){
+  ?>
+                <div class="testimonial-item">
+                <div class="row-d" >
+                <div class="collect-card carusel-card">
+                <div class="img-card">
+                    <img src="images/<?php echo $tox1['image']?>">
+                </div>
+                <div class="description-card">
+                  <div class="d-flex justify-content-between">
+                      <span>Description</span>
+                      <div class="plus-icon">+</div>
+                  </div>
+                  <p><?php echo $tox1['description']?></p>
+                </div>
+                <div class="d-flex collector-cad bd-highlight mb-3">
+                    <div class="author-avatar p-2 bd-highlight"></div>
+                    <div class="p-2 bd-highlight">
+                        <p class="author-name">Author name</p>
+                        <p class="country">Country</p>
+                    </div>
+                    <div class="align-self-center ml-auto p-2 bd-highlight">
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                    </div>
+                </div>
+            </div>
+            </div> 
+            </div>
+            
+
+
+  <?php } ?>
+
+      
+      
+      </div>
+      </div>
+    </section>
+      </div>
+<?php 
+
+else:
+ ?>
   <div class="discdiv">
   <img src="images/disc.png" class="img-responsive">
   <p class="collect">NO COLLECTIONS</p>
 </div>
+<?php endif ?>
+
+
+
+
+
+<div class="discdiv">
+    <section id="testimonials" class="top-collections personalSection">
+      <h2 class="text-center text-uppercase">PERSONAL CHECKLIST</h2>
+    <div class="container">
+       
+        <div class="owl-carousel testimonials-carousel">
+
+          
+          
+<?php if($row2 >= 1):
+  while($tox2=mysqli_fetch_assoc($res2)){
+  ?>
+                <div class="testimonial-item">
+                <div class="row-d" >
+                <div class="collect-card carusel-card">
+                <div class="img-card">
+                    <img src="images/<?php echo $tox2['image']?>">
+                </div>
+                <div class="description-card">
+                  <div class="d-flex justify-content-between">
+                      <span>Description</span>
+                      <div class="plus-icon">+</div>
+                  </div>
+                  <p><?php echo $tox2['description']?></p>
+                </div>
+                <div class="d-flex collector-cad bd-highlight mb-3">
+                    <div class="author-avatar p-2 bd-highlight"></div>
+                    <div class="p-2 bd-highlight">
+                        <p class="author-name">Author name</p>
+                        <p class="country">Country</p>
+                    </div>
+                    <div class="align-self-center ml-auto p-2 bd-highlight">
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                    </div>
+                </div>
+            </div>
+            </div> 
+            </div>
+            
+
+
+  <?php } ?>
+
+      
+      
+      </div>
+      </div>
+    </section>
+      </div>
+<?php 
+
+else:
+ ?>
+  <div class="discdiv">
+  <img src="images/disc.png" class="img-responsive">
+  <p class="collect">NO COLLECTIONS</p>
+</div>
+<?php endif ?>
+
+
+
+
+
 
 
 <div class="modal fade" id="exampleModall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,5 +272,7 @@ if(isset($_POST['login'])){
 <?php
 include "footer.php";
 ?>
+<script src="carusel/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="carusel/js/main.js"></script>
 </body>
 </html>
