@@ -71,8 +71,8 @@
   display: none !important;
 }
 .cust{
-    padding-top: 100px;
-    padding-bottom: 100px;
+    margin-top: 150px;
+    margin-bottom: 100px;
 }
 /*.select-search{height:50px;position:relative;min-width:200px;width:100%;margin-bottom:8px}*/
 .select-search.active .select-search-sub{z-index:99!important;opacity:1!important;transform:translateZ(0)!important;-webkit-transform:translateZ(0)!important;-moz-transform:translateZ(0)!important;visibility:visible!important}.select-search.disabled{pointer-events:none!important;opacity:.7!important}
@@ -217,4 +217,19 @@
 }
 .t1,.t2,.t3{
   background: #fad466!important;
+}
+.text-success{
+    width: max-content;
+    margin: auto;
+    text-align: center;
+    background: #5ae7a647;
+    padding: 5px 20px;
+    border-radius: 6px;
+    
+}
+.ee{
+  display: none;
+}
+.banner-button:hover{
+  cursor: pointer;
 }
