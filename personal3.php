@@ -4,24 +4,36 @@
 		$rid  = mysqli_real_escape_string($con, $_POST['rid']);
 		$id  = mysqli_real_escape_string($con, $_POST['id']);
 
-		$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
-		$res = mysqli_query($con, $sql);
-		$tox = mysqli_fetch_assoc($res);
-
-		$sel = "SELECT * FROM collections";
-		$rez = mysqli_query($con, $sel);
-		echo '<select class="form-control bname1" name="basechecklist">';
-		while( $row10 = mysqli_fetch_array($rez) ){
-?>
-		<option value = "<?php echo $row10['id'] ?>" 
-		<?php 
-		if(($tox['name_of_collection'] == $row10['name_of_collection'])){
-		echo 'selected = "selected"';
-		} ?>>
-		<?php echo $row10['name_of_collection']; ?></option>
-<?php		    
+		if($rid == 0){
+			$sql = "SELECT name_of_collection,id FROM collections";
+			$res = mysqli_query($con, $sql);
+			echo '<select class="form-control bname1" name="basechecklist"><option></option>';
+			while( $tox = mysqli_fetch_array($res) ){
+		?>
+			<option value = "<?php echo $tox['id'] ?>"><?php echo $tox['name_of_collection'] ?></option>
+		<?php
+			}
 		}
-		echo "</select>";
+		else {
+			$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
+			$res = mysqli_query($con, $sql);
+			$tox = mysqli_fetch_assoc($res);
+
+			$sel = "SELECT * FROM collections";
+			$rez = mysqli_query($con, $sel);
+			echo '<select class="form-control bname1" name="basechecklist">';
+			while( $row10 = mysqli_fetch_array($rez) ){
+	?>
+			<option value = "<?php echo $row10['id'] ?>" 
+			<?php 
+			if(($tox['name_of_collection'] == $row10['name_of_collection'])){
+			echo 'selected = "selected"';
+			} ?>>
+			<?php echo $row10['name_of_collection']; ?></option>
+	<?php		    
+			}
+			echo "</select>";
+		}
 	}
 	if(isset($_POST['sport_type'])){
 		$id  = mysqli_real_escape_string($con, $_POST['sport_type']);

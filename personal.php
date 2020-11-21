@@ -244,7 +244,7 @@ $base = mysqli_query($con, $cbase);
 				<div class="text-success ">
 					You have successfully added checklist
 					<br>
-					<a href='custom_checklist.php' class="text-info">Go to checklist?</a>
+					<a href='personal_checklist.php' class="text-info">Go to checklist?</a>
 				</div>
 			</div>
 			<br>

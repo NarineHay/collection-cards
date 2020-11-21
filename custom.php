@@ -4,7 +4,7 @@ include "config/con1.php";
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
 	
 }else{
-	//header('location:index.php');
+	header('location:index.php');
 }
 $msg = '';
 if(isset($_POST['login'])){
