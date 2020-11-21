@@ -4,31 +4,45 @@
 		$rid  = mysqli_real_escape_string($con, $_POST['rid']);
 		$id  = mysqli_real_escape_string($con, $_POST['id']);
 
-		$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
-		$res = mysqli_query($con, $sql);
-		$tox = mysqli_fetch_assoc($res);
-
-		$sel = "SELECT * FROM collections";
-		$rez = mysqli_query($con, $sel);
-		echo '<select class="form-control bname1" name="basechecklist">';
-		while( $row10 = mysqli_fetch_array($rez) ){
-?>
-		<option value = "<?php echo $row10['id'] ?>" 
-		<?php 
-		if(($tox['name_of_collection'] == $row10['name_of_collection'])){
-		echo 'selected = "selected"';
-		} ?>>
-		<?php echo $row10['name_of_collection']; ?></option>
-<?php		    
+		if($rid == 0){
+			$sql = "SELECT name_of_collection,id FROM collections";
+			$res = mysqli_query($con, $sql);
+			echo '<select class="form-control bname1" name="basechecklist"><option></option>';
+			while( $tox = mysqli_fetch_array($res) ){
+		?>
+			<option value = "<?php echo $tox['id'] ?>"><?php echo $tox['name_of_collection'] ?></option>
+		<?php
+			}
 		}
-		echo "</select>";
+		else {
+			$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
+			$res = mysqli_query($con, $sql);
+			$tox = mysqli_fetch_assoc($res);
+
+			$sel = "SELECT * FROM collections";
+			$rez = mysqli_query($con, $sel);
+			echo '<select class="form-control bname1" name="basechecklist">';
+			while( $row10 = mysqli_fetch_array($rez) ){
+	?>
+			<option value = "<?php echo $row10['id'] ?>" 
+			<?php 
+			if(($tox['name_of_collection'] == $row10['name_of_collection'])){
+			echo 'selected = "selected"';
+			} ?>>
+			<?php echo $row10['name_of_collection']; ?></option>
+	<?php		    
+			}
+			echo "</select>";
+		}
+
+		
 	}
 	if(isset($_POST['sport_type'])){
 		$id  = mysqli_real_escape_string($con, $_POST['sport_type']);
 		$cust = "SELECT * FROM `custom_checklist` WHERE id='$id'";
 		$query = mysqli_query($con, $cust);
 		$tox = mysqli_fetch_assoc($query);
-		echo '<select  class="form-control sport_type1>" name="sport_type">';
+		echo '<select  class="form-control sport_type1" name="sport_type">';
 		echo '<option value='.$tox['id'].'>'.$tox['sport_type'].'</option>';	
 		echo "</select>";
 
@@ -42,7 +56,7 @@
 
 		$sql = "SELECT * FROM base_checklist WHERE realese_id='$rid' GROUP BY set_type";
 		$res = mysqli_query($con, $sql);
-		echo '<select class="form-control set_type1" name="set_type">';
+		echo '<select class="form-control set_type1" name="set_type"><option></option>';
 		while( $row10 = mysqli_fetch_assoc($res) ){
 ?>
 		<option value = "<?php echo $row10['id'] ?>" data-value="<?php echo $row10['id'] ?>" 
@@ -290,17 +304,11 @@
             "custom2.php",
             {parallel:k,rid:rid,card_number:card_number,set_type:set_type},
             function(ard){
-                print_run.html("<option></option>"+ard)
+                print_run.html(ard)
             }
         )
     })
 
 })
     
-    
-
-    
-   /* 
-    
-    */
 </script>

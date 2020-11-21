@@ -4,7 +4,7 @@ include "config/con1.php";
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
 	
 }else{
-	header('location:index.php');
+	//header('location:index.php');
 }
 $msg = '';
 if(isset($_POST['login'])){
@@ -240,6 +240,13 @@ $base = mysqli_query($con, $cbase);
 			<button name='btn_custom' class="add-more-button float-left" id="add">
 				<div class="mt-0 mr-1 plus-icon float-left">+</div>Add more
 			</button>
+			<div class="ee">
+				<div class="text-success ">
+					You have successfully added checklist
+					<br>
+					<a href='custom_checklist.php' class="text-info">Go to checklist?</a>
+				</div>
+			</div>
 			<br>
 		</div>
 	</div>
@@ -276,12 +283,12 @@ include "footer.php";
     })
     $('.t3').keyup(function(){
     	var t3 = $('.t3').val()
-		if(t1.length > 0){
+		if(t3.length > 0){
 			$('.dn3').css('display','block');
 		    $('.dt3 input').attr('disabled','true')
 		    $('.dt3 input').val(t3)
     	}else{
-    		$('.dn2').css('display','none');
+    		$('.dn3').css('display','none');
     	}
 	    
     })	
@@ -341,8 +348,6 @@ $(document).on('click', '#add', function () {
 	$('#save-filds').on('submit', function(event){
 
         event.preventDefault();
-		var namecoll = $('.namecoll').val();
-		var desc = $('.desc').val();
 		$.ajax({
 		  url:"custom_form.php",
 	      method:"POST",
@@ -352,8 +357,8 @@ $(document).on('click', '#add', function () {
 	      processData:false,
 		  success:function(data)
 	      {
-	      	location.href="custom_checklist.php";
-	      	//alert(data)
+	      	//location.href="custom_checklist.php";
+	      	$('.ee').css('display','block')
 	      }
 		});
 	})

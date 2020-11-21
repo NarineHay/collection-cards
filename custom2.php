@@ -10,7 +10,7 @@
 	}
 	if(isset($_POST['sport_type'])){
 		$id  = mysqli_real_escape_string($con, $_POST['sport_type']);
-		$sql = "SELECT c.sport_type as sport_type, b.id as id FROM collections c, base_checklist b WHERE c.id=b.realese_id AND c.id=$id GROUP BY c.sport_type";
+		$sql = "SELECT sport_type FROM collections WHERE id=$id GROUP BY sport_type";
 		$res = mysqli_query($con, $sql);
 		while($tox = mysqli_fetch_assoc($res)){
 			echo "<option value=".$tox['id'].">".$tox['sport_type']."</option>";
@@ -95,7 +95,7 @@
 		$query = mysqli_query($con, $sel);
 		$tox = mysqli_fetch_assoc($query);
 		$card_number1 = $tox['card_number'];
-		$sql = "SELECT print_run, id FROM base_checklist WHERE realese_id='$rid' AND set_type='$set_type1' AND card_number='$card_number1' AND parallel='$parallel1' ORDER BY `base_checklist`.`id` ASC";
+		$sql = "SELECT print_run, id FROM base_checklist WHERE realese_id='$rid' AND set_type='$set_type1' AND card_number='$card_number1' AND parallel='$parallel1' GROUP BY print_run ORDER BY `base_checklist`.`id` ASC";
 		
 
 		$res = mysqli_query($con, $sql);
