@@ -17,10 +17,26 @@
 .fab {
     font-family: "Font Awesome 5 Brands";
 }
+.personalSection{
+    background: #5480ad;
+    margin-bottom: 70px;
+}
+.add{
+    width: 80px;
+    height: 30px;
+    border-radius: 9px;
+    background: #fad565;
+    font-size: 15px;
+    border: 1px solid #fad565;
+    margin-top: 10px;
+}
 .userdiv{
     display: inline-block;
     width: 42px;
     height: 29px;
+}
+.userRow{
+    margin-top: 35px;
 }
 .logout{
     margin-left:21px;
@@ -43,8 +59,8 @@
     top: 1px;
 }
 .discdiv > img{
-   width: 180px;
-    height: 184px;
+   width: 150px;
+    height: 150px;
 }
 .divspan{
     position: absolute;
@@ -64,3 +80,8 @@
        text-align: left; 
     }
 }
+
+
+
+
+

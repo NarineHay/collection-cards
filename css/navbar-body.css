@@ -16,15 +16,18 @@
     font-size: 15px;
     border: 1px solid #fad565;
 }
+.add{
+    background: #fad565;
+}
 .discdiv{
-    margin: 92px auto;
-    width: 88%;
-    height: 200px;
+    margin: 42px auto 20px;
+    /*width: 88%;
+    height: 200px;*/
     text-align: center;
 }
 .collect{
    font-family: "Tahoma Regular", serif !important;
-    font-size: 32px;
+    font-size: 26px;
     color: #c90e36;
     margin-top: 11px;
     font-weight: 700;
