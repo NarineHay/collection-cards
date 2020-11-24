@@ -233,3 +233,10 @@
 .banner-button:hover{
   cursor: pointer;
 }
+.releases-item-img img {
+  width: auto!important;
+  height: 100%;
+}
+.personImg {
+  width: auto!important;
+}
