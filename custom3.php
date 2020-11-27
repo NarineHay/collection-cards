@@ -245,9 +245,10 @@
 	            }
 	        )
     	})
-		$('.card_number1').change(function(){
+		$('.card_number1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid=$(this).parents('tr').find('.bname1').val()
+	        var set_type=$(this).parents('tr').find('.set_type1').val()
 	        $(this).parents('tr').find('.card_name1').empty()
 	        $(this).parents('tr').find('.team1').empty()
 	        $(this).parents('tr').find('.parallel1').empty()
@@ -255,13 +256,13 @@
 	        var card_name = $(this).parents('tr').find('.card_name1')
 	        $.post(
 	            "custom2.php",
-	            {id_settype2:k,rid:rid},
+	            {id_settype2:k,rid:rid,set_type:set_type},
 	            function(ard){
 	                card_name.html("<option></option>"+ard)
 	            }
 	        )
 	    })
-		$('.card_name1').change(function(){
+		$('.card_name1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid=$(this).parents('tr').find('.bname1').val()
 	        $(this).parents('tr').find('.team1').empty()
@@ -276,7 +277,7 @@
 	            }
 	        )
     	})
-		$('.team1').change(function(){
+		$('.team1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid = $(this).parents('tr').find('.bname1').val()
 	        var card_name = $(this).parents('tr').find('.card_name1').val()
@@ -293,7 +294,7 @@
 	            }
 	        )   
     	})
-    	$('.parallel1').change(function(){
+    	$('.parallel1').bind('change', function(){
         var k = $(this).val()
         var rid = $(this).parents('tr').find('.bname1').val()
         var card_number = $(this).parents('tr').find('.card_number1').val()

@@ -15,7 +15,8 @@ if(isset($_GET['id'])){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/base_checklist.css">
-
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 </head>
     <body class="page_fix">
         <?php include "cookie.php";?>
@@ -106,7 +107,7 @@ echo '</select></form>
                                 <div class="card-body table-full-width table-responsive filterable">
 
                                     <table id="bootstrap-table-2" class="table">
-                                        <thead>
+                                       <thead>
                                         <!--<th data-field="state" data-checkbox="true"></th>-->
                                         <th data-field="id" class="text-center">ID</th>
                                         <th data-field="Card number">Card number</th>
@@ -134,6 +135,7 @@ echo '</select></form>
                                         }
                                         ?>
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -149,7 +151,7 @@ echo '</select></form>
 
 <script src="admin/assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="admin/assets/js/plugins/bootstrap-table.js"></script>
-<script src="admin/assets/js/plugins/jquery.dataTables.min.js"></script>
+<!--<script src="admin/assets/js/plugins/jquery.dataTables.min.js"></script>-->
 <script src="admin/assets/js/demo.js"></script>
 
 <script type="text/javascript">
@@ -160,7 +162,6 @@ echo '</select></form>
 <script type="text/javascript">
     var $table = $('#bootstrap-table-2');
 
-
     $(document).ready(function() {
 
         $table.bootstrapTable({
@@ -169,7 +170,7 @@ echo '</select></form>
 
             search: true,
             showColumns: true,
-            pagination: true,
+            // pagination: true,
             searchAlign: 'left',
             pageSize: 8,
             clickToSelect: false,
@@ -198,52 +199,83 @@ echo '</select></form>
     });
 </script>
     <script>
-        $(document).ready(function() {
-
-            $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' ).addClass('filters');
-            $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
-                var title = $(this).text();
-                if (i > 0){
+     $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' );
+    $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        if (i > 0){
                     $(this).html(`<div class="input-group">
-                                   <input  class="form-control inpt2" type="text" placeholder="Search" aria-label="Search">
-                                   <button class="btn" style="border-radius:0;">
-                                       <i class="fa fa-search btn" aria-hidden="true"></i>
-                                   </button>
-                               </div>`);
+                                  <input  class="form-control inpt2" type="text" placeholder="Search" aria-label="Search">
+                                  <button class="btn" style="border-radius:0;">
+                                      <i class="fa fa-search btn" aria-hidden="true"></i>
+                                  </button>
+                              </div>`);
                 }else {
                     $(this).html('')
                 }
-
-            } );
-
-            $('.filterable .filters input').keyup(function(e){
-                /* Ignore tab key */
-                var code = e.keyCode || e.which;
-                if (code == '9') return;
-                /* Useful DOM data and selectors */
-                var $input = $(this),
-                    inputContent = $input.val().toLowerCase(),
-                    $panel = $input.parents('.filterable'),
-                    column = $panel.find('.filters th').index($input.parents('th')),
-                    $table = $panel.find('.table'),
-                    $rows = $table.find('tbody tr');
-                /* Dirtiest filter function ever ;) */
-                var $filteredRows = $rows.filter(function(){
-                    var value = $(this).find('td').eq(column).text().toLowerCase();
-                    return value.indexOf(inputContent) === -1;
-                });
-                /* Clean previous no-result if exist */
-                $table.find('tbody .no-result').remove();
-                /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-                $rows.show();
-                $filteredRows.hide();
-                /* Prepend no-result row if all rows are filtered */
-                if ($filteredRows.length === $rows.length) {
-                    $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
-                }
-            });
-
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
         } );
+    } );
+ 
+    var table = $('#bootstrap-table-2').DataTable( {
+        orderCellsTop: true,
+        // fixedHeader: true
+    } );
+} );
+        // $(document).ready(function() {
+
+            // $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' ).addClass('filters');
+            // $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
+            //     var title = $(this).text();
+            //     if (i > 0){
+            //         $(this).html(`<div class="input-group">
+            //                       <input  class="form-control inpt2" type="text" placeholder="Search" aria-label="Search">
+            //                       <button class="btn" style="border-radius:0;">
+            //                           <i class="fa fa-search btn" aria-hidden="true"></i>
+            //                       </button>
+            //                   </div>`);
+            //     }else {
+            //         $(this).html('')
+            //     }
+
+            // } );
+
+        //     $('.filterable .filters input').keyup(function(e){
+        //         /* Ignore tab key */
+        //         var code = e.keyCode || e.which;
+        //         if (code == '9') return;
+        //         /* Useful DOM data and selectors */
+        //         var $input = $(this),
+        //             inputContent = $input.val().toLowerCase(),
+        //             $panel = $input.parents('.filterable'),
+        //             column = $panel.find('.filters th').index($input.parents('th')),
+        //             $table = $panel.find('.table'),
+        //             $rows = $table.find('tbody tr');
+        //         /* Dirtiest filter function ever ;) */
+        //         var $filteredRows = $rows.filter(function(){
+        //             var value = $(this).find('td').eq(column).text().toLowerCase();
+        //             return value.indexOf(inputContent) === -1;
+        //         });
+        //         /* Clean previous no-result if exist */
+        //         $table.find('tbody .no-result').remove();
+        //         /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        //         $rows.show();
+        //         $filteredRows.hide();
+        //         /* Prepend no-result row if all rows are filtered */
+        //         if ($filteredRows.length === $rows.length) {
+        //             $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        //         }
+        //     });
+
+        // } );
 
     </script>
 </body>
