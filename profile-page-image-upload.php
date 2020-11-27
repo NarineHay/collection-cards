@@ -16,13 +16,23 @@ if(isset($_POST['send'])){
                     echo "sxal";
                 }
      }else{
-        $folder = $_SERVER['DOCUMENT_ROOT'].'/collection-cards/images/';
+        // $folder = $_SERVER['DOCUMENT_ROOT'].'/collection-cards/images/';
+        // $folder ='images/';
         $img = $_FILES["image"]["name"];
-        $fname = explode('.', $img);
-        $ext = end($fname);
-        $fname = md5(rand(0,1000).rand(0,1000).rand(0,1000).rand(0,1000)).'.'.$ext;
-        if(move_uploaded_file($_FILES["image"]["tmp_name"], "$folder".$fname)){
-            $ins="UPDATE `users` SET `name`='$name', `more`= '$text', `image` = '$fname' WHERE id = '$hidden'";
+        $tmp=$_FILES['image']['tmp_name'];
+        $type=$_FILES['image']['type'];
+        $f_name = explode('.', $img);
+        $ext = end($f_name);
+        
+        $allowed_extension = array('jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG');
+        if(in_array($ext, $allowed_extension)){
+             $fname = md5(rand(0,1000)).'.'.$ext;
+             $folder='images_users/'.$fname;
+
+        if(move_uploaded_file($tmp, $folder)){
+        // move_uploaded_file($_FILES["image"]["tmp_name"], $folder.$fname);
+            
+            $ins="UPDATE `users` SET `name`='$name', `more`= '$text', `image` = '$fname' WHERE id = $hidden";
             $res=mysqli_query($con, $ins);
                     
                 if($res){
@@ -31,6 +41,11 @@ if(isset($_POST['send'])){
                     echo "sxal";
                 }
         }
+        }
+        else{
+            echo 'sxal format';
+        }
+        
      }
       
   }   

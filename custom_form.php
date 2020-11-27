@@ -21,6 +21,7 @@
 		$t3 = mysqli_real_escape_string($con, $_POST['title3']);
 		// if($size <= 200){
 		// 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+			
 				move_uploaded_file($tmp, $chanaparh);
 				$sql = "INSERT INTO `custom_name_checklist`
 				(`user_id`, `name_of_checklist`, `description`, `image`, `title1`, `title2`, `title3`) 

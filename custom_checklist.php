@@ -6,39 +6,6 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
 }else{
   header('location:index.php');
 }
-$msg = '';
-if(isset($_POST['login'])){
-     
-    $name = $con-> real_escape_string($_POST['name']);
-  $password = $con-> real_escape_string($_POST['password']);
-  $password=md5($password);
-    if($name=='' || $password==''){
-    $msg="Please check your inputs!";
-  }else{
-      
-    $object=mysqli_query($con,"SELECT*FROM users where name='$name' and password='$password'");
-    if(mysqli_num_rows($object)==0){
-      $msg='Wrong name or password';
-    }else{
-      $fetch=mysqli_fetch_assoc($object);
-      
-      if($fetch['isEmailConfirmed']==0){
-          $msg="Please verify your email!";
-        }
-        else{
-          $msg="You have been logged in!";
-          session_start();
-          $_SESSION['user']=$fetch['id'];
-              if(isset($_POST['remember'])){
-                setcookie('user',$fetch['id'],time()+86400*30);
-                
-              }
-        echo "<script>location.href='./profile-page.php'; </script>";
-        //header('http://localhost/collection-cards/profile-page.php');
-        }
-    }
-  }
-}
 ?> 
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -67,10 +34,14 @@ if(isset($_POST['login'])){
   <div class="container">
     <div class="row">
     <div class="col-md-12">
-    <a href="custom.php" class="float-right hr">Add Checklist</a>
+    <a href="custom.php" class="float-right hr ml-2">Add Checklist</a>
+    <a href="custom_import.php" class="float-right hr import-btn">Import Checklist</a>
     </div>
     <?php
-      $uid=$_SESSION['user'];
+    if(isset($_SESSION['user'])){
+        $uid=$_SESSION['user'];
+    
+      
       $sql = "SELECT * FROM `custom_name_checklist` WHERE `user_id`=$uid ORDER BY `id` DESC";
       $res = mysqli_query($con, $sql);
       @$rows = mysqli_num_rows($res);
@@ -113,6 +84,7 @@ if(isset($_POST['login'])){
     <?php    
         }
       }
+    }
     ?>
     
 </section>
