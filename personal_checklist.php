@@ -67,7 +67,8 @@ if(isset($_POST['login'])){
   <div class="container">
     <div class="row">
     <div class="col-md-12">
-    <a href="personal.php" class="float-right hr">Add Checklist</a>
+    <a href="personal.php" class="float-right hr ml-2">Add Checklist</a>
+    <a href="personal_import.php" class="float-right hr">Import Checklist</a>
     </div>
     <?php
       $uid=$_SESSION['user'];
