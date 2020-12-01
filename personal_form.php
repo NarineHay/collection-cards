@@ -21,6 +21,7 @@
 		$t3 = mysqli_real_escape_string($con, $_POST['title3']);
 		// if($size <= 200){
 		// 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+			
 				move_uploaded_file($tmp, $chanaparh);
 				$sql = "INSERT INTO `personal_name_checklist`
 				(`user_id`, `name_of_checklist`, `description`, `image`, `title1`, `title2`, `title3`) 
@@ -115,23 +116,23 @@
 		$d1 = mysqli_real_escape_string($con, $_POST['d1']);
 		$d2 = mysqli_real_escape_string($con, $_POST['d2']);
 		$d3 = mysqli_real_escape_string($con, $_POST['d3']);
-		if($parallel==$print_run){
 
 
-			$id = $parallel;
+			$id = $print_run;
 			$sql = "SELECT * FROM `base_checklist`WHERE id='$id'";
 			$res = mysqli_query($con, $sql);
 			$tox = mysqli_fetch_assoc($res);
-			$set_type = trim($tox['set_type']);
-			$card_number = trim($tox['card_number']);
-			$card_name = trim($tox['card_name']);
-			$team = trim($tox['team']);
-			$parallel = trim($tox['parallel']);
-			$print_run = trim($tox['print_run']);
+			$set_type = $tox['set_type'];
+			$card_number = $tox['card_number'];
+			$card_name = $tox['card_name'];
+			$team = $tox['team'];
+			$parallel = $tox['parallel'];
+			$print_run = $tox['print_run'];
+			$rid = $tox['realese_id'];
 
-			$upd = "UPDATE `personal_checklist` SET `base_checklist_name`= '$base',`sport_type`='$sport_type',`card_number`='$card_number',`card_name`='$card_name',`team`='$team',`set_type`='$set_type',`parallel`='$parallel',`print_run`='$print_run',`description1`='$d1',`description2`='$d2',`description3`='$d3' WHERE id=$upd_id";
+			$upd = "UPDATE `personal_checklist` SET `base_checklist_name`= '$base',`sport_type`='$sport_type',`card_number`='$card_number',`card_name`='$card_name',`team`='$team',`set_type`='$set_type',`parallel`='$parallel',`print_run`='$print_run',`description1`='$d1',`description2`='$d2',`description3`='$d3',rid='$rid' WHERE id=$upd_id";
 			$res = mysqli_query($con, $upd);
-		}
+		
 
 		
 	}
@@ -166,7 +167,7 @@
 		else
 		{
 		// if($size <= 200){
-		// 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+		 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
 				move_uploaded_file($tmp, $chanaparh);
 				$sql = "UPDATE `personal_name_checklist` SET `name_of_checklist`='$name_collection',`description`='$description',`image`='$name2',`title1`='$t1',`title2`='$t2',`title3`='$t3' WHERE id='$id' AND `user_id`='$uid'";
 				$query = mysqli_query($con, $sql);
@@ -175,7 +176,7 @@
 				}else {
 					echo "sxal";
 				}
-		//	}
+			}
 		//}
 		}
 	}

@@ -240,6 +240,13 @@ $base = mysqli_query($con, $cbase);
 			<button name='btn_personal' class="add-more-button float-left" id="add">
 				<div class="mt-0 mr-1 plus-icon float-left">+</div>Add more
 			</button>
+			<div class="ee">
+				<div class="text-success ">
+					You have successfully added checklist
+					<br>
+					<a href='personal_checklist.php' class="text-info">Go to checklist?</a>
+				</div>
+			</div>
 			<br>
 		</div>
 	</div>
@@ -352,8 +359,8 @@ $(document).on('click', '#add', function () {
 	      processData:false,
 		  success:function(data)
 	      {
-	      	location.href="personal_checklist.php";
-	      	//alert(data)
+	      	//location.href="personal_checklist.php";
+	      	$('.ee').css('display','block')
 	      }
 		});
 	})

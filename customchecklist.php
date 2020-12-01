@@ -22,7 +22,7 @@ if(isset($_GET['id'])){
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/base_checklist.css">
 <!-------------------------------------->
-
+<meta charset="utf-8">
 
 <style type="text/css">
     td{
@@ -122,30 +122,16 @@ if(isset($_GET['id'])){
                                             ?>
                                                 <tr>
                                                   <td><?php echo $count ?><input  type='hidden' value="<?php echo $row['id']; ?>"/></td>
-                                                  <td class='base'>
-                                                        <?php echo $row['base_checklist_name']?>
-                                                  </td>
-                                                  <td class='sport_type'>
-                                                    <?php echo $row['sport_type']?>
-                                                  </td>
-                                                  <td class='set_type'>
-                                                    <?php echo $row['set_type']?>
-                                                  <td class='card_number'>
-                                                    <?php echo $row['card_number']?>
-                                                  </td>
-                                                  <td class='card_name'>
-                                                    <?php echo $row['card_name']?>
-                                                  </td>
-                                                  <td class='team'>
-                                                    <?php echo $row['team']?>                                                    
-                                                  </td>
-                                                  <td class='parallel'>
-                                                        <?php echo $row['parallel']?>
-                                                  </td>
-                                                  <td class='print_run'>
-                                                        <?php echo $row['print_run']?>
-                                                        <input class="tr" type='hidden' value="<?php echo $row['rid']; ?>" >
-                                                  </td>
+                                                  <td class='base'><?php echo $row['base_checklist_name']?></td>
+                                                  <td class='sport_type'><?php echo $row['sport_type']?></td>
+                                                  <td class='set_type'><?php echo $row['set_type']?></td>
+                                                  <td class='card_number'><?php echo $row['card_number']?></td>
+                                                    
+                                                  
+                                                  <td class='card_name'><?php echo $row['card_name']?></td>
+                                                  <td class='team'><?php echo $row['team']?></td>
+                                                  <td class='parallel'><?php echo $row['parallel']?></td>
+                                                  <td class='print_run'><?php echo $row['print_run']?><input class="tr" type='hidden' value="<?php echo $row['rid']; ?>" ></td>
                                                   <?php
                                                     if( $tox['title1'] ){
                                                         echo "<td class='d1 popox'>".$row['description1']."</td>";
@@ -447,9 +433,13 @@ if(isset($_GET['id'])){
                     var team =        $(this).parents('tr').find('.team1').val()
                     var parallel =    $(this).parents('tr').find('.parallel1').val()
                     var print_run =   $(this).parents('tr').find('.print_run1').val()
+
+                    var d1          = $(this).parents('tr').find('.d1').text()
+                    var d2          = $(this).parents('tr').find('.d2').text()
+                    var d3          = $(this).parents('tr').find('.d3').text()
                     $.post(
                         "custom_form.php",
-                        {upd_id:upd_id,base:base,set_type:set_type,sport_type:sport_type,card_number:card_number,card_name:card_name,team:team,parallel:parallel,print_run:print_run},
+                        {upd_id:upd_id,base:base,set_type:set_type,sport_type:sport_type,card_number:card_number,card_name:card_name,team:team,parallel:parallel,print_run:print_run,d1:d1,d2:d2,d3:d3},
                         function(){
                             location.reload()
                         }
@@ -461,6 +451,7 @@ if(isset($_GET['id'])){
 
 
             $('.copy_btn').click(function(){
+                
                 var k = $(this).parents('tr').html();
                 var e = "<tr data-index='0'>"+k+"</tr>";
                 var t = $(this).parents('tr');
@@ -468,17 +459,17 @@ if(isset($_GET['id'])){
                 $('tbody').find('td')
                 var copy        = $('.copy').val();
                 var rid         = $(this).parents('tr').find('.tr').val()
-                var base        = $(this).parents('tr').find('.base').text().trim()
-                var sport_type  = $(this).parents('tr').find('.sport_type').text().trim()
-                var card_number = $(this).parents('tr').find('.card_number').text().trim()
-                var card_name   = $(this).parents('tr').find('.card_name').text().trim()
-                var team        = $(this).parents('tr').find('.team').text().trim()
-                var set_type    = $(this).parents('tr').find('.set_type').text().trim()
-                var parallel    = $(this).parents('tr').find('.parallel').text().trim()
-                var print_run   = $(this).parents('tr').find('.print_run').text().trim()
-                var d1          = $(this).parents('tr').find('.d1').text().trim()
-                var d2          = $(this).parents('tr').find('.d2').text().trim()
-                var d3          = $(this).parents('tr').find('.d3').text().trim()
+                var base        = $(this).parents('tr').find('.base').text()
+                var sport_type  = $(this).parents('tr').find('.sport_type').text()
+                var card_number = $(this).parents('tr').find('.card_number').text()
+                var card_name   = $(this).parents('tr').find('.card_name').text()
+                var team        = $(this).parents('tr').find('.team').text()
+                var set_type    = $(this).parents('tr').find('.set_type').text()
+                var parallel    = $(this).parents('tr').find('.parallel').text()
+                var print_run   = $(this).parents('tr').find('.print_run').text()
+                var d1          = $(this).parents('tr').find('.d1').text()
+                var d2          = $(this).parents('tr').find('.d2').text()
+                var d3          = $(this).parents('tr').find('.d3').text()
                 $.post(
                     'custom_form.php',
                     {basename:base,rrid:rid,sport_type:sport_type,card_number:card_number,card_name:card_name,parallel:parallel,print_run:print_run,team:team,set_type:set_type,d1:d1,d2:d2,d3:d3,copy:copy},

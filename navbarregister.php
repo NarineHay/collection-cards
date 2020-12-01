@@ -13,6 +13,11 @@ if(isset($_GET['log_out'])){
 	header('location:index.php');
     
 }
+$id = $_SESSION['user'];
+$sql = "SELECT * FROM users WHERE id = '$id' ";
+$res = mysqli_query($con, $sql);
+$navbarimg = mysqli_fetch_assoc($res);
+$img = $navbarimg['image'];
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/profile-page.css">
@@ -49,7 +54,7 @@ if(isset($_GET['log_out'])){
 			</div>
 		</div>
 		<div class="userdiv">
-           <a href="profile-page.php"><img src="images/releases/user-icon.png" class="img-responsive user"></a>
+           <a href="profile-page.php"><img src="images/<?php echo $img ? $img : 'user-icon.png' ?>" class="img-responsive user"></a>
         </div>
     	<div class = "logout"><a href="navbarregister.php?log_out" class = "register">Log out</a></div>
     	 <div data-google-lang="<?php if($lng=='ru'){

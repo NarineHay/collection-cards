@@ -4,31 +4,45 @@
 		$rid  = mysqli_real_escape_string($con, $_POST['rid']);
 		$id  = mysqli_real_escape_string($con, $_POST['id']);
 
-		$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
-		$res = mysqli_query($con, $sql);
-		$tox = mysqli_fetch_assoc($res);
-
-		$sel = "SELECT * FROM collections";
-		$rez = mysqli_query($con, $sel);
-		echo '<select class="form-control bname1" name="basechecklist">';
-		while( $row10 = mysqli_fetch_array($rez) ){
-?>
-		<option value = "<?php echo $row10['id'] ?>" 
-		<?php 
-		if(($tox['name_of_collection'] == $row10['name_of_collection'])){
-		echo 'selected = "selected"';
-		} ?>>
-		<?php echo $row10['name_of_collection']; ?></option>
-<?php		    
+		if($rid == 0){
+			$sql = "SELECT name_of_collection,id FROM collections";
+			$res = mysqli_query($con, $sql);
+			echo '<select class="form-control bname1" name="basechecklist"><option></option>';
+			while( $tox = mysqli_fetch_array($res) ){
+		?>
+			<option value = "<?php echo $tox['id'] ?>"><?php echo $tox['name_of_collection'] ?></option>
+		<?php
+			}
 		}
-		echo "</select>";
+		else {
+			$sql = "SELECT name_of_collection FROM collections WHERE id=$rid";
+			$res = mysqli_query($con, $sql);
+			$tox = mysqli_fetch_assoc($res);
+
+			$sel = "SELECT * FROM collections";
+			$rez = mysqli_query($con, $sel);
+			echo '<select class="form-control bname1" name="basechecklist">';
+			while( $row10 = mysqli_fetch_array($rez) ){
+	?>
+			<option value = "<?php echo $row10['id'] ?>" 
+			<?php 
+			if(($tox['name_of_collection'] == $row10['name_of_collection'])){
+			echo 'selected = "selected"';
+			} ?>>
+			<?php echo $row10['name_of_collection']; ?></option>
+	<?php		    
+			}
+			echo "</select>";
+		}
+
+		
 	}
 	if(isset($_POST['sport_type'])){
 		$id  = mysqli_real_escape_string($con, $_POST['sport_type']);
 		$cust = "SELECT * FROM `personal_checklist` WHERE id='$id'";
 		$query = mysqli_query($con, $cust);
 		$tox = mysqli_fetch_assoc($query);
-		echo '<select  class="form-control sport_type1>" name="sport_type">';
+		echo '<select  class="form-control sport_type1" name="sport_type">';
 		echo '<option value='.$tox['id'].'>'.$tox['sport_type'].'</option>';	
 		echo "</select>";
 
@@ -42,7 +56,7 @@
 
 		$sql = "SELECT * FROM base_checklist WHERE realese_id='$rid' GROUP BY set_type";
 		$res = mysqli_query($con, $sql);
-		echo '<select class="form-control set_type1" name="set_type">';
+		echo '<select class="form-control set_type1" name="set_type"><option></option>';
 		while( $row10 = mysqli_fetch_assoc($res) ){
 ?>
 		<option value = "<?php echo $row10['id'] ?>" data-value="<?php echo $row10['id'] ?>" 
@@ -231,9 +245,10 @@
 	            }
 	        )
     	})
-		$('.card_number1').change(function(){
+		$('.card_number1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid=$(this).parents('tr').find('.bname1').val()
+	        var set_type=$(this).parents('tr').find('.set_type1').val()
 	        $(this).parents('tr').find('.card_name1').empty()
 	        $(this).parents('tr').find('.team1').empty()
 	        $(this).parents('tr').find('.parallel1').empty()
@@ -241,13 +256,13 @@
 	        var card_name = $(this).parents('tr').find('.card_name1')
 	        $.post(
 	            "personal2.php",
-	            {id_settype2:k,rid:rid},
+	            {id_settype2:k,rid:rid,set_type:set_type},
 	            function(ard){
 	                card_name.html("<option></option>"+ard)
 	            }
 	        )
 	    })
-		$('.card_name1').change(function(){
+		$('.card_name1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid=$(this).parents('tr').find('.bname1').val()
 	        $(this).parents('tr').find('.team1').empty()
@@ -262,7 +277,7 @@
 	            }
 	        )
     	})
-		$('.team1').change(function(){
+		$('.team1').bind('change', function(){
 	        var k = $(this).val()
 	        var rid = $(this).parents('tr').find('.bname1').val()
 	        var card_name = $(this).parents('tr').find('.card_name1').val()
@@ -279,7 +294,7 @@
 	            }
 	        )   
     	})
-    	$('.parallel1').change(function(){
+    	$('.parallel1').bind('change', function(){
         var k = $(this).val()
         var rid = $(this).parents('tr').find('.bname1').val()
         var card_number = $(this).parents('tr').find('.card_number1').val()
@@ -290,10 +305,11 @@
             "personal2.php",
             {parallel:k,rid:rid,card_number:card_number,set_type:set_type},
             function(ard){
-                print_run.html("<option></option>"+ard)
+                print_run.html(ard)
             }
         )
     })
 
 })
+    
 </script>

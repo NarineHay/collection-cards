@@ -6,42 +6,6 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
 }else{
 	header('location:index.php');
 }
-$msg = '';
-if(isset($_POST['login'])){
-     
-    $name = $con-> real_escape_string($_POST['name']);
-	$password = $con-> real_escape_string($_POST['password']);
-	$password=md5($password);
-    if($name=='' || $password==''){
-		$msg="Please check your inputs!";
-	}else{
-	    
-		$object=mysqli_query($con,"SELECT*FROM users where name='$name' and password='$password'");
-		if(mysqli_num_rows($object)==0){
-			$msg='Wrong name or password';
-		}else{
-			$fetch=mysqli_fetch_assoc($object);
-			
-			if($fetch['isEmailConfirmed']==0){
-					$msg="Please verify your email!";
-				}
-				else{
-					$msg="You have been logged in!";
-					session_start();
-
-					$_SESSION['user']=$fetch['id'];
-			
-		        	if(isset($_POST['remember'])){
-			    	    setcookie('user',$fetch['id'],time()+86400*30);
-			        	
-			        }
-				echo "<script>location.href='./profile-page.php'; </script>";
-				//header('http://localhost/collection-cards/profile-page.php');
-			
-				}
-		}
-	}
-}
 $cbase = "SELECT * FROM `collections` ORDER BY `name_of_collection` ASC";
 $base = mysqli_query($con, $cbase);
 
@@ -83,7 +47,6 @@ $base = mysqli_query($con, $cbase);
 		<h2 class="header-log">
 			<center class="first-par mx-auto">Add New Custom Checklist</center>
 		</h2>
-
 		<div class="card-body ">
 			<form method="post" enctype="multipart/form-data" action="custom_form.php" id="save-filds">
 				<div class="form-group">
@@ -120,14 +83,16 @@ $base = mysqli_query($con, $cbase);
 						</div>
 					</div>
 				</div>
+				<button type="submit" name="btn_custom[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
+				<input type="hidden" name="hid_val" class="hid_val" value="0">
 				<center>
-					<div class="gits"></div>
+					<div class="gits pt-5"></div>
 				</center>
 				<div class="clone_select">
 					<h5 class="number" style="color:#3b6692!important;letter-spacing: 3px;"><center class="first-par mx-auto pt-3">Card-1</center></h5>
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
-							<label>Base Checklist</label>
+							<label>Base Checklist</label><span class="float-right mr-5 text-light bg-info hrf"></span>
 							<select class="form-control select2 sel bname" name="basechecklist[]" >
 								<option selected="true"></option>
 								<?php
@@ -234,12 +199,19 @@ $base = mysqli_query($con, $cbase);
 					</div> 
 
 				</div>
-				<hr>		
-				<input type="submit" name="btn_custom" class="banner-button float-right save" value="Save">
+				<hr>
+				<button type="submit" name="btn_custom[]" class="banner-button float-right save">Save</button>
 			</form>
-			<button name='btn_custom' class="add-more-button float-left" id="add">
+			<button class="add-more-button float-left" id="add">
 				<div class="mt-0 mr-1 plus-icon float-left">+</div>Add more
 			</button>
+			<div class="ee">
+				<div class="text-success ">
+					You have successfully added checklist
+					<br>
+					<a href='custom_checklist.php' class="text-info">Go to checklist?</a>
+				</div>
+			</div>
 			<br>
 		</div>
 	</div>
@@ -276,12 +248,12 @@ include "footer.php";
     })
     $('.t3').keyup(function(){
     	var t3 = $('.t3').val()
-		if(t1.length > 0){
+		if(t3.length > 0){
 			$('.dn3').css('display','block');
 		    $('.dt3 input').attr('disabled','true')
 		    $('.dt3 input').val(t3)
     	}else{
-    		$('.dn2').css('display','none');
+    		$('.dn3').css('display','none');
     	}
 	    
     })	
@@ -341,8 +313,6 @@ $(document).on('click', '#add', function () {
 	$('#save-filds').on('submit', function(event){
 
         event.preventDefault();
-		var namecoll = $('.namecoll').val();
-		var desc = $('.desc').val();
 		$.ajax({
 		  url:"custom_form.php",
 	      method:"POST",
@@ -352,14 +322,22 @@ $(document).on('click', '#add', function () {
 	      processData:false,
 		  success:function(data)
 	      {
-	      	location.href="custom_checklist.php";
-	      	//alert(data)
+	      	//location.href="custom_checklist.php";
+	      	$('.ee').css('display','block')
+	      	$('.hrf').html(data)
 	      }
 		});
 	})
 
 	$('.bname').bind('change', function(){
 		var k = $(this).val()
+		$.post(
+			"custom_form.php",
+			{bbid:k}
+		)
+		$('.hrfa').attr('href','base_checklist.php?id='+k+'');
+		$('.hrfa').css('display','block')
+
 		$(this).parents('.row').find('.noc').val(k)
 		$(this).parents('.clone_select').find('.set_type').empty()
 		$(this).parents('.clone_select').find('.card_number').empty()
@@ -467,6 +445,12 @@ $(document).on('click', '#add', function () {
 				print_run.html("<option selected='true'></option>"+ard)
 			}
 		)
+	})
+	$('.save').click(function(){
+		$('.hid_val').val('1')
+	})
+	$('.save-title').click(function(){
+		$('.hid_val').val('2')
 	})
 </script>
 </body>
