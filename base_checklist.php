@@ -6,9 +6,8 @@ if(isset($_GET['id'])){
     $sql = "SELECT * FROM `collections` WHERE id = '$realise_id'";
     $rezult = mysqli_query($con,$sql);
     $tox = mysqli_fetch_assoc($rezult);
-
-
 }
+
 ?>
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -69,12 +68,54 @@ if(isset($_GET['id'])){
                  <div class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        
+                        
                         <div class="col-md-12">
 
                             <div class="card bootstrap-table">
-
+                                <form method="post" id="save-filds">
                                 <div class="card-body table-full-width table-responsive filterable">
+                                    <div class="bars pull-left mr-2">
+                                        <?php
+                                        if(isset($_SESSION['user'])){
+                                            if(isset($_COOKIE['bbid'])){
+                                                $sql1 = "SELECT MAX(id) as id FROM `custom_name_checklist`";
+                                                $res1 = mysqli_query($con, $sql1);
+                                                $tox1 = mysqli_fetch_assoc($res1);
+                                                $mid = $tox1['id'];
+                                                $sql = "SELECT * FROM `custom_name_checklist` WHERE id='$mid'";
+                                                $res = mysqli_query($con, $sql);
+                                                $tox = mysqli_fetch_assoc($res);
+                                                $noc = $tox['name_of_checklist'];
+                                                echo "<select class='form-control sel_checklis' name='cid'><option></option>";
+                                                $uid = $_SESSION['user'];
+                                                $sel = "SELECT * FROM `custom_name_checklist` WHERE user_id = '$uid'";
+                                                $res = mysqli_query($con, $sel);
+                                                while( $row=mysqli_fetch_assoc($res) ) {
+                                                ?>
+                                                <option value = "<?php echo $row['id'] ?>" 
+                                                <?php 
+                                                if(($tox['name_of_checklist'] == $row['name_of_checklist'])){
+                                                echo 'selected = "selected"';
+                                                } ?>><?php echo $row['name_of_checklist']; ?></option>
+                                                <?php
+                                                }
+                                                echo "</select>";
+                                            }else{
+                                            echo "<select class='form-control sel_checklis' name='cid'><option></option>";
+                                            $uid = $_SESSION['user'];
+                                            $sel = "SELECT * FROM `custom_name_checklist` WHERE user_id = '$uid'";
+                                            $res = mysqli_query($con, $sel);
+                                            while( $row=mysqli_fetch_assoc($res) ) {
+                                              echo " <option value = '".$row['id']."'>".$row['name_of_checklist']."</option>";
+                                            }
+                                            echo "</select>";
+                                            }
+                                        }
+                                        ?>
 
+                                        </select>
+                                    </div>
                                     <table id="bootstrap-table-2" class="table">
                                         <thead>
                                         <!--<th data-field="state" data-checkbox="true"></th>-->
@@ -97,7 +138,7 @@ if(isset($_GET['id'])){
 //                                            print_r($tox);die;
                                             echo"
                                                 <tr>
-                                                  <td>".$count."<input  type='hidden' value='".$tox['id']."'/></td>
+                                                  <td>".$count."<input class='ml-1 mt-1 float-right checkmark' name='checkmark[]' type='checkbox' value='".$tox['id']."'></td>
                                                   <td>".$tox['card_number']."</td>
                                                   <td>".$tox['card_name']."</td>
                                                   <td>".$tox['team']."</td>
@@ -108,8 +149,12 @@ if(isset($_GET['id'])){
                                         ?>
                                         </tbody>
                                     </table>
+
+                                    <input type="submit" name="btn_custom" class="banner-button save ml-3" value="Save">
                                 </div>
+                            </form>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -186,7 +231,12 @@ if(isset($_GET['id'])){
 </script>
     <script>
         $(document).ready(function() {
-
+            var t = $('.sel_checklis').val()
+            if(t>0){
+                $('.checkmark').css('display','block')
+            }else{
+                $('.checkmark').css('display','none')
+            }
             $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' ).addClass('filters');
             $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
                 var title = $(this).text();
@@ -231,7 +281,28 @@ if(isset($_GET['id'])){
             });
 
         } );
-
+        $('.sel_checklis').change(function(){
+            if($('.sel_checklis').val()<1){
+                $('.checkmark').css('display','none')
+            }else{
+                $('.checkmark').css('display','block')
+            }
+        })
+        $('#save-filds').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+              url:"custom_form.php",
+              method:"POST",
+              data:new FormData(this),
+              contentType:false,
+              cache:false,
+              processData:false,
+              success:function(data)
+              {
+                //location.href="custom_checklist.php";
+              }
+            });
+        })
     </script>
 </body>
 </html>
