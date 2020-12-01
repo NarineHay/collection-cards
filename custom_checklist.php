@@ -35,13 +35,11 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
     <div class="row">
     <div class="col-md-12">
     <a href="custom.php" class="float-right hr ml-2">Add Checklist</a>
-    <a href="custom_import.php" class="float-right hr import-btn">Import Checklist</a>
+    <a href="custom_import.php" class="float-right hr">Import Checklist</a>
+
     </div>
     <?php
-    if(isset($_SESSION['user'])){
-        $uid=$_SESSION['user'];
-    
-      
+      $uid=$_SESSION['user'];
       $sql = "SELECT * FROM `custom_name_checklist` WHERE `user_id`=$uid ORDER BY `id` DESC";
       $res = mysqli_query($con, $sql);
       @$rows = mysqli_num_rows($res);
@@ -84,7 +82,6 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
     <?php    
         }
       }
-    }
     ?>
     
 </section>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 include "config/con1.php";
 if(isset($_SESSION['language'])){
   $lng=$_SESSION['language'];
@@ -10,7 +10,7 @@ else{
 if(isset($_GET['log_out'])){
     setcookie('user', null);
     session_destroy();
-	header('location:index.php');
+  header('location:index.php');
     
 }
 $id = $_SESSION['user'];
@@ -35,8 +35,8 @@ $img = $navbarimg['image'];
   </button>
   <div class="collapse navbar-collapse multi-collapse" id="navbarSupportedContent">
     <form class="form-inline ml-auto">
-    	<div class="input-group" id="head-search">
-     	 <input type="text" class="form-control" placeholder="Search something">
+      <div class="input-group" id="head-search">
+       <input type="text" class="form-control" placeholder="Search something">
       
       <div class="input-group-prepend">
         <span class="input-group-text" id="search-border"><i class="fa fa-search" id="icon-search"></i></span>
@@ -44,20 +44,20 @@ $img = $navbarimg['image'];
     </div>    
     </form>
     
-	<div class="d-flex ml-auto" id="header-right">
-		<div>Saved searches</div>
-		<div>
-			<div class="divimg">
-				<img src="images/zang.png" class="img-responsive disc">
-				<img src="images/oxak.png" class="img-responsive oxak">
-				<span class="divspan">1</span>
-			</div>
-		</div>
-		<div class="userdiv">
-           <a href="profile-page.php"><img src="images_users/<?php echo $img ? $img : 'user-icon.png' ?>" class="img-responsive user"></a>
+  <div class="d-flex ml-auto" id="header-right">
+    <div>Saved searches</div>
+    <div>
+      <div class="divimg">
+        <img src="images/zang.png" class="img-responsive disc">
+        <img src="images/oxak.png" class="img-responsive oxak">
+        <span class="divspan">1</span>
+      </div>
+    </div>
+    <div class="userdiv">
+           <a href="profile-page.php"><img src="images/<?php echo $img ? $img : 'user-icon.png' ?>" class="img-responsive user"></a>
         </div>
-    	<div class = "logout"><a href="navbarregister.php?log_out" class = "register">Log out</a></div>
-    	 <div data-google-lang="<?php if($lng=='ru'){
+      <div class = "logout"><a href="navbarregister.php?log_out" class = "register">Log out</a></div>
+       <div data-google-lang="<?php if($lng=='ru'){
             echo 'en';}
         else{
             echo 'ru';}
