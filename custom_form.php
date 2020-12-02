@@ -7,22 +7,21 @@
 
 		if($val==1){
 			$user_id = mysqli_real_escape_string($con, $_POST['user_id']);
-		$name_collection = mysqli_real_escape_string($con, $_POST['name-collection']);
-		$description	 = mysqli_real_escape_string($con, $_POST['description']);
-		$file_name = $_FILES['file']['name'];
-		$tmp = $_FILES['file']['tmp_name'];
-		$type = $_FILES['file']['type'];
-		$size = $_FILES['file']['size'];
-		$size = round($size/1024);
-		$test = explode('.', $file_name);
-		$extension = end($test);
-		$name2 = md5(rand(0,1000). rand(0,1000). rand(0,1000). rand(0,1000)).'.'.$extension;
-		$chanaparh = 'img/'.$name2;
+			$name_collection = mysqli_real_escape_string($con, $_POST['name-collection']);
+			$description	 = mysqli_real_escape_string($con, $_POST['description']);
+			$file_name = $_FILES['file']['name'];
+			$tmp = $_FILES['file']['tmp_name'];
+			$type = $_FILES['file']['type'];
+			$size = $_FILES['file']['size'];
+			$size = round($size/1024);
+			$test = explode('.', $file_name);
+			$extension = end($test);
+			$name2 = md5(rand(0,1000). rand(0,1000). rand(0,1000). rand(0,1000)).'.'.$extension;
+			$chanaparh = 'img/'.$name2;
 
-		$t1 = mysqli_real_escape_string($con, $_POST['title1']);
-		$t2 = mysqli_real_escape_string($con, $_POST['title2']);
-		$t3 = mysqli_real_escape_string($con, $_POST['title3']);
-		// if($size <= 200){
+			$t1 = mysqli_real_escape_string($con, $_POST['title1']);
+			$t2 = mysqli_real_escape_string($con, $_POST['title2']);
+			$t3 = mysqli_real_escape_string($con, $_POST['title3']);
 		 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
 			
 				move_uploaded_file($tmp, $chanaparh);
@@ -32,71 +31,69 @@
 				('$user_id','$name_collection','$description','$name2','$t1','$t2','$t3')";
 				$query = mysqli_query($con, $sql);
 		 	}
-		// }
-		$sqlid = "SELECT MAX(id) as id FROM custom_name_checklist";
-		$resid = mysqli_query($con, $sqlid);
-		$tox = mysqli_fetch_assoc($resid);
-		$cid = $tox['id'];
+			$sqlid = "SELECT MAX(id) as id FROM custom_name_checklist";
+			$resid = mysqli_query($con, $sqlid);
+			$tox = mysqli_fetch_assoc($resid);
+			$cid = $tox['id'];
 		
-		for($i=0;$i<count($_POST['basechecklist']);$i++){
-			$rid[$i]	 		 = mysqli_real_escape_string($con, $_POST['rid'][$i]);
-			$basechecklist[$i]	 = mysqli_real_escape_string($con, $_POST['basechecklist'][$i]);
-			$sport_type1[$i]	 = mysqli_real_escape_string($con, $_POST['sport_type'][$i]);
-			$card_number1[$i]    = mysqli_real_escape_string($con, $_POST['card_number'][$i]);
-			$card_name1[$i]      = mysqli_real_escape_string($con, $_POST['card_name'][$i]);
-			$team1[$i]			 = mysqli_real_escape_string($con, $_POST['team'][$i]);
-			$set_type1[$i]		 = mysqli_real_escape_string($con, $_POST['set_type'][$i]);
-			$parallel1[$i]		 = mysqli_real_escape_string($con, $_POST['parallel'][$i]);
-			$print_run1[$i]		 = mysqli_real_escape_string($con, $_POST['print_run'][$i]);
+			for($i=0;$i<count($_POST['basechecklist']);$i++){
+				$rid[$i]	 		 = mysqli_real_escape_string($con, $_POST['rid'][$i]);
+				$basechecklist[$i]	 = mysqli_real_escape_string($con, $_POST['basechecklist'][$i]);
+				$sport_type1[$i]	 = mysqli_real_escape_string($con, $_POST['sport_type'][$i]);
+				$card_number1[$i]    = mysqli_real_escape_string($con, $_POST['card_number'][$i]);
+				$card_name1[$i]      = mysqli_real_escape_string($con, $_POST['card_name'][$i]);
+				$team1[$i]			 = mysqli_real_escape_string($con, $_POST['team'][$i]);
+				$set_type1[$i]		 = mysqli_real_escape_string($con, $_POST['set_type'][$i]);
+				$parallel1[$i]		 = mysqli_real_escape_string($con, $_POST['parallel'][$i]);
+				$print_run1[$i]		 = mysqli_real_escape_string($con, $_POST['print_run'][$i]);
 
-			$d1[$i]	= mysqli_real_escape_string($con, $_POST['description1'][$i]);
-			$d2[$i]	= mysqli_real_escape_string($con, $_POST['description2'][$i]);
-			$d3[$i]	= mysqli_real_escape_string($con, $_POST['description3'][$i]);
-			
-			$base1 = "SELECT * FROM collections WHERE id=$basechecklist[$i]";
-			$res = mysqli_query($con, $base1);
-			$tox[$i] = mysqli_fetch_assoc($res);
-			$base[$i] = $tox[$i]['name_of_collection'];
-			$sport_type[$i] = $tox[$i]['sport_type'];
+				$d1[$i]	= mysqli_real_escape_string($con, $_POST['description1'][$i]);
+				$d2[$i]	= mysqli_real_escape_string($con, $_POST['description2'][$i]);
+				$d3[$i]	= mysqli_real_escape_string($con, $_POST['description3'][$i]);
+				
+				$base1 = "SELECT * FROM collections WHERE id=$basechecklist[$i]";
+				$res = mysqli_query($con, $base1);
+				$tox[$i] = mysqli_fetch_assoc($res);
+				$base[$i] = $tox[$i]['name_of_collection'];
+				$sport_type[$i] = $tox[$i]['sport_type'];
 
-			$cnumber = "SELECT card_number FROM base_checklist WHERE id=$card_number1[$i]";
-			$res = mysqli_query($con, $cnumber);
-			$tox2[$i] = mysqli_fetch_assoc($res);
-			$card_number[$i] = $tox2[$i]['card_number'];
+				$cnumber = "SELECT card_number FROM base_checklist WHERE id=$card_number1[$i]";
+				$res = mysqli_query($con, $cnumber);
+				$tox2[$i] = mysqli_fetch_assoc($res);
+				$card_number[$i] = $tox2[$i]['card_number'];
 
-			$cname = "SELECT card_name FROM base_checklist WHERE id=$card_name1[$i]";
-			$res = mysqli_query($con, $cname);
-			$tox3[$i] = mysqli_fetch_assoc($res);
-			$card_name[$i] = $tox3[$i]['card_name'];
+				$cname = "SELECT card_name FROM base_checklist WHERE id=$card_name1[$i]";
+				$res = mysqli_query($con, $cname);
+				$tox3[$i] = mysqli_fetch_assoc($res);
+				$card_name[$i] = $tox3[$i]['card_name'];
 
-			$set_type2 = "SELECT set_type FROM base_checklist WHERE id=$set_type1[$i]";
-			$res = mysqli_query($con, $set_type2);
-			$tox4[$i] = mysqli_fetch_assoc($res);
-			$set_type[$i] = $tox4[$i]['set_type'];
+				$set_type2 = "SELECT set_type FROM base_checklist WHERE id=$set_type1[$i]";
+				$res = mysqli_query($con, $set_type2);
+				$tox4[$i] = mysqli_fetch_assoc($res);
+				$set_type[$i] = $tox4[$i]['set_type'];
 
-			$parallel2 = "SELECT parallel FROM base_checklist WHERE id=$parallel1[$i]";
-			$res = mysqli_query($con, $parallel2);
-			$tox5[$i] = mysqli_fetch_assoc($res);
-			$parallel[$i] = $tox5[$i]['parallel'];
+				$parallel2 = "SELECT parallel FROM base_checklist WHERE id=$parallel1[$i]";
+				$res = mysqli_query($con, $parallel2);
+				$tox5[$i] = mysqli_fetch_assoc($res);
+				$parallel[$i] = $tox5[$i]['parallel'];
 
-			$prun = "SELECT print_run FROM base_checklist WHERE id=$print_run1[$i]";
-			$res = mysqli_query($con, $prun);
-			$tox6[$i] = mysqli_fetch_assoc($res);
-			$print_run[$i] = $tox6[$i]['print_run'];
-			
-			$team2 = "SELECT team FROM base_checklist WHERE id=$team1[$i]";
-			$res = mysqli_query($con, $team2);
-			$tox7[$i] = mysqli_fetch_assoc($res);
-			$team[$i] = $tox7[$i]['team'];
+				$prun = "SELECT print_run FROM base_checklist WHERE id=$print_run1[$i]";
+				$res = mysqli_query($con, $prun);
+				$tox6[$i] = mysqli_fetch_assoc($res);
+				$print_run[$i] = $tox6[$i]['print_run'];
+				
+				$team2 = "SELECT team FROM base_checklist WHERE id=$team1[$i]";
+				$res = mysqli_query($con, $team2);
+				$tox7[$i] = mysqli_fetch_assoc($res);
+				$team[$i] = $tox7[$i]['team'];
 
-			
+				
 
-			$sql2 = "INSERT INTO `custom_checklist`
-			(`cid`,`rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`) 
-			VALUES ('$cid','$rid[$i]','$base[$i]','$sport_type[$i]','$card_number[$i]','$card_name[$i]','$team[$i]','$set_type[$i]','$parallel[$i]','$print_run[$i]','$d1[$i]','$d2[$i]','$d3[$i]')";
+				$sql2 = "INSERT INTO `custom_checklist`
+				(`cid`,`rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`) 
+				VALUES ('$cid','$rid[$i]','$base[$i]','$sport_type[$i]','$card_number[$i]','$card_name[$i]','$team[$i]','$set_type[$i]','$parallel[$i]','$print_run[$i]','$d1[$i]','$d2[$i]','$d3[$i]')";
 
-			$res = mysqli_query($con, $sql2);
-
+				$res = mysqli_query($con, $sql2);
 			}
 		}
 		elseif ($val==2) {
