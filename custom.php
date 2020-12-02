@@ -48,7 +48,7 @@ $base = mysqli_query($con, $cbase);
 			<center class="first-par mx-auto">Add New Custom Checklist</center>
 		</h2>
 		<div class="card-body ">
-			<form method="post" enctype="multipart/form-data" action="custom_form.php" id="save-filds">
+			<form method="post" enctype="multipart/form-data" id="save-filds">
 				<div class="form-group">
 					<label>Name of collection</label>
 					<input type="hidden" value="<?php echo $_SESSION['user']; ?>" name='user_id' >
@@ -83,6 +83,23 @@ $base = mysqli_query($con, $cbase);
 						</div>
 					</div>
 				</div>
+				<div class="form-group p-1">
+				            &nbsp&nbsp Upload your own checklist 
+				            <input type="file" name="import_excel" class="" />
+				        
+				         <div class="container">
+				        	<small><sup>*</sup>Plase note, that your checklist should be whit xlsx, xls, ods, or csv formats. You can download template from here 
+				        			<a class="text-info border border-info btn p-1 btn-sm" href='import/table.xlsx'> .xlsx </a>,&nbsp
+					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.xls'> .xls </a>,&nbsp
+					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.csv'> .csv </a>&nbsp
+					                or&nbsp
+					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.ods'> .ods </a>
+					        </small>
+					            
+				        </div> 
+				    <div id="message" class="mt-1"></div>
+				</div>       
+    			<span class="err_msg"></span>
 				<button type="submit" name="btn_custom[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
 				<input type="hidden" name="hid_val" class="hid_val" value="0">
 				<center>
@@ -93,8 +110,8 @@ $base = mysqli_query($con, $cbase);
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 							<label>Base Checklist</label><span class="float-right mr-5 text-light bg-info hrf"></span>
-							<select class="form-control select2 sel bname" name="basechecklist[]" >
-								<option selected="true"></option>
+							<select class="form-control select2 sel bname" name="basechecklist_sel[]" >
+								<option selected="true" value='0'></option>
 								<?php
 								while($tox=mysqli_fetch_assoc($base)){
 								?>
@@ -107,8 +124,8 @@ $base = mysqli_query($con, $cbase);
 						</div>
 						<div class="col-md-6 col-sm-12">
 							<label>Sport type</label>
-							<select class="form-control select2 sel sport_type" name="sport_type[]" >
-								
+							<select class="form-control select2 sel sport_type" name="sport_type_sel[]" >
+								<option selected="true" value='0'></option>
 							</select>
 						</div>
 					</div>
@@ -116,42 +133,42 @@ $base = mysqli_query($con, $cbase);
 						<div class="col-md-6 col-sm-12">
 			                
 						    <label>Set Type</label>
-							<select class="form-control select2 sel set_type" name="set_type[]" >
-								
+							<select class="form-control select2 sel set_type" name="set_type_sel[]" >
+								<option selected="true" value='0'></option>
 							</select>
 						</div>
 						<div class="col-md-6 col-sm-12">
 							<label>Card number</label>
-							<select class="form-control select2 sel card_number" name="card_number[]" >
-
+							<select class="form-control select2 sel card_number" name="card_number_sel[]" >
+								<option selected="true" value='0'></option>
 						    </select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 							<label>Card Name</label>
-							<select class="form-control select2 sel card_name" name="card_name[]" >
-								
+							<select class="form-control select2 sel card_name" name="card_name_sel[]" >
+								<option selected="true" value='0'></option>
 							</select>
 						</div>
 						<div class="col-md-6 col-sm-12">
 			                <label>Team</label>
-							<select class="form-control select2 sel team" name="team[]" >
-							
+							<select class="form-control select2 sel team" name="team_sel[]" >
+								<option selected="true" value='0'></option>
 						    </select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 			                <label>Parallel</label>
-							<select class="form-control select2 sel parallel" name="parallel[]">
-							
+							<select class="form-control select2 sel parallel" name="parallel_sel[]">
+								<option selected="true" value='0'></option>
 						    </select>
 						</div>
 						<div class="col-md-6 col-sm-12">
 							<label>Print run</label>
-							<select class="form-control select2 sel print_run" name="print_run[]">
-							
+							<select class="form-control select2 sel print_run" name="print_run_sel[]">
+								<option selected="true" value='0'></option>
 							</select>
 						</div>
 					</div>
@@ -314,7 +331,7 @@ $(document).on('click', '#add', function () {
 
         event.preventDefault();
 		$.ajax({
-		  url:"custom_form.php",
+		  url:"import/custom_form.php",
 	      method:"POST",
 	      data:new FormData(this),
 	      contentType:false,
@@ -324,7 +341,7 @@ $(document).on('click', '#add', function () {
 	      {
 	      	//location.href="custom_checklist.php";
 	      	$('.ee').css('display','block')
-	      	$('.hrf').html(data)
+	      	$('.err_msg').html(data)
 	      }
 		});
 	})
@@ -352,7 +369,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{k:k},
 			function(ard){
-				set_type.html("<option selected='true'></option>"+ard)
+				set_type.html("<option selected='true' value='0'></option>"+ard)
 
 			}
 		)
@@ -377,7 +394,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{id_settype1:k,rid:rid},
 			function(ard){
-				card_number.html("<option selected='true'></option>"+ard)
+				card_number.html("<option selected='true' value='0'></option>"+ard)
 			}
 		)
 		
@@ -394,7 +411,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{id_settype2:k,rid:rid},
 			function(ard){
-				card_name.html("<option selected='true'></option>"+ard)
+				card_name.html("<option selected='true' value='0'></option>"+ard)
 			}
 		)
 	})
@@ -409,7 +426,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{id_settype3:k,rid:rid},
 			function(ard){
-				team.html("<option selected='true'></option>"+ard)
+				team.html("<option selected='true' value='0'></option>"+ard)
 			}
 		)
 	})
@@ -426,7 +443,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{id_team:k,rid:rid,card_name:card_name,set_type:set_type},
 			function(ard){
-				parallel.html("<option selected='true'></option>"+ard)
+				parallel.html("<option selected='true' value='0'></option>"+ard)
 			}
 		)	
 		
@@ -442,7 +459,7 @@ $(document).on('click', '#add', function () {
 			"custom2.php",
 			{parallel:k,rid:rid,card_number:card_number,set_type:set_type},
 			function(ard){
-				print_run.html("<option selected='true'></option>"+ard)
+				print_run.html("<option selected='true' value='0'></option>"+ard)
 			}
 		)
 	})
@@ -450,6 +467,7 @@ $(document).on('click', '#add', function () {
 		$('.hid_val').val('1')
 	})
 	$('.save-title').click(function(){
+		$('.hrf').html('<a class="hrfa" style="display:none" >Select in releases</a>'); 
 		$('.hid_val').val('2')
 	})
 </script>

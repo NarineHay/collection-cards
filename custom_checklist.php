@@ -35,7 +35,7 @@ if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
     <div class="row">
     <div class="col-md-12">
     <a href="custom.php" class="float-right hr ml-2">Add Checklist</a>
-    <a href="custom_import.php" class="float-right hr">Import Checklist</a>
+    <!-- <a href="custom_import.php" class="float-right hr">Import Checklist</a> -->
 
     </div>
     <?php

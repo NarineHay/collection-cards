@@ -2,8 +2,11 @@
 	session_start();
 	$uid = $_SESSION['user'];
 	include "config/con1.php";
-	if(isset($_POST['name-collection'])){
-		$user_id = mysqli_real_escape_string($con, $_POST['user_id']);
+	if(isset($_POST['hid_val'])){
+		$val = mysqli_real_escape_string($con, $_POST['hid_val']);
+
+		if($val==1){
+			$user_id = mysqli_real_escape_string($con, $_POST['user_id']);
 		$name_collection = mysqli_real_escape_string($con, $_POST['name-collection']);
 		$description	 = mysqli_real_escape_string($con, $_POST['description']);
 		$file_name = $_FILES['file']['name'];
@@ -20,7 +23,7 @@
 		$t2 = mysqli_real_escape_string($con, $_POST['title2']);
 		$t3 = mysqli_real_escape_string($con, $_POST['title3']);
 		// if($size <= 200){
-		// 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+		 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
 			
 				move_uploaded_file($tmp, $chanaparh);
 				$sql = "INSERT INTO `personal_name_checklist`
@@ -28,7 +31,7 @@
 				VALUES 
 				('$user_id','$name_collection','$description','$name2','$t1','$t2','$t3')";
 				$query = mysqli_query($con, $sql);
-		// 	}
+		 	}
 		// }
 		$sqlid = "SELECT MAX(id) as id FROM personal_name_checklist";
 		$resid = mysqli_query($con, $sqlid);
@@ -55,7 +58,7 @@
 			$tox[$i] = mysqli_fetch_assoc($res);
 			$base[$i] = $tox[$i]['name_of_collection'];
 			$sport_type[$i] = $tox[$i]['sport_type'];
-			echo $sport_type[$i]."---".$rid[$i];
+
 			$cnumber = "SELECT card_number FROM base_checklist WHERE id=$card_number1[$i]";
 			$res = mysqli_query($con, $cnumber);
 			$tox2[$i] = mysqli_fetch_assoc($res);
@@ -94,7 +97,40 @@
 
 			$res = mysqli_query($con, $sql2);
 
+			}
 		}
+		elseif ($val==2) {
+			$user_id = mysqli_real_escape_string($con, $_POST['user_id']);
+		$name_collection = mysqli_real_escape_string($con, $_POST['name-collection']);
+		$description	 = mysqli_real_escape_string($con, $_POST['description']);
+		$file_name = $_FILES['file']['name'];
+		$tmp = $_FILES['file']['tmp_name'];
+		$type = $_FILES['file']['type'];
+		$size = $_FILES['file']['size'];
+		$size = round($size/1024);
+		$test = explode('.', $file_name);
+		$extension = end($test);
+		$name2 = md5(rand(0,1000). rand(0,1000). rand(0,1000). rand(0,1000)).'.'.$extension;
+		$chanaparh = 'img/'.$name2;
+
+		$t1 = mysqli_real_escape_string($con, $_POST['title1']);
+		$t2 = mysqli_real_escape_string($con, $_POST['title2']);
+		$t3 = mysqli_real_escape_string($con, $_POST['title3']);
+		// if($size <= 200){
+		 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+			
+				move_uploaded_file($tmp, $chanaparh);
+				$sql = "INSERT INTO `personal_name_checklist`
+				(`user_id`, `name_of_checklist`, `description`, `image`, `title1`, `title2`, `title3`) 
+				VALUES 
+				('$user_id','$name_collection','$description','$name2','$t1','$t2','$t3')";
+				$query = mysqli_query($con, $sql);
+				if($query){
+					echo '<a class="hrfa" style="display:none" >kskskk</a>';
+				}
+		 	}
+		}
+		
 	}
 	if(isset($_POST['upd_id'])){
 		$upd_id = mysqli_real_escape_string($con, $_POST['upd_id']);
@@ -214,4 +250,47 @@
 		}
 
 	}
+	if(isset($_POST['checkmark'])){
+		$aDoor = $_POST['checkmark'];
+		$cid = mysqli_real_escape_string($con, $_POST['cid']);
+		  if(empty($aDoor)){
+		    echo("You didn't select any buildings.");
+		  }else{
+	    	$N = count($aDoor);
+		    for($i=0; $i < $N; $i++){
+		    	$sel = "SELECT * FROM base_checklist WHERE id='$aDoor[$i]'";
+				$res = mysqli_query($con, $sel);
+				$tox[$i] = mysqli_fetch_assoc($res);
+				$rid[$i] = $tox[$i]['realese_id'];
+				$card_number[$i] = $tox[$i]['card_number'];
+				$card_name[$i] = $tox[$i]['card_name'];
+				$team[$i] = $tox[$i]['team'];
+				$set_type[$i] = $tox[$i]['set_type'];
+				$parallel[$i] = $tox[$i]['parallel'];
+				$print_run[$i] = $tox[$i]['print_run'];
+
+				$sel = "SELECT * FROM collections WHERE id='$rid[$i]' ";
+				$rez = mysqli_query($con, $sel);
+				$row[$i] = mysqli_fetch_assoc($rez);
+				$base_checklist_name[$i]=$row[$i]['name_of_collection'];
+				$sport_type[$i]=$row[$i]['sport_type'];
+		
+		      	$ins = "
+		      	INSERT INTO `personal_checklist`
+		      	(`cid`, `rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`)
+		      	VALUES ('$cid','$rid[$i]','$base_checklist_name[$i]','$sport_type[$i]','$card_number[$i]','$card_name[$i]','$team[$i]','$set_type[$i]','$parallel[$i]','$print_run[$i]')";
+		      	$result = mysqli_query($con, $ins);
+		      	if($result){
+		      		echo "ok";
+		      	}else{
+		      		echo "no ";
+		      	}
+		    }
+	  	}	
+	}
+	if(isset($_POST['bbid'])){
+		setcookie('bbid', $_POST['bbid'], time() + (90), "/");
+
+	}
+	  
 ?>
