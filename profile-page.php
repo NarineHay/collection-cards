@@ -78,6 +78,8 @@ include "config/con1.php";
 <div class="discdiv">
     <section id="testimonials" class="top-collections">
       <h2 class="text-center text-uppercase">CUSTOM CHECKLIST</h2>
+      <br>
+      <a style="margin-top: -56px;position: absolute;left: 87%;" href="custom.php" class="float-right hr ml-2">Add Checklist</a>
     <div class="container">
        
         <div class="owl-carousel testimonials-carousel">
@@ -91,14 +93,15 @@ include "config/con1.php";
                 <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
+                  <span class = "del del-custom" id="<?php echo $tox1['id']?>" data-toggle="modal" data-target="#deliteCustom">X</span>
                    <a href="customchecklist.php?id=<?php echo $tox1['id']?>" class = "customLink"> <img src="img/<?php echo $tox1['image']?>"></a>
                 </div>
                 <div class="description-card">
                   <div class="d-flex justify-content-between">
-                      <span>Description</span>
+                      <span class="nameofCollection"><?php echo $tox1['name_of_checklist']; ?></span>
                       <div class="plus-icon">+</div>
                   </div>
-                  <p><?php echo $tox1['description']?></p>
+                  <p  class="description"><?php echo $tox1['description']?></p>
                 </div>
                 <div class="d-flex collector-cad bd-highlight mb-3">
                     <div class="author-avatar p-2 bd-highlight"></div>
@@ -144,8 +147,11 @@ else:
 <div class="discdiv">
     <section id="testimonials" class="top-collections personalSection">
       <h2 class="text-center text-uppercase">PERSONAL CHECKLIST</h2>
+      <br>
+      <a style="margin-top: -56px;position: absolute;left: 87%;" href="personal.php" class="float-right hr ml-2">Add Checklist</a>
     <div class="container">
        
+    
         <div class="owl-carousel testimonials-carousel">
 
           
@@ -157,14 +163,17 @@ else:
                 <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
+                  <span class = "del del-personal" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#delitePersonal">X</span>
                     <a href="personalchecklist.php?id=<?php echo $tox2['id']?>" class = "customLink"> <img src="img/<?php echo $tox2['image']?>"></a>
                 </div>
                 <div class="description-card">
                   <div class="d-flex justify-content-between">
-                      <span>Description</span>
+                    <span class="nameofCollection"><?php echo $tox2['name_of_checklist']; ?></span>
+                      
+
                       <div class="plus-icon">+</div>
                   </div>
-                  <p><?php echo $tox2['description']?></p>
+                  <p class="description"><?php echo $tox2['description']?></p>
                 </div>
                 <div class="d-flex collector-cad bd-highlight mb-3">
                     <div class="author-avatar p-2 bd-highlight"></div>
@@ -240,11 +249,37 @@ else:
         </div>
     </div>
 </div>
+<div class="modal fade" id="deliteCustom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog delite_modal" role="document">
+    
+  </div>
+</div>
+
+<div class="modal fade" id="delitePersonal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog delite_modal-p" role="document">
+    
+  </div>
+</div>
 
 <?php
 include "footer.php";
 ?>
 <script src="carusel/vendor/owl.carousel/owl.carousel.min.js"></script>
 <script src="carusel/js/main.js"></script>
+<script>
+
+  $('.del-custom').click(function(){
+    var id = $(this).attr('id')
+    var name = $(this).parents('.collect-card').find('.nameofCollection').text()
+    var k = '<div class="modal-content" style="border:0"><form action="./custom_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn-p" value="'+id+'">Delete</button></div></form></div>';
+    $('.delite_modal').html(k)
+  })
+$('.del-personal').click(function(){
+    var id = $(this).attr('id')
+    var name = $(this).parents('.collect-card').find('.nameofCollection').text()
+    var k = '<div class="modal-content" style="border:0"><form action="./personal_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn-p" value="'+id+'">Delete</button></div></form></div>';
+    $('.delite_modal-p').html(k)
+  })
+</script>
 </body>
 </html>
