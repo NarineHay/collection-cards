@@ -9,6 +9,7 @@ include "config/con1.php";
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/profile-page.css">
   <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
  
   <link href="carusel/css/style.css" rel="stylesheet">
@@ -106,8 +107,8 @@ include "config/con1.php";
                 <div class="d-flex collector-cad bd-highlight mb-3">
                     <div class="author-avatar p-2 bd-highlight"></div>
                     <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
+                        <p class="author-name"><?php echo $ard['name']?></p>
+                        <p class="country"><?php echo $ard['country']?></p>
                     </div>
                     <div class="align-self-center ml-auto p-2 bd-highlight">
                         <span class="star"><i class="fa fa-star-o"></i></span>
@@ -178,8 +179,8 @@ else:
                 <div class="d-flex collector-cad bd-highlight mb-3">
                     <div class="author-avatar p-2 bd-highlight"></div>
                     <div class="p-2 bd-highlight">
-                        <p class="author-name">Author name</p>
-                        <p class="country">Country</p>
+                        <p class="author-name"><?php echo $ard['name']?></p>
+                        <p class="country"><?php echo $ard['country']?></p>
                     </div>
                     <div class="align-self-center ml-auto p-2 bd-highlight">
                         <span class="star"><i class="fa fa-star-o"></i></span>
