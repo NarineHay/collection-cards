@@ -98,8 +98,8 @@ $img = $navbarimg['image'];
                            <li class="dropdown">
                                <a class="dropdown-item" href="#">My checklists</a>
                                <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="personal_checklist.php">Personal</a></li>
-                                   <li><a class="dropdown-item" href="custom_checklist.php">Custom</a></li>
+                                   <li><a class="dropdown-item" href="profile-page.php">Personal</a></li>
+                                   <li><a class="dropdown-item" href="profile-page.php">Custom</a></li>
                                </ul>
                            </li>
                            <?php

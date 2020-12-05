@@ -1,16 +1,21 @@
 <?php
 include "header.php";
 include "config/con1.php";
+
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
-	if(isset($_COOKIE['href'])){
-		$href = $_COOKIE['href'];
+	if(isset($_GET['id'])){
+		$realise_id=mysqli_real_escape_string($con, $_GET['id']);
+
+		$sql = "SELECT * FROM `personal_name_checklist` WHERE id = '$realise_id'";
+	    $rezult = mysqli_query($con, $sql);
+	    $tox = mysqli_fetch_assoc($rezult);
 	}
 }else{
 	header('location:index.php');
 }
 $cbase = "SELECT * FROM `collections` ORDER BY `name_of_collection` ASC";
 $base = mysqli_query($con, $cbase);
-
+$colid = $realise_id;
 ?> 
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -47,18 +52,18 @@ $base = mysqli_query($con, $cbase);
 <section class="cust">
 	<div class="container">
 		<h2 class="header-log">
-			<center class="first-par mx-auto">Add New Personal Checklist</center>
+			<center class="first-par mx-auto">Edit Personal Checklist</center>
 		</h2>
 		<div class="card-body ">
 			<form method="post" enctype="multipart/form-data" id="save-filds">
 				<div class="form-group">
 					<label>Name of collection</label>
 					<input type="hidden" value="<?php echo $_SESSION['user']; ?>" name='user_id' >
-					<input type="text" class="form-control namecoll" name="name-collection" required>
+					<input type="text" class="form-control namecoll" name="name-collection" value="<?php echo $tox['name_of_checklist'] ?>" required>
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<textarea class="form-control desc" name="description"></textarea>
+					<textarea class="form-control desc" name="description"><?php echo $tox['description'] ?></textarea>
 	            </div>
 	            <div class="form-group">
 					<div class="choose_file">
@@ -67,42 +72,43 @@ $base = mysqli_query($con, $cbase);
 				            <i class="fas fa-upload"></i>
 			        	</label>
 			    	</div>
-			   		<span class="file-text" >Upload photo</span>
+			    <span class="file-text" >Edit photo</span>
 				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-md-4">
 							<label>Title-1</label>
-							<input type="text" class="form-control t1" name="title1" >
+							<input type="text" class="form-control t1" name="title1" value='<?php echo $tox['title1'] ?>'>
 						</div>
 						<div class="col-md-4">
 							<label>Title-2</label>
-							<input type="text" class="form-control t2" name="title2" >
+							<input type="text" class="form-control t2" name="title2" value='<?php echo $tox['title2'] ?>'>
 						</div>
 						<div class="col-md-4">
 							<label>Title-3</label>
-							<input type="text" class="form-control t3" name="title3" >
+							<input type="text" class="form-control t3" name="title3" value='<?php echo $tox['title3'] ?>'>
 						</div>
 					</div>
 				</div>
 				<div class="form-group p-1">
-				            <div class="form-group">
-								<div class="choose_file">
-						        	<label class="file_label w-auto" >
-							            <input class="excel" type="file" name="import_excel">
-							            <i class="fas fa-upload"></i>
-						        	</label>
-						    	</div>
-						   		<span class="excel-text" >Upload your own checklist</span>
-							</div>
-				         <div class="container">
-				        	<small><sup>*</sup>Please note, that your checklist should be with xlsx, xls, ods, or csv formats. You can download template from here 
+				        <div class="form-group">
+							<div class="choose_file">
+						      	<label class="file_label w-auto" >
+							        <input class="excel" type="file" name="file">
+							        <i class="fas fa-upload"></i>
+						       	</label>
+						    </div>
+						   	<span class="excel-text" >Upload your own checklist</span>
+						</div>
+				        <div class="container">
+				        	<small><sup>*</sup>Plase note, that your checklist should be whit xlsx, xls, ods, or csv formats. You can download template from here 
 				        			<a class="text-info border border-info btn p-1 btn-sm" href='import/table.xlsx'> .xlsx </a>,&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.xls'> .xls </a>,&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.csv'> .csv </a>&nbsp
 					                or&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.ods'> .ods </a>
 					        </small>
+					            
 				        </div> 
 				    <div id="message" class="mt-1"></div>
 				</div>
@@ -112,12 +118,12 @@ $base = mysqli_query($con, $cbase);
 						<button type="submit" name="btn_personal_edit[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
 						<div class="alert alert-success float-right mr-5 tstitle">
 							Successfully added checklist. 
-							<a href='personalchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
-
+							<a href='personalchecklist.php?id=<?php echo $colid; ?>' class="text-info">Go to checklist?</a>
 						</div>
 					</div>
 				</div>
 				<input type="hidden" name="hid_val" class="hid_val" value="0">
+				<input type="hidden" name="colid" value="<?php echo $colid; ?>">
 				<center>
 					<div class="gits pt-5"></div>
 				</center>
@@ -233,16 +239,16 @@ $base = mysqli_query($con, $cbase);
 
 				</div>
 				<hr>
-				<button type="submit" name="btn_personal[]" class="banner-button float-right save">Save</button>
+				<button type="submit" name="btn_personal_edit[]" class="banner-button float-right save">Save</button>
 			</form>
 			<button class="add-more-button float-left" id="add">
 				<div class="mt-0 mr-1 plus-icon float-left">+</div>Add more
 			</button>
 			<div class="ee">
-				<div class="text-success tet">
+				<div class="text-success">
 					You have successfully added checklist
 					<br>
-					<a href='personalchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
+					<a href='personalchecklist.php?id=<?php echo $colid; ?>' class="text-info">Go to checklist?</a>
 				</div>
 			</div>
 			<br>
@@ -254,7 +260,7 @@ $base = mysqli_query($con, $cbase);
 include "footer.php";
 ?>
 <script>
-	$('.choose_file .file_label .img').bind('change', function () {
+	$('.choose_file .file_label input').bind('change', function () {
         var filename = $(this).val();
        $(".file-text").text(filename.replace("C:\\fakepath\\", ""));
     })
@@ -262,6 +268,21 @@ include "footer.php";
         var filename = $(this).val();
        $(".excel-text").text(filename.replace("C:\\fakepath\\", ""));
     })
+    if($('.t1').val()>0){
+    	$('.dn1').css('display','block');
+		$('.dt1 input').attr('disabled','true')
+		$('.dt1 input').val($('.t1').val())
+    }
+    if($('.t2').val()>0){
+    	$('.dn2').css('display','block');
+		$('.dt2 input').attr('disabled','true')
+		$('.dt2 input').val($('.t2').val())
+    }
+    if($('.t3').val()>0){
+    	$('.dn3').css('display','block');
+		$('.dt3 input').attr('disabled','true')
+		$('.dt3 input').val($('.t3').val())
+    }
     $('.t1').keyup(function(){
     	var t1 = $('.t1').val()
     	if(t1.length > 0){
@@ -351,7 +372,7 @@ $(document).on('click', '#add', function () {
 
         event.preventDefault();
 		$.ajax({
-		  url:"import/personal_form.php",
+		  url:"import/personal_edit_form.php",
 	      method:"POST",
 	      data:new FormData(this),
 	      contentType:false,
@@ -485,6 +506,7 @@ $(document).on('click', '#add', function () {
 	$('.save').click(function(){
 		$('.hid_val').val('1')
 		$('.ee').css('display','block')
+
 	})
 	$('.save-title').click(function(){
 		$('.hrf').html('<a class="hrfa" style="display:none" >Select in releases</a>'); 

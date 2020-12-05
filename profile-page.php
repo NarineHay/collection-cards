@@ -6,12 +6,13 @@ include "config/con1.php";
 }*/
 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
- 
-  <link href="carusel/css/style.css" rel="stylesheet">
+<link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="carusel/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php include "cookie.php";?>
