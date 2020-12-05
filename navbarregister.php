@@ -54,7 +54,7 @@ $img = $navbarimg['image'];
       </div>
     </div>
     <div class="userdiv">
-           <a href="profile-page.php"><img src="images/<?php echo $img ? $img : 'user-icon.png' ?>" class="img-responsive user"></a>
+           <a href="profile-page.php"><img src="images_users/<?php echo $img ? $img : 'user-icon.png' ?>" class="img-responsive user"></a>
         </div>
       <div class = "logout"><a href="navbarregister.php?log_out" class = "register">Log out</a></div>
        <div data-google-lang="<?php if($lng=='ru'){
