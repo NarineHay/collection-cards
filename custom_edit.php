@@ -94,7 +94,7 @@ $colid = $realise_id;
 				        <div class="form-group">
 							<div class="choose_file">
 						      	<label class="file_label w-auto" >
-							        <input class="excel" type="file" name="file" required>
+							        <input class="excel" type="file" name="import_excel" >
 							        <i class="fas fa-upload"></i>
 						       	</label>
 						    </div>

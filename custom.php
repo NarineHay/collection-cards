@@ -3,9 +3,7 @@ include "header.php";
 include "config/con1.php";
 $href='';
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
-	if(isset($_COOKIE['href'])){
-		$href = $_COOKIE['href'];
-	}
+
 }else{
 	header('location:index.php');
 }
@@ -63,7 +61,7 @@ $base = mysqli_query($con, $cbase);
 	            <div class="form-group">
 					<div class="choose_file">
 			        	<label class="file_label">
-				            <input class="img" type="file" name="file">
+				            <input class="img" type="file" name="file" required>
 				            <i class="fas fa-upload"></i>
 			        	</label>
 			    	</div>
@@ -112,8 +110,8 @@ $base = mysqli_query($con, $cbase);
 					<div class="col-md-6 col-sm-12">
 						<button type="submit" name="btn_custom_edit[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
 						<div class="alert alert-success float-right mr-5 tstitle">
-							Successfully added checklist. 
-							<a href='customchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
+							Successfully added checklist.<?php echo $href; ?>
+							<span class="msg1"></span>
 							<input type="hidden" class="href_value" value="">
 						</div>
 					</div>
@@ -243,7 +241,7 @@ $base = mysqli_query($con, $cbase);
 				<div class="text-success ">
 					You have successfully added checklist
 					<br>
-					<a href='customchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
+					<span class="msg2"></span>
 				</div>
 			</div>
 			<br>
@@ -484,14 +482,28 @@ $(document).on('click', '#add', function () {
 		)
 	})
 	$('.save').click(function(){
+		$('err_msg').css('display','none')
 		$('.hid_val').val('1')
-		$('.ee').css('display','block')
+		$('.tstitle').css('display','none')
+		setTimeout(function(){
+			$('.ee').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg2').html("<a href='customchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
 	})
 	$('.save-title').click(function(){
+		$('err_msg').css('display','none')
+		$('.ee').css('display','none')
 		$('.hrf').html('<a class="hrfa" style="display:none" >Select in releases</a>'); 
 		$('.hid_val').val('2')
-		$('.tstitle').css('display','block')
+		setTimeout(function(){
+			$('.tstitle').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg1').html("<a href='customchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
+	    
 	})
+	
 </script>
 </body>
 </html>

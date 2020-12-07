@@ -17,7 +17,6 @@
 		if($name_collection){
 			if (!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
 			{
-				$message = '<div class="alert alert-danger">Only .png .jpg or .jpeg file allowed</div>';
 			}
 			else
 			{
@@ -42,7 +41,10 @@
 					$resid = mysqli_query($con, $sqlid);
 					$tox = mysqli_fetch_assoc($resid);
 					$cid = $tox['id'];
-					setcookie('href', $cid, time() + (120), "/");
+					setcookie('href', $cid, time() + (10), "/");
+				}
+				else{
+				$message = '<div class="alert alert-danger">Only .png .jpg or .jpeg file allowed</div>';
 				}
 			}
 			if($val==1)
@@ -266,6 +268,7 @@
 	else{
 		$message = '<div class="alert alert-danger">Error</div>';
 	}
-echo $message;
+	
+echo $message."<input type='hidden' value=".$cid." class='cid'>";
 echo $err_msg;		
 ?>

@@ -6,6 +6,7 @@
 	$message='';
 	$err_msg='';
 	$arr = array();
+	$ok = 0;
 	if(isset($_POST['hid_val'])){
 		$val = mysqli_real_escape_string($con, $_POST['hid_val']);
 		$colid = mysqli_real_escape_string($con, $_POST['colid']);
@@ -235,6 +236,7 @@
 							if($roww==0){
 								$tox = $row+1;
 								$arr[] = $tox;
+								$ok = 1; 
 							}else{
 								$tox = mysqli_fetch_assoc($result);
 								$card_number0	=	$tox['card_number'];
@@ -260,11 +262,27 @@
 	else{
 		$message = '<div class="alert alert-danger">Error</div>';
 	}
-	echo '<div class="alert alert-warning">Error on line';
-	foreach ($arr as $key => $value) {
-		echo $value;
+	if($ok==1){
+		
+		$qanak = count($arr);
+		if($qanak==1){
+			echo '<div class="alert alert-warning">Error on line ';
+			foreach ($arr as $key => $value) {
+				echo $value;
+			}
+			echo '</div>';
+		}elseif($qanak>1){
+			echo '<div class="alert alert-warning">Error on lines ';
+			foreach ($arr as $key => $value) {
+				echo $value.", ";
+			}
+			echo '</div>';
+		}else{
+			echo '';
+		}
+		
+		
 	}
-	echo '</div>';
 echo $message;
 echo $err_msg;		
 ?>

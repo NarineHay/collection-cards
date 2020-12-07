@@ -1,16 +1,14 @@
 <?php
 include "header.php";
 include "config/con1.php";
+$href='';
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
-	if(isset($_COOKIE['href'])){
-		$href = $_COOKIE['href'];
-	}
+
 }else{
 	header('location:index.php');
 }
 $cbase = "SELECT * FROM `collections` ORDER BY `name_of_collection` ASC";
 $base = mysqli_query($con, $cbase);
-
 ?> 
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -67,7 +65,7 @@ $base = mysqli_query($con, $cbase);
 				            <i class="fas fa-upload"></i>
 			        	</label>
 			    	</div>
-			   		<span class="file-text" >Upload photo</span>
+			    <span class="file-text" >Upload photo</span>
 				</div>
 				<div class="form-group">
 					<div class="row">
@@ -86,15 +84,15 @@ $base = mysqli_query($con, $cbase);
 					</div>
 				</div>
 				<div class="form-group p-1">
-				            <div class="form-group">
-								<div class="choose_file">
-						        	<label class="file_label w-auto" >
-							            <input class="excel" type="file" name="import_excel">
-							            <i class="fas fa-upload"></i>
-						        	</label>
-						    	</div>
-						   		<span class="excel-text" >Upload your own checklist</span>
-							</div>
+				        <div class="form-group">
+							<div class="choose_file">
+						      	<label class="file_label w-auto" >
+							        <input class="excel" type="file" name="import_excel">
+							        <i class="fas fa-upload"></i>
+						       	</label>
+						    </div>
+						   	<span class="excel-text" >Upload your own checklist</span>
+						</div>
 				         <div class="container">
 				        	<small><sup>*</sup>Please note, that your checklist should be with xlsx, xls, ods, or csv formats. You can download template from here 
 				        			<a class="text-info border border-info btn p-1 btn-sm" href='import/table.xlsx'> .xlsx </a>,&nbsp
@@ -103,17 +101,18 @@ $base = mysqli_query($con, $cbase);
 					                or&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.ods'> .ods </a>
 					        </small>
+					            
 				        </div> 
 				    <div id="message" class="mt-1"></div>
-				</div>
+				</div>  
 				<div class="row">
 					<div class="err_msg col-md-6 col-sm-12"></div>
 					<div class="col-md-6 col-sm-12">
 						<button type="submit" name="btn_personal_edit[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
 						<div class="alert alert-success float-right mr-5 tstitle">
-							Successfully added checklist. 
-							<a href='personalchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
-
+							Successfully added checklist.<?php echo $href; ?>
+							<span class="msg1"></span>
+							<input type="hidden" class="href_value" value="">
 						</div>
 					</div>
 				</div>
@@ -239,10 +238,10 @@ $base = mysqli_query($con, $cbase);
 				<div class="mt-0 mr-1 plus-icon float-left">+</div>Add more
 			</button>
 			<div class="ee">
-				<div class="text-success tet">
+				<div class="text-success ">
 					You have successfully added checklist
 					<br>
-					<a href='personalchecklist.php?id=<?php echo $href; ?>' class="text-info">Go to checklist?</a>
+					<span class="msg2"></span>
 				</div>
 			</div>
 			<br>
@@ -483,14 +482,28 @@ $(document).on('click', '#add', function () {
 		)
 	})
 	$('.save').click(function(){
+		$('err_msg').css('display','none')
 		$('.hid_val').val('1')
-		$('.ee').css('display','block')
+		$('.tstitle').css('display','none')
+		setTimeout(function(){
+			$('.ee').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg2').html("<a href='personalchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
 	})
 	$('.save-title').click(function(){
+		$('err_msg').css('display','none')
+		$('.ee').css('display','none')
 		$('.hrf').html('<a class="hrfa" style="display:none" >Select in releases</a>'); 
 		$('.hid_val').val('2')
-		$('.tstitle').css('display','block')
+		setTimeout(function(){
+			$('.tstitle').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg1').html("<a href='personalchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
+	    
 	})
+	
 </script>
 </body>
 </html>

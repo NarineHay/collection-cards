@@ -50,17 +50,16 @@
     text-overflow: ellipsis;
 }
 .del{
-    color: red;
     position: absolute;
     left: 80%;
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: #c90e36;
+    background: grey;
     color: #fff;
     text-align: center;
     font-size: 15px;
-
+    top: 23px;
 }
 .hr {
     padding: 8px 20px;
