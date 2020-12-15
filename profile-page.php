@@ -23,14 +23,14 @@ include "config/con1.php";
 </head>
 <body>
     <?php include "cookie.php";?>
-	 <?php 
-// 	 if(isset($_SESSION['user'])){
-// 	     $id=$_SESSION['user'];
-// 	 }
-	 	$id = $_SESSION['user'];
-	 	$sql = "SELECT * FROM users where id = $id";
-	 	$res = mysqli_query($con,$sql);
-	 	$ard = mysqli_fetch_assoc($res);
+   <?php 
+//   if(isset($_SESSION['user'])){
+//       $id=$_SESSION['user'];
+//   }
+    $id = $_SESSION['user'];
+    $sql = "SELECT * FROM users where id = $id";
+    $res = mysqli_query($con,$sql);
+    $ard = mysqli_fetch_assoc($res);
 
     $sql1 = "SELECT * FROM custom_name_checklist WHERE user_id = $id";
     $res1 = mysqli_query($con,$sql1);
@@ -42,11 +42,11 @@ include "config/con1.php";
 
     
 
-	  ?> 
+    ?> 
 <div class="dvbtn">
-	<button class="log-in">Add collection</button>	
+  <button class="log-in">Add collection</button>  
 </div>
-<div class="container">
+<div class="container" style = "margin-top: 100px">
   <div class="row userRow">
       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"> 
         <div>
@@ -55,27 +55,27 @@ include "config/con1.php";
           <?php else: ?>
             <p>Add your image</p>
           <?php endif ?>
-        </div>    	
-      		
+        </div>      
+          
         <br>
         <button class="add" data-toggle="modal" data-target="#exampleModall">Edit</button> 
       </div>
       <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12" style="word-break: break-all">  
-    	<h4 class="parag-log"><?php echo $ard['name']?>
+      <h4 class="parag-log"><?php echo $ard['name']?>
         
       </h4>
         <p class="parag-log"><?php echo $ard['country']?></p>
         <p class="parag-log">
-        	<?php 
-        		if($ard['more']){
-        			echo $ard['more'];		
-        		}else{
-        			echo "Add more information";
-        		}
-        	?>
-        		
-        	</p>
-        	
+          <?php 
+            if($ard['more']){
+              echo $ard['more'];    
+            }else{
+              echo "Add more information";
+            }
+          ?>
+            
+          </p>
+          
       </div>
   </div>
 </div>
@@ -87,7 +87,7 @@ include "config/con1.php";
     <section id="testimonials" class="top-collections">
       <h2 class="text-center text-uppercase">CUSTOM CHECKLIST</h2>
       <br>
-      <a style="margin-top: -56px;position: absolute;left: 87%;" href="custom.php" class="float-right hr ml-2">Add Checklist</a>
+      <a style="margin-top: -66px;position: absolute;left: 87%;" href="custom.php" class="float-right hr ml-2">Add Checklist</a>
     <div class="container">
        
         <div class="owl-carousel testimonials-carousel">
@@ -101,7 +101,7 @@ include "config/con1.php";
                 <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
-                  <span class = "del del-custom" id="<?php echo $tox1['id']?>" data-toggle="modal" data-target="#deliteCustom">X</span>
+                  
                    <a href="customchecklist.php?id=<?php echo $tox1['id']?>" class = "customLink"> <img src="img/<?php echo $tox1['image']?>"></a>
                 </div>
                 <div class="description-card">
@@ -131,15 +131,7 @@ include "config/con1.php";
             
 
 
-  <?php } ?>
-
-      
-      
-      </div>
-      </div>
-    </section>
-      </div>
-<?php 
+  <?php } 
 
 else:
  ?>
@@ -148,6 +140,12 @@ else:
   <p class="collect">NO COLLECTIONS</p>
 </div>
 <?php endif ?>
+      
+      </div>
+      </div>
+    </section>
+      </div>
+
 
       <!----------------personal cecklist----------------------------->
       
@@ -156,7 +154,7 @@ else:
     <section id="testimonials" class="top-collections personalSection">
       <h2 class="text-center text-uppercase">PERSONAL CHECKLIST</h2>
       <br>
-      <a style="margin-top: -56px;position: absolute;left: 87%;" href="personal.php" class="float-right hr ml-2">Add Checklist</a>
+      <a style="margin-top: -66px;position: absolute;left: 87%;" href="personal.php" class="float-right hr ml-2">Add Checklist</a>
     <div class="container">
        
     
@@ -171,7 +169,7 @@ else:
                 <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
-                  <span class = "del del-personal" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#delitePersonal">X</span>
+                    <span class = "del del-personal" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#delitePersonal">X</span>
                     <a href="personalchecklist.php?id=<?php echo $tox2['id']?>" class = "customLink"> <img src="img/<?php echo $tox2['image']?>"></a>
                 </div>
                 <div class="description-card">
@@ -203,15 +201,7 @@ else:
             
 
 
-  <?php } ?>
-
-      
-      
-      </div>
-      </div>
-    </section>
-      </div>
-<?php 
+  <?php } 
 
 else:
  ?>
@@ -221,6 +211,12 @@ else:
 </div>
 <?php endif ?>
 
+
+      
+      </div>
+      </div>
+    </section>
+      </div>
 
 
 
@@ -234,19 +230,19 @@ else:
                   <input type="hidden" name="id" value="<?php echo $id?>">
                   <input type="text" class="form-control" name="name" value="<?php echo $ard['name']?>"> 
                   <br>                  
-    		        	<textarea  name="text" cols="50" class="form-control">
-  		        		<?php 
-  			        		if($ard['more']){
-  			        			echo $ard['more'];		
-  			        		}else{
-  			        			echo "Add more information";
-  			        		}
-          				?>
-  		        	</textarea>
-  		        	<br>
+                  <textarea  name="text" cols="50" class="form-control">
+                  <?php 
+                    if($ard['more']){
+                      echo $ard['more'];    
+                    }else{
+                      echo "Add more information";
+                    }
+                  ?>
+                </textarea>
+                <br>
                 <input type="file" name="image" class="form-control">        
-          			<button type="submit" name="send" class="add">Add</button>
-        		</form>
+                <button type="submit" name="send" class="add">Add</button>
+            </form>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
