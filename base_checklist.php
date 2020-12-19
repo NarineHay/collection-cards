@@ -149,8 +149,12 @@ if(isset($_GET['id'])){
                                         ?>
                                         </tbody>
                                     </table>
-
-                                    <input type="submit" name="btn_custom" class="banner-button save ml-3" value="Save">
+                                </div>
+                                <div class="row">
+                                    <input type="submit" name="btn_custom" class="banner-button save mx-3" value="Save">
+                                    <span class="text-success success">
+                                        
+                                    </span>
                                 </div>
                             </form>
                             </div>
@@ -300,6 +304,8 @@ if(isset($_GET['id'])){
               success:function(data)
               {
                 //location.href="custom_checklist.php";
+                $('.success').html(data)
+                $('.checkmark').prop('checked',false)
               }
             });
         })

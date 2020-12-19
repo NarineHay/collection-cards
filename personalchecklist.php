@@ -77,7 +77,6 @@ if(isset($_GET['id'])){
                         <div class="col-md-12">
 
                             <div class="card bootstrap-table">
-                                
                                 <div class="card-body table-full-width table-responsive filterable">
                                     <table id="bootstrap-table-2" class="table">
                                         <thead>
@@ -287,8 +286,9 @@ if(isset($_GET['id'])){
     });
 </script>
     <script>
+        
         $(document).ready(function() {
-
+            $('.keep-open .dropdown-toggle').before('<a class="banner-button mr-3 py-2 px-3 edt-btn" href="personal_edit.php?id=<?php echo $realise_id; ?>">Edit</a>')
             $('.search').after('<br><br>')
             $('#bootstrap-table-2 thead tr').clone(true).appendTo( '#bootstrap-table-2 thead' ).addClass('filters');
             $('#bootstrap-table-2 thead tr:eq(1) th').each( function (i) {
@@ -484,7 +484,7 @@ if(isset($_GET['id'])){
                 $('.del_modal').html(form)
             })
         });
-
+    
     </script>
     
 </body>

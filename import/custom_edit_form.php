@@ -6,8 +6,10 @@
 	$message='';
 	$err_msg='';
 	$arr = array();
+	$ok = 0;
 	if(isset($_POST['hid_val'])){
 		$val = mysqli_real_escape_string($con, $_POST['hid_val']);
+		$colid = mysqli_real_escape_string($con, $_POST['colid']);
 		$name_collection = mysqli_real_escape_string($con, $_POST['name-collection']);
 		$user_id = mysqli_real_escape_string($con, $_POST['user_id']);
 		$description	 = mysqli_real_escape_string($con, $_POST['description']);
@@ -17,6 +19,8 @@
 		if($name_collection){
 			if (!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
 			{
+				$sql = "UPDATE `custom_name_checklist` SET `user_id`='$user_id',`name_of_checklist`='$name_collection',`description`='$description',`title1`='$t1',`title2`='$t2',`title3`='$t3' WHERE id='$colid' ";
+				$query = mysqli_query($con, $sql);
 			}
 			else
 			{
@@ -32,21 +36,11 @@
 				$chanaparh = '../img/'.$name2;
 				if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
 					move_uploaded_file($tmp, $chanaparh);
-					$sql = "INSERT INTO `personal_name_checklist`
-					(`user_id`, `name_of_checklist`, `description`, `image`, `title1`, `title2`, `title3`) 
-					VALUES 
-					('$user_id','$name_collection','$description','$name2','$t1','$t2','$t3')";
+					$sql = "UPDATE `custom_name_checklist` SET `user_id`='$user_id',`name_of_checklist`='$name_collection',`description`='$description',`image`='$name2',`title1`='$t1',`title2`='$t2',`title3`='$t3' WHERE id='$colid'";
 					$query = mysqli_query($con, $sql);
-					$sqlid = "SELECT MAX(id) as id FROM personal_name_checklist";
-					$resid = mysqli_query($con, $sqlid);
-					$tox = mysqli_fetch_assoc($resid);
-					$cid = $tox['id'];
-					setcookie('href', $cid, time() + (10), "/");
-				}
-				else{
-				$message = '<div class="alert alert-danger">Only .png .jpg or .jpeg file allowed</div>';
 				}
 			}
+			$cid = $colid;
 			if($val==1)
 			{
 				for($i=0;$i<count($_POST['basechecklist_sel']);$i++)
@@ -128,7 +122,7 @@
 			        	if($roww==0){
 			           		//$message = '<div class="alert alert-warning">Error on line</div>';
 			        	}else{
-			            	$sql2 = "INSERT INTO `personal_checklist` (`cid`,`rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`) VALUES ('$cid','$rid[$i]','$base[$i]','$sport_type[$i]','$card_number[$i]','$card_name[$i]','$team[$i]','$set_type[$i]','$parallel[$i]','$print_run[$i]','$d1[$i]','$d2[$i]','$d3[$i]')";
+			            	$sql2 = "INSERT INTO `custom_checklist` (`cid`,`rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`) VALUES ('$cid','$rid[$i]','$base[$i]','$sport_type[$i]','$card_number[$i]','$card_name[$i]','$team[$i]','$set_type[$i]','$parallel[$i]','$print_run[$i]','$d1[$i]','$d2[$i]','$d3[$i]')";
 			            	$res = mysqli_query($con, $sql2);
 			        	}
 		        	}
@@ -242,7 +236,7 @@
 							if($roww==0){
 								$tox = $row+1;
 								$arr[] = $tox;
-								$err_msg = '<div class="alert alert-warning">Error on line '.$tox.',</div>';
+								$ok = 1; 
 							}else{
 								$tox = mysqli_fetch_assoc($result);
 								$card_number0	=	$tox['card_number'];
@@ -252,7 +246,7 @@
 								$parallel0		=	$tox['parallel'];
 								$print_run0		=	$tox['print_run'];
 								$query = "
-								INSERT INTO `personal_checklist`(`cid`, `rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`)
+								INSERT INTO `custom_checklist`(`cid`, `rid`, `base_checklist_name`, `sport_type`, `card_number`, `card_name`, `team`, `set_type`, `parallel`, `print_run`, `description1`, `description2`, `description3`)
 								 VALUES ('$cid','$rid','$base_checklist','$sport_type','$card_number0','$card_name0','$team0','$set_type0','$parallel0','$print_run0','$description1','$description2','$description3')";
 								$statement = mysqli_query($con, $query);
 							}
@@ -268,7 +262,27 @@
 	else{
 		$message = '<div class="alert alert-danger">Error</div>';
 	}
-	
-echo $message."<input type='hidden' value=".$cid." class='cid'>";
+	if($ok==1){
+		
+		$qanak = count($arr);
+		if($qanak==1){
+			echo '<div class="alert alert-warning">Error on line ';
+			foreach ($arr as $key => $value) {
+				echo $value;
+			}
+			echo '</div>';
+		}elseif($qanak>1){
+			echo '<div class="alert alert-warning">Error on lines ';
+			foreach ($arr as $key => $value) {
+				echo $value.", ";
+			}
+			echo '</div>';
+		}else{
+			echo '';
+		}
+		
+		
+	}
+echo $message;
 echo $err_msg;		
 ?>
