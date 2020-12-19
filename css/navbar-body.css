@@ -3,9 +3,11 @@
     margin: 0;
 }
 .dvbtn{
-    text-align: right;
-    margin-top: 70px;
+    text-align: right; 
     margin-right: 31px;
+    position: absolute;
+    right: 0;
+    top: 150px;
 }
 .log-in{ 
     width: 180px;
