@@ -11,12 +11,22 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
 	<div class="container">
 		<div class="row d-flex pl-3 pr-4">
 			    <div class="top">
-						<div class="icon-text" data-toggle="modal" data-target="#newModal">New</div>
-				</div>
+						<div class="icon-text" data-toggle="modal" data-target="#newModal" id="new">New</div>
+				  </div>
 			    <div class="top ml-2">
-						<div class="icon-text" data-toggle="modal" data-target="#downloadModal">Download file</div>
+						<div class="icon-text" data-toggle="modal" data-target="#downloadModal">Download</div>
 			    </div>
-			    
+          <div class="top ml-2">
+            <div class="icon-text" data-toggle="modal" data-target="#clearCanvas">Clear</div>
+          </div>
+          <div class="top ml-2">
+            <div class="icon-text" id="saveProject" >Save</div>
+            <div id='dwn'></div>
+          </div>
+          <div class="top ml-2">
+			        <div id="addProject" class="icon-text">Add project</div>
+          </div>
+          <div class="json-res"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
@@ -111,11 +121,40 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
 			</div>	
 				<!-- <input type="number" name="" id="draw-size" value="3"> -->
       </div>
-      <div class="tab-pane fade" id="v-pills-crop" role="tabpanel" aria-labelledby="v-pills-crop-tab">...</div>
+      <div class="tab-pane fade" id="v-pills-crop" role="tabpanel" aria-labelledby="v-pills-crop-tab">
+        <!-- <button id="crop">crop</button> -->
+        <div class="mt-3 border-bot text-center">
+            <button id="crop-image" class="pr-2 pl-2 pt-1 pb-1 mb-1">Crop </button>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center crop-divs">
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='238' data-height='333'>6.3 sm x 8.8 sm<br>
+                 2.48 in x 3.46 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='242' data-height='336'>6.4 sm x 8.9 sm<br>
+                2.51 in x 3.50 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='310' data-height='391'>8.2 sm x 13 sm<br>
+                 3.22 in x 5.11 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='302' data-height='510'>8 sm x 13.5 sm<br>
+                 3.14 in x 5.31 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='314' data-height='525'>8.3 sm x 13.9 sm<br>
+                 3.26 in x 5.47 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='272' data-height='416'>7.2 sm x 11 sm<br>
+                 2.83 in x 4.33 in
+            </div>
+            <div class='crop-item pl-3 pr-3 pt-2 pb-2' data-width='272' data-height='386'>7.2 sm x 10.1 sm<br>
+                 2.83 in x 3.97in
+            </div>
+        </div>
+      </div>
       <div class="tab-pane fade" id="v-pills-frame" role="tabpanel" aria-labelledby="v-pills-frame-tab">
       	 <div class="text-center">
-      	 	<div class="w-100 text-center pt-2 pb-2 border-bot">
-      	 		<input type="color" id="hue">
+      	 	<div class="w-100 text-center pt-3 pb-2 border-bot d-flex justify-content-center">
+            <label>Color: </label>
+      	 		<input type="color" id="hue" class="ml-3">
       	 	</div>
       	 	
       	 	<?php
@@ -128,7 +167,18 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
          </div>
       </div>
       <div class="tab-pane fade" id="v-pills-s-icon" role="tabpanel" aria-labelledby="v-pills-s-icon-tab">
-      	  <div class="text-center"> 
+      	  <div class="d-flex justify-content-center mt-3 border-bot">
+              <label class="d-flex">Upload File: 
+              <div for="overlay-img" class="ml-4 pl-3 pr-4 pt-1 pb-1 overlay-img-div text-white">Upload</div>
+              <input type="file" name="" id="overlay-img" >
+              </label>
+            </div>
+            <div class="w-100 text-center pt-3 pb-2 border-bot d-flex justify-content-center">
+            <label>Color: </label>
+            <input type="color" id="color-sport-icon" class="ml-3">
+            <button id="dd">dddddd</button>
+          </div>
+          <div class="text-center"> 
       	 	<?php
                while($row_sport_icon=mysqli_fetch_assoc($res_sport_icon)){
                	 echo "<img src='card-editor/sport-icon/".$row_sport_icon['sport_logo']."' class='sport-icon'>";
@@ -150,6 +200,7 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
 	      	 	  <div class="shapes" name="heptagon" data-angle="7"><img src="card-editor/images/heptagon.png"></div>
 	      	 	  <div class="shapes" name="octagon" data-angle="8"><img src="card-editor/images/octagon.png"></div>
 	      	 	  <div class="shapes" name="elipse" data-angle="10"><img src="card-editor/images/Elipse.png"></div>
+
       	  	</div>
       	  	<div class="border-bot mt-3">Background</div>
       	    <div class="d-flex mt-3">
@@ -165,6 +216,10 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
       	    	<!-- <div class="background-color mr-1 ml-1 color7" data-color=''></div> -->
       	    </div>
          </div>
+         <div class="d-flex mt-3 text-center justify-content-center">
+              <div  name="text-box-1"><img src="card-editor/images/template-3-4.png" class="text-box"></div>
+              <div  name="text-box-1"><img src="card-editor/images/template-3-5.png" class="text-box"></div>
+         </div>
       </div>
       <div class="tab-pane fade" id="v-pills-text" role="tabpanel" aria-labelledby="v-pills-text-tab">
       	<div class="text-center mt-4">
@@ -172,34 +227,63 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
       			<label>Color: </label>
 				<input type="color" value="blue" id="fill" />
       		</div>
-      		<div>
+      		<div class="mt-2">
       			<label>Font: </label>
-				<select id="font">
-				  <option>arial</option>
-				  <option>tahoma</option>
-				  <option>times new roman</option>
-				  <option>verdana</option>
-				  <option>helvetica</option>
-				  <option>calibri</option>
-				  <option>noto</option>
-				  <option>lucida sans</option>
-				  <option>Century Gothic</option>
-				  <option>candara</option>
-				  <option>futara</option>
-				  <option>Comic Sans MS</option>
-				  <option>Brush Script MT</option>
-				  <option>Impact</option>
-				  <option>Ink Free</option>
-				</select>
-      	        <button id="text" class="pt-1 pb-1 pl-2 pr-2">Add text</button>
+    				<select id="font">
+    				  <option>arial</option>
+    				  <option>tahoma</option>
+    				  <option>times new roman</option>
+    				  <option>verdana</option>
+    				  <option>helvetica</option>
+    				  <option>calibri</option>
+    				  <option>noto</option>
+    				  <option>lucida sans</option>
+    				  <option>Century Gothic</option>
+    				  <option>candara</option>
+    				  <option>futara</option>
+    				  <option>Comic Sans MS</option>
+    				  <option>Brush Script MT</option>
+    				  <option>Impact</option>
+    				  <option>Ink Free</option>
+    				</select>
             </div>
+            <div class="mt-2">
+              <label>Font Size: </label>
+              <select id="font-size">
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>14</option>
+                <option>18</option>
+                <option>24</option>
+                <option>30</option>
+                <option>36</option>
+                <option>48</option>
+                <option>60</option>
+                <option>72</option>
+                <option>96</option>
+                <option>100</option>
+              </select>
+            </div>
+            <div class="w-100 d-flex mt-2 justify-content-center">
+                 <div id='bold' class="ml-2 mr-2">B</div>
+                 <div id='italic' class="ml-2 mr-2">I</div>
+                 <div id='underline' class="ml-2 mr-2">U</div>
+            </div>
+                <button id="text" class="pt-1 pb-1 pl-2 pr-2 mt-2">Add text</button>
+
 		</div>
       </div>
       <div class="tab-pane fade text-center" id="v-pills-background" role="tabpanel" aria-labelledby="v-pills-background-tab">
       	    <div class="border-bot mt-3">Background</div>
       	    <div class="d-flex mt-3">
       	    	<div>
-      	    		<label><img src="card-editor/images/app-icons.png" for="color-inp" class="color-img"><input type="color" name="" id="color-inp"></lable>
+      	    		<label>
+                  <img src="card-editor/images/app-icons.png" for="color-inp" class="color-img">
+                  <input type="color" name="" id="color-inp">
+                </lable>
       	    	</div>
       	    	<div class="background-color mr-1 ml-1 color1" data-color='#dbc126'></div>
       	    	<div class="background-color mr-1 ml-1 color2" data-color='#df9b28'></div>
@@ -209,6 +293,16 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
       	    	<div class="background-color mr-1 ml-1 color6" data-color='#157212'></div>
       	    	<!-- <div class="background-color mr-1 ml-1 color7" data-color=''></div> -->
       	    </div>
+            <div class="w-100 d-flex justify-content-end pr-4 mt-2">
+              <label>Delete Background:</label>
+              <button class="ml-4 pl-3 pr-4 pt-1 pb-1 delete-background text-white">Delete</button>
+            </div>
+            <div class="d-flex justify-content-end pr-4 mt-2">
+              <label class="d-flex">Upload File: 
+              <div for="background-img" class="ml-4 pl-3 pr-4 pt-1 pb-1 background-img-div text-white">Upload</div>
+              <input type="file" name="" id="background-img" >
+              </label>
+            </div>
       </div>
     </div>
   </div>
@@ -281,7 +375,7 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
       </div>
       <div class="modal-body text-center">
        	<!-- <div class="w-100 pt-2 pb-2 border-bot text-center">Create new project</div> -->
-    		<div class="text-center pt-3">
+    		<div class="text-center pt-3 create-new">
     			<div class="pt-1 pb-1">
     				<label>Width</label>
     				<input type="" name="" id="width">
@@ -290,8 +384,39 @@ $res_sport_icon=mysqli_query($con, $sql_sport_icon);
     				<label>Height</label>
     				<input type="" name="" id="height">
     			</div>
-                <button id="create-canvas" class="pt-1 pb-1 mt-2" data-dismiss="modal">Crate</button>
+                <button id="create-canvas" class="pt-1 pb-1 mt-2" data-dismiss="modal">Create</button>
     		</div>
+        <div class="text-center pt-3 yes-no">
+           <div class="pb-2">Do you want to save this canvas?</div>
+           <button id="yes-save" class="pt-1 pb-1 mt-2">Yes</button>
+           <button id="no-save" class="pt-1 pb-1 mt-2">No</button>
+           <div class="json-res mt-2"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-------- Modal Clear canvas ------------------------- -->
+<div class="modal fade" id="clearCanvas" tabindex="" aria-labelledby="clearCancasLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="clearCanvasLabel">Clear Canvas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- <div class="w-100 pt-2 pb-2 border-bot text-center">Create new project</div> -->
+        <div class="text-center pt-3">
+          <div class="pt-1 pb-1">
+             Do you want to clear this canvas?
+          </div>
+          <button id="clear" class="pt-1 pb-1 mt-2" data-dismiss="modal">Clear</button>
+        </div>
       </div>
       
     </div>

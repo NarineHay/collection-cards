@@ -6,12 +6,23 @@ include "config/con1.php";
 }*/
 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/profile-page.css">
 <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="carusel/css/style.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/profile-page.css">
+
+<link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="carusel/css/style.css" rel="stylesheet">
+
+  <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+ 
+  <link href="carusel/css/style.css" rel="stylesheet">
+
 </head>
 <body>
     <?php include "cookie.php";?>
@@ -39,6 +50,12 @@ include "config/con1.php";
     
 
     ?> 
+
+
+<div class="dvbtn">
+  <button class="log-in">Add collection</button>  
+</div>
+
 <div class="container" style = "margin-top: 100px">
   <div class="row userRow">
       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"> 
@@ -78,7 +95,11 @@ include "config/con1.php";
     <section id="testimonials" class="top-collections">
       <h2 class="text-center text-uppercase">COLLECTION</h2>
       <br>
+
   <a href="add_collection.php" class="float-right hr ml-2" style="margin-top: -66px;position: absolute;left: 84%;width: 180px;height: 40px;border-radius: 9px;">Add collection</a> 
+
+      <a style="margin-top: -66px;position: absolute;left: 87%;" href="custom.php" class="float-right hr ml-2">Add Checklist</a>
+
     <div class="container">
        
         <div class="owl-carousel testimonials-carousel">
@@ -92,8 +113,13 @@ include "config/con1.php";
                 <div class="row-d" >
                 <div class="collect-card carusel-card">
                 <div class="img-card">
+
                   <span class = "del del-collection" id="<?php echo $tox3['id']?>" data-toggle="modal" data-target="#deliteCollection">X</span>
                    <a href="collection_checklist.php?id=<?php echo $tox3['id']?>" class = "customLink"> <img src="img/<?php echo $tox3['image']?>"></a>
+
+                  
+                   <a href="customchecklist.php?id=<?php echo $tox1['id']?>" class = "customLink"> <img src="img/<?php echo $tox1['image']?>"></a>
+
                 </div>
                 <div class="description-card" style="overflow: auto">
                   <div class="d-flex justify-content-between">
@@ -122,15 +148,7 @@ include "config/con1.php";
             
 
 
-  <?php } ?>
-
-      
-      
-      </div>
-      </div>
-    </section>
-      </div>
-<?php 
+  <?php } 
 
 else:
  ?>
@@ -139,6 +157,12 @@ else:
   <p class="collect">NO COLLECTIONS</p>
 </div>
 <?php endif ?>
+      
+      </div>
+      </div>
+    </section>
+      </div>
+
 
           
           
