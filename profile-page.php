@@ -11,15 +11,18 @@ include "config/con1.php";
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<<<<<<< HEAD
 <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="carusel/css/style.css" rel="stylesheet">
-=======
+
 <link rel="stylesheet" type="text/css" href="css/profile-page.css">
+
+<link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="carusel/css/style.css" rel="stylesheet">
+
   <link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
  
   <link href="carusel/css/style.css" rel="stylesheet">
->>>>>>> ddf73f73a8b17aaa11d81d6e5d6de6e643a92577
+
 </head>
 <body>
     <?php include "cookie.php";?>
@@ -40,12 +43,19 @@ include "config/con1.php";
     $res2 = mysqli_query($con,$sql2);
     $row2 = mysqli_num_rows($res2);
 
+    $sql3 = "SELECT * FROM  new_collection_card WHERE user_id = $id";
+    $res3 = mysqli_query($con,$sql3);
+    $row3 = mysqli_num_rows($res3);
+
     
 
     ?> 
+
+
 <div class="dvbtn">
   <button class="log-in">Add collection</button>  
 </div>
+
 <div class="container" style = "margin-top: 100px">
   <div class="row userRow">
       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"> 
@@ -79,6 +89,79 @@ include "config/con1.php";
       </div>
   </div>
 </div>
+
+
+<div class="discdiv">
+    <section id="testimonials" class="top-collections">
+      <h2 class="text-center text-uppercase">COLLECTION</h2>
+      <br>
+
+  <a href="add_collection.php" class="float-right hr ml-2" style="margin-top: -66px;position: absolute;left: 84%;width: 180px;height: 40px;border-radius: 9px;">Add collection</a> 
+
+      <a style="margin-top: -66px;position: absolute;left: 87%;" href="custom.php" class="float-right hr ml-2">Add Checklist</a>
+
+    <div class="container">
+       
+        <div class="owl-carousel testimonials-carousel">
+
+          
+          
+<?php if($row3 >= 1):
+  while($tox3=mysqli_fetch_assoc($res3)){
+  ?>
+                <div class="testimonial-item">
+                <div class="row-d" >
+                <div class="collect-card carusel-card">
+                <div class="img-card">
+
+                  <span class = "del del-collection" id="<?php echo $tox3['id']?>" data-toggle="modal" data-target="#deliteCollection">X</span>
+                   <a href="collection_checklist.php?id=<?php echo $tox3['id']?>" class = "customLink"> <img src="img/<?php echo $tox3['image']?>"></a>
+
+                  
+                   <a href="customchecklist.php?id=<?php echo $tox1['id']?>" class = "customLink"> <img src="img/<?php echo $tox1['image']?>"></a>
+
+                </div>
+                <div class="description-card" style="overflow: auto">
+                  <div class="d-flex justify-content-between">
+                      <span class="nameofCollection"><?php echo $tox3['name_of_collection']; ?></span>
+                      <div class="plus-icon">+</div>
+                  </div>
+                  <p  class="description"><?php echo $tox3['description']?></p>
+                </div>
+                <div class="d-flex collector-cad bd-highlight mb-3">
+                    <div class="author-avatar p-2 bd-highlight"></div>
+                    <div class="p-2 bd-highlight">
+                        <p class="author-name"><?php echo $ard['name']?></p>
+                        <p class="country"><?php echo $ard['country']?></p>
+                    </div>
+                    <div class="align-self-center ml-auto p-2 bd-highlight">
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                        <span class="star"><i class="fa fa-star-o"></i></span>
+                    </div>
+                </div>
+            </div>
+            </div> 
+            </div>
+            
+
+
+  <?php } 
+
+else:
+ ?>
+  <div class="discdiv">
+  <img src="images/disc.png" class="img-responsive">
+  <p class="collect">NO COLLECTIONS</p>
+</div>
+<?php endif ?>
+      
+      </div>
+      </div>
+    </section>
+      </div>
 
 
           
@@ -265,6 +348,11 @@ else:
   </div>
 </div>
 
+<div class="modal fade" id="deliteCollection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog delite_modal-p" role="document">
+    
+  </div>
+</div>
 <?php
 include "footer.php";
 ?>
@@ -282,6 +370,13 @@ $('.del-personal').click(function(){
     var id = $(this).attr('id')
     var name = $(this).parents('.collect-card').find('.nameofCollection').text()
     var k = '<div class="modal-content" style="border:0"><form action="./personal_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn-p" value="'+id+'">Delete</button></div></form></div>';
+    $('.delite_modal-p').html(k)
+  })
+
+$('.del-collection').click(function(){
+    var id = $(this).attr('id')
+    var name = $(this).parents('.collect-card').find('.nameofCollection').text()
+    var k = '<div class="modal-content" style="border:0"><form action="./collection_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_btn-p" value="'+id+'">Delete</button></div></form></div>';
     $('.delite_modal-p').html(k)
   })
 </script>
