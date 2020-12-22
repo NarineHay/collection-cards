@@ -91,6 +91,53 @@ include "config/con1.php";
 </div>
 
 
+
+ <div class="discdiv">
+          <section id="testimonials" class="top-collections">
+            <h4 class="text-center text-uppercase">COLLECTION</h4>
+            <br>
+            <a href="add_collection.php" class="float-right hr ml-2" style="margin-top: -66px;position: absolute;left: 84%;width: 180px;height: 40px;border-radius: 9px;">Add collection</a> 
+            <div class="container">
+              <?php 
+                if($row3 == 0){
+                  echo ' <div class="discdiv text-center">
+                          <img src="images/disc.png" class="img-responsive">
+                          <p class="collect">NO COLLECTIONS</p>
+                        </div>';
+                }
+                else{
+              ?>
+               <div class="owl-carousel testimonials-carousel">
+                  <?php
+                      while($tox3=mysqli_fetch_assoc($res3)){
+                  ?>
+                    <div class="testimonial-item">
+                      <div class="row-d" >
+                        <div class="collect-card carusel-card">
+                          <div class="img-card">
+                            <span class = "del del-collection" id="<?php echo $tox3['id']?>" data-toggle="modal" data-target="#deliteCollection">X</span>
+                            <a href="collection_checklist.php?id=<?php echo $tox3['id']?>" class = "customLink"> <img src="img/<?php echo $tox3['image']?>"></a>
+                          </div>
+                          <div class="description-card" style="overflow: auto">
+                            <div class="d-flex justify-content-between">
+                              <span class="nameofCollection"><?php echo $tox3['name_of_collection']; ?></span>
+                              <div class="plus-icon">+</div>
+                            </div>
+                            <p  class="description"><?php echo $tox3['description']?></p>
+                          </div>
+                          <div class="d-flex collector-cad bd-highlight mb-3">
+                              <div class="author-avatar p-2 bd-highlight"></div>
+                                                  <div class="align-self-center ml-auto p-2 bd-highlight">
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                              </div>
+                          </div>
+                        </div>
+                      </div> 
+
 <div class="discdiv">
     <section id="testimonials" class="top-collections">
       <h2 class="text-center text-uppercase">COLLECTION</h2>
@@ -140,11 +187,19 @@ include "config/con1.php";
                         <span class="star"><i class="fa fa-star-o"></i></span>
                         <span class="star"><i class="fa fa-star-o"></i></span>
                         <span class="star"><i class="fa fa-star-o"></i></span>
+
                     </div>
-                </div>
+                  <?php
+                    }
+                  ?>
+               </div>
+              <?php
+                  }
+              ?>
             </div>
-            </div> 
-            </div>
+
+        </div>
+
             
 
 
@@ -162,6 +217,7 @@ else:
       </div>
     </section>
       </div>
+
 
 
           

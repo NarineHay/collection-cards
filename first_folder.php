@@ -27,6 +27,8 @@ if(isset($_GET['id'])){
    
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/login-register.css">
+<link rel="stylesheet" type="text/css" href="css/realize.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/profile-page.css">
 <link rel="stylesheet" href="css/index.css">
@@ -148,7 +150,7 @@ if(isset($_GET['id'])){
             </div>
         </div>
         <div class="discdiv mt-3">
-          <section id="testimonials" class="top-collections">
+          <section id="testimonials" class="top-collections" style="background: white">
             <h4 class="text-center text-uppercase">CARDS</h4>
             <br>
             <div class="container">
@@ -161,41 +163,42 @@ if(isset($_GET['id'])){
                 }
                 else{
                 ?>
-                  <div class="owl-carousel testimonials-carousel">
+                
                   <?php
                       while($tox2=mysqli_fetch_assoc($res2)){
                   ?>
-                    <div class="testimonial-item">
-                      <div class="row-d" >
-                        <div class="collect-card carusel-card">
-                          <div class="img-card">
-                            <span class = "del second_folder" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#SecondFolder">X</span>
-                            <a href="card1.php?id=<?php echo $tox2['id']?>" class = "customLink"> <img src="img/<?php echo $tox2['image']?>"></a>
-                          </div>
-                          <div class="description-card" style="overflow: auto">
-                            <div class="d-flex justify-content-between">
-                              <span class="nameofCollection"><?php echo $tox2['name_of_collection']; ?></span>
-                              <div class="plus-icon">+</div>
-                            </div>
-                            <p  class="description"><?php echo $tox2['description']?></p>
-                          </div>
-                          <div class="d-flex collector-cad bd-highlight mb-3">
-                              <div class="author-avatar p-2 bd-highlight"></div>
-                                                  <div class="align-self-center ml-auto p-2 bd-highlight">
-                                  <span class="star"><i class="fa fa-star-o"></i></span>
-                                  <span class="star"><i class="fa fa-star-o"></i></span>
-                                  <span class="star"><i class="fa fa-star-o"></i></span>
-                                  <span class="star"><i class="fa fa-star-o"></i></span>
-                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                    
+                         <div class="col-md-12">
+                      <div class="row style">                     
+                          <div class="col-md-12">
+                              <div class="row parent">
+                                  <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
+                                      <div class="releases-item-img">
+                                           <span class = "del second_folder" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#SecondFolder">X</span>
+                                          <a href="card1.php?id=<?php echo $tox2['id']?>" class = "customLink"> <img src="img/<?php echo $tox2['image']?>"></a>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-8 col-sm-12 col-xs-12">
+                                       <div class="releases-item-text">
+                                            <div class="description-card" style="overflow: auto;padding: 0 0">
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="nameofCollection"><?php echo $tox2['name_of_collection']; ?></span>
+                                                </div>
+                                                <br>
+                                                
+                                            </div>
+                                            <div  class="description"><?php echo $tox2['description']?></div>
+                                       </div>
+                                  </div>
                               </div>
                           </div>
-                        </div>
-                      </div> 
-                    </div>
+                      </div>
+                </div>
+
                   <?php
                     }
                   ?>
-               </div>
+              
                <?php
                 }
             ?>
@@ -343,7 +346,7 @@ if(isset($_GET['id'])){
 
            $('.second_folder').click(function(){
           var id = $(this).attr('id')
-          var name = $(this).parents('.collect-card').find('.nameofCollection').text()
+          var name = $(this).parents('.parent').find('.nameofCollection').text()
           var k = '<div class="modal-content" style="border:0"><form action="./collection_modal.php" method="POST"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="p-3"><p>Are you sure you want to delete the <b>'+name+'<b>?</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button><button type="submit" class="btn btn-danger" name="delite_second-folder" value="'+id+'">Delete</button></div></form></div>';
           $('.delite_modal-p').html(k)
           })
