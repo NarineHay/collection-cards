@@ -194,7 +194,7 @@
   outline: none;
   padding: 0 5px
 }
-#create-canvas, #text{
+#create-canvas, #text, #clear, #yes-save, #no-save, #crop-image{
   width: 100px;
   background: #133960;
   color: #fff;
@@ -238,7 +238,7 @@
   background-image: linear-gradient(140deg, #EADEDB 0%, #BC70A4 50%, #BFD641 75%);
     color: white;
 }
-#color-inp, #shape-color-inp{
+#color-inp, #shape-color-inp, #background-img, #overlay-img{
   display: none;
 }
 .color-img{
@@ -252,4 +252,53 @@
 }
 .shapes img{
   width: 100%
+}
+.background-img-div, .overlay-img-div,.delete-background, #crop-imge{
+  background: #133960;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+button:focus{
+  border:none;
+  outline: none;
+}
+#bold, #italic, #underline{
+  font-size: 22px;
+  cursor: pointer;
+  width: 36px
+}
+#bold{
+  font-weight: bold;
+}
+#italic{
+  font-style: italic;
+}
+#underline{
+  text-decoration: underline;
+}
+.bold-active, .italic-active, .u-active{
+  color: #133960;
+  font-size: 22px;
+  width: 36px;
+  background: #fad565;
+  text-align: center; 
+  border-radius: 8px;
+}
+.crop-divs{
+  overflow: auto;
+}
+.crop-item{
+  border: 1px solid #133960;
+  font-size: 14px;
+  margin: 5px;
+  color: #133960;
+  cursor: pointer;
+}
+.active-crop-item{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.7)
+}
+.text-box{
+  width: 110px;
+  cursor: pointer;
 }

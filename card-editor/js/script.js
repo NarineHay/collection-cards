@@ -3,6 +3,7 @@ var can =document.getElementById('canvas')
 // ------------------create new project (canvas)---------------------
 
  $('#create-canvas').click(function(){
+  canvas.clear()
     $('#divHabilitSelectors').remove()
     $('.canvas-cont').removeClass('hide')
     $('.bord-dotted').css({'width': 'max-content', 'height':'max-content'})
@@ -23,6 +24,33 @@ var can =document.getElementById('canvas')
        }
   
 });
+
+ $('#new').click(function(){
+  canvas.renderAll();
+  var count_objects=canvas.getObjects().length
+  if(count_objects>0){
+    $('.create-new').css('display', 'none')
+    $('.yes-no').css('display', 'block')
+  }
+  else{
+      $('.yes-no').css('display', 'none')
+      $('.create-new').css('display', 'block')
+  }
+  console.log(canvas.getObjects().length+'  c')
+
+})
+$('#no-save').click(function(){
+      $('.yes-no').css('display', 'none')
+      $('.create-new').css('display', 'block')
+})
+
+$('#yes-save').click(function(){
+       $('#saveProject').trigger('click')
+       setTimeout(function(){
+            $('.yes-no').css('display', 'none')
+            $('.create-new').css('display', 'block')
+       },1500)
+})
 
 // --------------------upload image--------------------------------
 var image
@@ -127,9 +155,46 @@ $('.sport-icon').click(function(){
                       oImg.scaleToHeight(50);
                       oImg.scaleToWidth(50);
                       canvas.add(oImg).renderAll();
-});
-})
 
+  document.getElementById('color-sport-icon').addEventListener('input', changeFrameColor)
+          
+          function changeFrameColor(){
+            var color=this.value
+            var filter = new fabric.Image.filters.Tint({
+                         color: color,
+                         mode: 'tint',
+                         alpha: 1
+                });
+                
+                img.filters.push(filter);
+                img.applyFilters(canvas.renderAll.bind(canvas));
+       }    
+  });
+})
+// ---------------------overlay image--------------------------
+  var over_img
+  document.getElementById('overlay-img').addEventListener("input", function (e) {
+
+       var o_file = e.target.files[0];
+       var reader = new FileReader();
+
+   reader.onloadend = function (event) {
+           over_img = new Image();
+           over_img.src = event.target.result;
+
+     over_img.onload = function() {
+      var data = event.target.result;
+      var canvasHeight = canvas.height;
+      var canvasWidth = canvas.width;
+      fabric.Image.fromURL(data, function (img) {
+        var oImg = img.set({ left: 20, top: 10, angle: 00});
+      canvas.add(oImg).renderAll();
+       
+    })
+     }
+   }
+ reader.readAsDataURL(o_file);  
+})
 // ----------------------layer for selected object-----------------------------------------
       canvas.preserveObjectStacking = true;
       canvas.stopContextMenu = true;
@@ -175,8 +240,9 @@ var sendSelectedObjectBack = function() {
      // bringForward
 }
 // -----------------------delete selected object--------------------------
+
 $('html').keyup(function(e){
-        if(e.keyCode == 46) {
+        if(e.keyCode == 46 || e.keyCode==8) {
           console.log('dd')
             deleteSelectedObjectsFromCanvas();
         }
@@ -271,7 +337,7 @@ $('.shapes').click(function(){
   var point=$(this).attr('data-angle')
 
 var points=regularPolygonPoints(point,50);
-
+var top=canvas.height*2/3
 function regularPolygonPoints(sideCount,radius){
   var sweep=Math.PI*2/sideCount;
   var cx=radius;
@@ -287,8 +353,8 @@ function regularPolygonPoints(sideCount,radius){
 
 if(sh_name=='elipse'){
        myPoly = new fabric.Ellipse({
-        top: 10,
-        left: 10,
+        top: top,
+        left: 60,
        /* Try same values rx, ry => circle */
         rx: 75,
         ry: 50,
@@ -299,8 +365,8 @@ if(sh_name=='elipse'){
 }
 else if(sh_name=='rectangle'){
      myPoly = new fabric.Rect({
-    top: 10,
-    left: 10,
+    top: top,
+    left: 60,
     width: 75,
     height: 100,
     fill: 'blue',
@@ -309,8 +375,8 @@ else if(sh_name=='rectangle'){
 }
 else{
      myPoly = new fabric.Polygon(points, {
-        left: 10,
-        top: 10,
+        left: 60,
+        top: top,
         fill: 'blue',
       },false);
 }
@@ -330,6 +396,30 @@ $('#shape-color-inp').on('input', function(){
     myPoly.setFill(color)
     canvas.renderAll();
 })
+// ---------------------------text boxes------------------------------
+var arr_boxes=document.getElementsByClassName('text-box')
+    for(var i=0; i<arr_boxes.length; i++){
+         arr_boxes[i].addEventListener("click", addTextBox)
+    }
+
+ var textBox = new Image();
+    var oImg2
+ function addTextBox(a){
+   canvas.isDrawingMode = false;
+  
+     var src=this.src
+     textBox.src = src
+
+  fabric.Image.fromURL(src, function(img, isError) {
+     oImg2=img.set({ left: 30, top: canvas.height*2/3}).scale(0.3);
+    
+    // oImg2.scaleX=canvas.width / img.width
+    // oImg2.scaleY=canvas.height / img.height
+    canvas.add(oImg2).renderAll();
+    canvas.sendToBack(oImg2);
+    
+  })
+}
 // -----------------------------add text-------------------------------
 $('#fill').on('input', function(){
   var obj = canvas.getActiveObject();
@@ -349,12 +439,92 @@ $('#font').change(function(){
   
   canvas.renderAll();
 });
+$('#font-size').change(function(){
+  var obj = canvas.getActiveObject();
+  
+  if(obj){
+    obj.set("fontSize", this.value);
+  }
+  
+  canvas.renderAll();
+});
+$('#bold').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('bold-active')
+    if(obj){
+        if($('#bold').hasClass('bold-active')){
+      obj.set("fontWeight", 'bold');
+      }
+      else{
+        obj.set("fontWeight", 'normal');
+      }
+    }
+    canvas.renderAll();
+});
+$('#italic').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('italic-active')
+    if(obj){
+        if($('#italic').hasClass('italic-active')){
+          obj.set("fontStyle", 'italic');
+        }
+        else{
+          obj.set("fontStyle", 'normal');
+        }
+    }
+    canvas.renderAll();
+});
+$('#underline').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('u-active')
+    if(obj){
+       if($('#underline').hasClass('u-active')){
+      obj.set("textDecoration", 'underline');
+      }
+      else{
+        obj.set("textDecoration", 'normal');
+      }
+    }
+    canvas.renderAll();
+});
+
 $('#text').click(function(){
    canvas.isDrawingMode = false;
+   var bold
+   var italic
+   var underline
+   if($('#bold').hasClass('bold-active')){
+      bold=$('#bold').attr('id')
+   }
+   else{
+      bold='normal'
+   }
+   if($('#italic').hasClass('italic-active')){
+      italic=$('#italic').attr('id')
+   }
+   else{
+      italic='normal'
+   }
+   if($('#underline').hasClass('u-active')){
+      underline=$('#underline').attr('id')
+   }
+   else{
+     underline='normal'
+   }
+   var font_size=$('#font-size').val()
+   var color=$('#fill').val()
+   var font=$('#font').val()
+
 var oText = new fabric.IText('Tap and Type', { 
-    left: 200, 
-    top: 300 ,
+    left: 50, 
+    top: canvas.height-100,
     id: 'text',
+    fill: color,
+    fontSize: font_size,
+    fontFamily: font,
+    fontWeight: bold,
+    fontStyle: italic,
+    textDecoration: underline
   });
 
   canvas.add(oText);
@@ -374,6 +544,42 @@ console.log(color)
     canvas.setBackgroundColor(color)
     canvas.renderAll();
 })
+// ---------------------background image--------------------------
+  var back_img
+  document.getElementById('background-img').addEventListener("input", function (e) {
+
+       var b_file = e.target.files[0];
+       var reader = new FileReader();
+      var dd
+   reader.onloadend = function (event) {
+           back_img = new Image();
+           back_img.src = event.target.result;
+
+     back_img.onload = function() {
+      var data = event.target.result;
+      var canvasHeight = canvas.height;
+      var canvasWidth = canvas.width;
+      fabric.Image.fromURL(data, function (img) {
+        var oImg = img.set({ left: 0, top: 0, angle: 00, scaleX: canvasWidth/back_img.width,
+        scaleY: canvasHeight/back_img.height,
+        originX: 'left', originY: 'top'});
+      canvas.setBackgroundImage(oImg).renderAll();
+       
+    })
+     }
+   }
+ reader.readAsDataURL(b_file);  
+ 
+})
+  $('.delete-background').click(function(){
+  
+  canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
+})
+
+  // --------------------clear canvas-------------------------
+  $('#clear').click(function(){
+     canvas.clear()
+  })
 // ---------------download image------------------------------
 // var imageSaver = document.getElementById('lnkDownload');
 // imageSaver.addEventListener('click', saveImage);
@@ -422,3 +628,120 @@ $('#lnkDownload').click(function(e){
               }
             })
         })
+
+
+
+// -------------------save project----------------------------------------
+
+$('#saveProject').click(function(){
+    // var filedata=canvas.toSVG(); // the SVG file is now in filedata
+ var filedata = JSON.stringify(canvas.toDatalessJSON()); 
+// console.log(filedata);
+var th=this
+     canvas.renderAll();
+     var data=canvas.toDataURL()
+     
+    // var locfile = new Blob([filedata], {type: "objects/json+xml;charset=utf-8"});
+    // console.log(locfile)
+    // var locfilesrc = URL.createObjectURL(locfile);//mylocfile);
+    // var dwn = document.getElementById('dwn');
+    // dwn.innerHTML = "<a href=" + locfilesrc + " download='mysvg.json'>Download</a>";
+
+    $.ajax({
+              type: 'post',
+              url: 'card-editor/projects_json.php',
+              data: {myjson: filedata, data: data},
+              success: function(res){
+                console.log(res)
+                  $('.json-res').html(res)
+                  setTimeout(function(){
+                      $('.json-res').html('')
+                  },1500)
+              }
+            })
+  })
+
+// ---------------------------svg---------------------
+var colorSet = 'green';
+
+$("#dd").click(function() {
+  fabric.loadSVGFromURL('card-editor/2.svg', function(objects, options) {
+    var shape = fabric.util.groupSVGElements(objects, options);
+    shape.set({
+      left: 20,
+      top: 100,
+      width: 295,
+      height: 40
+    });
+    if (shape.isSameColor && shape.isSameColor() || !shape.paths) {
+      shape.setFill(colorSet);
+    }
+    else if (shape.paths) {
+      for (var i = 0; i < shape.paths.length; i++) {
+        shape.paths[i].setFill(colorSet);
+      }
+    }
+    canvas.add(shape);
+    canvas.renderAll();
+  }); 
+});
+
+
+// ---------------------------json----Add project----------------
+
+
+$("#addProject").click(function() {
+    var jsonResponse = $.getJSON( "card-editor/projects-json/1607812214.json")
+
+    jsonResponse.then(function (data) {
+        var new_o=JSON.stringify(data)
+        canvas.loadFromJSON(new_o)
+    })
+});
+
+// --------------------test crop---------------------------
+let rect;
+$('.crop-item').click(function(){
+    $('.crop-item').removeClass('active-crop-item')
+    $(this).addClass('active-crop-item')
+
+    let c_width=$(this).attr('data-width')*1
+    let c_height=$(this).attr('data-height')*1
+console.log(c_width)
+  rect = new fabric.Rect({
+    
+    width: c_width,
+    height: c_height,
+    fill: 'rgb(0,0,0,0.7)',
+    strokeWidth: 0
+});
+  // rect.scaleToWidth(300);
+  canvas.centerObject(rect);
+  rect.visible = true;
+  canvas.add(rect);
+})
+$('#crop-image').click(function(){
+    canvas.remove(rect); 
+let cropWidth=rect.getWidth()
+let cropHeight=rect.getHeight()
+let cropLeft=rect.left
+let cropTop=rect.top
+
+    var cropped = new Image();
+    cropped.src = canvas.toDataURL({
+        left: cropLeft,
+        top: cropTop,
+        width: cropWidth,
+        height: cropHeight
+    });
+    cropped.onload = function() {
+        canvas.clear();
+        let currentImage = new fabric.Image(cropped);
+        currentImage.left = 0;
+        currentImage.top = 0;
+        currentImage.setCoords();
+        canvas.add(currentImage);
+        canvas.setDimensions({width: currentImage.width, height: currentImage.height})
+        canvas.renderAll();
+   }
+})
