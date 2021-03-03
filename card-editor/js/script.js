@@ -3,6 +3,7 @@ var can =document.getElementById('canvas')
 // ------------------create new project (canvas)---------------------
 
  $('#create-canvas').click(function(){
+  canvas.clear()
     $('#divHabilitSelectors').remove()
     $('.canvas-cont').removeClass('hide')
     $('.bord-dotted').css({'width': 'max-content', 'height':'max-content'})
@@ -19,25 +20,59 @@ var can =document.getElementById('canvas')
        else{
          $('.bord-dotted').css({'height': '85px', 'width': '200px', 'padding': '12px'})
          $('.error-message').removeClass('hide')
-         $('.error-message').html('wax width: 500px<br> max height: 500px')
+         $('.error-message').html('max width: 500px<br> max height: 500px')
        }
   
 });
 
+ $('#new').click(function(){
+  canvas.renderAll();
+  var count_objects=canvas.getObjects().length
+  if(count_objects>0){
+    $('.create-new').css('display', 'none')
+    $('.yes-no').css('display', 'block')
+  }
+  else{
+      $('.yes-no').css('display', 'none')
+      $('.create-new').css('display', 'block')
+  }
+  console.log(canvas.getObjects().length+'  c')
+
+})
+$('#no-save').click(function(){
+      $('.yes-no').css('display', 'none')
+      $('.create-new').css('display', 'block')
+})
+
+$('#yes-save').click(function(){
+       $('#saveProject').trigger('click')
+       setTimeout(function(){
+            $('.yes-no').css('display', 'none')
+            $('.create-new').css('display', 'block')
+       },1500)
+})
+
 // --------------------upload image--------------------------------
 var image
-  document.getElementById('fileupload').addEventListener("input", function (e) {
-    $('#divHabilitSelectors').remove()
-    $('.canvas-cont').removeClass('hide')
-    $('.bord-dotted').css({'width': 'max-content', 'height':'max-content'})
-
-   canvas.isDrawingMode = false;
+  // document.getElementById('fileupload').addEventListener("input", function (e) {
+  $('#fileupload').on("input", function (e) {
 
        var file = e.target.files[0];
-       var reader = new FileReader();
+       createFormData(file);
+});
+$('#new-file').on("input", function (e) {
+    $('#fileupload').trigger(e)
+})
+ function createFormData(file) {
+      $('#divHabilitSelectors').remove()
+      $('.canvas-cont').removeClass('hide')
+      $('.bord-dotted').css({'width': 'max-content', 'height':'max-content'})
+
+       canvas.isDrawingMode = false;
+      var reader = new FileReader();
 
    reader.onloadend = function (event) {
-        image = new Image();
+           image = new Image();
            image.src = event.target.result;
 
      image.onload = function() {
@@ -58,23 +93,20 @@ var image
               }
             }
     fabric.Image.fromURL(data, function (img) {
-      var oImg = img.set({ left: 40, top: 40, angle: 00, id: 'backimage'}).scale(1);
-      
-          oImg.scaleToHeight(imgHeight);
-          oImg.scaleToWidth(imgWidth);
-                     
-          canvas.add(oImg).renderAll();
+        var oImg = img.set({ left: 40, top: 40, angle: 00, id: 'backimage'}).scale(1);
+            oImg.scaleToHeight(imgHeight);
+            oImg.scaleToWidth(imgWidth);
+            canvas.add(oImg).renderAll();
 
         var a = canvas.setActiveObject(oImg);
         var dataURL = canvas.toDataURL({ format: 'png',});
  quality: 0.8});
-    
-canvas.setDimensions({width:imgWidth+80, height:imgHeight+160})
+           canvas.setDimensions({width:imgWidth+80, height:imgHeight+160})
     };
   }
-         
-  reader.readAsDataURL(file);  
-});
+reader.readAsDataURL(file); 
+
+}
 // ------------------add frames----------------------------------------
   var arr=document.getElementsByClassName('aa')
     for(var i=0; i<arr.length; i++){
@@ -117,19 +149,56 @@ document.getElementById('hue').addEventListener('input', changeFrameColor)
 $('.sport-icon').click(function(){
   var icon=$(this).attr('src')
   console.log(icon)
-  canvas.isDrawingMode = false;
+  fabric.loadSVGFromURL(icon, function(objects, options) {
+    var shape = fabric.util.groupSVGElements(objects, options);
+    shape.set({
+      left: 20,
+      top: 100,
+    }).scale(0.2);
 
-  console.log(canvas.height)
-  fabric.Image.fromURL(icon, function(img, isError) {
-     
-   var oImg=img.set({ left: 0, top: 00, id: 'sport' }).scale(0.3);;
-   canvas.toDataURL({ format: 'svg'});
-                      oImg.scaleToHeight(50);
-                      oImg.scaleToWidth(50);
-                      canvas.add(oImg).renderAll();
+    $('#color-sport-icon').on('input', function(){
+      var colorSet=$(this).val()
+      console.log(colorSet)
+      if (shape.isSameColor && shape.isSameColor() || !shape.paths) {
+          shape.setFill(colorSet);
+      }
+      else if (shape.paths) {
+           for (var i = 0; i < shape.paths.length; i++) {
+                 shape.paths[i].setFill(colorSet);
+            }
+      }
+    canvas.add(shape);
+    canvas.renderAll();
+    })
+    canvas.add(shape);
+    canvas.renderAll();
+  }); 
 });
-})
 
+// ---------------------overlay image--------------------------
+  var over_img
+  document.getElementById('overlay-img').addEventListener("input", function (e) {
+
+       var o_file = e.target.files[0];
+       var reader = new FileReader();
+
+   reader.onloadend = function (event) {
+           over_img = new Image();
+           over_img.src = event.target.result;
+
+     over_img.onload = function() {
+      var data = event.target.result;
+      var canvasHeight = canvas.height;
+      var canvasWidth = canvas.width;
+      fabric.Image.fromURL(data, function (img) {
+        var oImg = img.set({ left: 20, top: 10, angle: 00});
+      canvas.add(oImg).renderAll();
+       
+    })
+     }
+   }
+ reader.readAsDataURL(o_file);  
+})
 // ----------------------layer for selected object-----------------------------------------
       canvas.preserveObjectStacking = true;
       canvas.stopContextMenu = true;
@@ -175,8 +244,9 @@ var sendSelectedObjectBack = function() {
      // bringForward
 }
 // -----------------------delete selected object--------------------------
+
 $('html').keyup(function(e){
-        if(e.keyCode == 46) {
+        if(e.keyCode == 46 || e.keyCode==8) {
           console.log('dd')
             deleteSelectedObjectsFromCanvas();
         }
@@ -271,7 +341,7 @@ $('.shapes').click(function(){
   var point=$(this).attr('data-angle')
 
 var points=regularPolygonPoints(point,50);
-
+var top=canvas.height*2/3
 function regularPolygonPoints(sideCount,radius){
   var sweep=Math.PI*2/sideCount;
   var cx=radius;
@@ -287,8 +357,8 @@ function regularPolygonPoints(sideCount,radius){
 
 if(sh_name=='elipse'){
        myPoly = new fabric.Ellipse({
-        top: 10,
-        left: 10,
+        top: top,
+        left: 60,
        /* Try same values rx, ry => circle */
         rx: 75,
         ry: 50,
@@ -299,8 +369,8 @@ if(sh_name=='elipse'){
 }
 else if(sh_name=='rectangle'){
      myPoly = new fabric.Rect({
-    top: 10,
-    left: 10,
+    top: top,
+    left: 60,
     width: 75,
     height: 100,
     fill: 'blue',
@@ -309,8 +379,8 @@ else if(sh_name=='rectangle'){
 }
 else{
      myPoly = new fabric.Polygon(points, {
-        left: 10,
-        top: 10,
+        left: 60,
+        top: top,
         fill: 'blue',
       },false);
 }
@@ -330,6 +400,30 @@ $('#shape-color-inp').on('input', function(){
     myPoly.setFill(color)
     canvas.renderAll();
 })
+// ---------------------------text boxes------------------------------
+var arr_boxes=document.getElementsByClassName('text-box')
+    for(var i=0; i<arr_boxes.length; i++){
+         arr_boxes[i].addEventListener("click", addTextBox)
+    }
+
+ var textBox = new Image();
+    var oImg2
+ function addTextBox(a){
+   canvas.isDrawingMode = false;
+  
+     var src=this.src
+     textBox.src = src
+
+  fabric.Image.fromURL(src, function(img, isError) {
+     oImg2=img.set({ left: 30, top: canvas.height*2/3}).scale(0.3);
+    
+    // oImg2.scaleX=canvas.width / img.width
+    // oImg2.scaleY=canvas.height / img.height
+    canvas.add(oImg2).renderAll();
+    canvas.sendToBack(oImg2);
+    
+  })
+}
 // -----------------------------add text-------------------------------
 $('#fill').on('input', function(){
   var obj = canvas.getActiveObject();
@@ -349,12 +443,92 @@ $('#font').change(function(){
   
   canvas.renderAll();
 });
+$('#font-size').change(function(){
+  var obj = canvas.getActiveObject();
+  
+  if(obj){
+    obj.set("fontSize", this.value);
+  }
+  
+  canvas.renderAll();
+});
+$('#bold').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('bold-active')
+    if(obj){
+        if($('#bold').hasClass('bold-active')){
+      obj.set("fontWeight", 'bold');
+      }
+      else{
+        obj.set("fontWeight", 'normal');
+      }
+    }
+    canvas.renderAll();
+});
+$('#italic').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('italic-active')
+    if(obj){
+        if($('#italic').hasClass('italic-active')){
+          obj.set("fontStyle", 'italic');
+        }
+        else{
+          obj.set("fontStyle", 'normal');
+        }
+    }
+    canvas.renderAll();
+});
+$('#underline').click(function(){
+    var obj = canvas.getActiveObject();
+    $(this).toggleClass('u-active')
+    if(obj){
+       if($('#underline').hasClass('u-active')){
+      obj.set("textDecoration", 'underline');
+      }
+      else{
+        obj.set("textDecoration", 'normal');
+      }
+    }
+    canvas.renderAll();
+});
+
 $('#text').click(function(){
    canvas.isDrawingMode = false;
+   var bold
+   var italic
+   var underline
+   if($('#bold').hasClass('bold-active')){
+      bold=$('#bold').attr('id')
+   }
+   else{
+      bold='normal'
+   }
+   if($('#italic').hasClass('italic-active')){
+      italic=$('#italic').attr('id')
+   }
+   else{
+      italic='normal'
+   }
+   if($('#underline').hasClass('u-active')){
+      underline=$('#underline').attr('id')
+   }
+   else{
+     underline='normal'
+   }
+   var font_size=$('#font-size').val()
+   var color=$('#fill').val()
+   var font=$('#font').val()
+
 var oText = new fabric.IText('Tap and Type', { 
-    left: 200, 
-    top: 300 ,
+    left: 50, 
+    top: canvas.height-100,
     id: 'text',
+    fill: color,
+    fontSize: font_size,
+    fontFamily: font,
+    fontWeight: bold,
+    fontStyle: italic,
+    textDecoration: underline
   });
 
   canvas.add(oText);
@@ -374,6 +548,42 @@ console.log(color)
     canvas.setBackgroundColor(color)
     canvas.renderAll();
 })
+// ---------------------background image--------------------------
+  var back_img
+  document.getElementById('background-img').addEventListener("input", function (e) {
+
+       var b_file = e.target.files[0];
+       var reader = new FileReader();
+      var dd
+   reader.onloadend = function (event) {
+           back_img = new Image();
+           back_img.src = event.target.result;
+
+     back_img.onload = function() {
+      var data = event.target.result;
+      var canvasHeight = canvas.height;
+      var canvasWidth = canvas.width;
+      fabric.Image.fromURL(data, function (img) {
+        var oImg = img.set({ left: 0, top: 0, angle: 00, scaleX: canvasWidth/back_img.width,
+        scaleY: canvasHeight/back_img.height,
+        originX: 'left', originY: 'top'});
+      canvas.setBackgroundImage(oImg).renderAll();
+       
+    })
+     }
+   }
+ reader.readAsDataURL(b_file);  
+ 
+})
+  $('.delete-background').click(function(){
+  
+  canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
+})
+
+  // --------------------clear canvas-------------------------
+  $('#clear').click(function(){
+     canvas.clear()
+  })
 // ---------------download image------------------------------
 // var imageSaver = document.getElementById('lnkDownload');
 // imageSaver.addEventListener('click', saveImage);
@@ -392,6 +602,7 @@ $('#lnkDownload').click(function(e){
 
      canvas.renderAll();
      var data=canvas.toDataURL()
+     console.log(canvas.width)
      var name=$('#image-name').val()
      var format=''
      $('.format').each(function(){
@@ -401,18 +612,50 @@ $('#lnkDownload').click(function(e){
      })
 
      th.href = canvas.toDataURL({
+                     width: canvas.lowerCanvasEl.width-canvas.width/2.23,
+                     height: canvas.lowerCanvasEl.height-canvas.height/2.23,
                      format: 'jpeg',
-                     quality: 0.8
+                     quality: 1
               });
-     th.download = name+'.'+format
      
+     th.download = name+'.'+format
+        })
+
+// ---------------------add cards---------------------------------------
+     
+$('#add-sport-card').click(function(e){
+     var th=this
+
+     canvas.renderAll();
+      // var data=canvas.toDataURL({
+      //                 width: canvas.lowerCanvasEl.width-canvas.width/2.23,
+      //                height: canvas.lowerCanvasEl.height-canvas.height/2.23})
+     var data=canvas.toDataURL()
+     // var name=$('#image-name').val()
+     // var format=''
+     // $('.format').each(function(){
+     //  if($(this).prop('checked')==true){
+     //     format=$(this).attr('data-format')
+     //  }
+     // })
+
+     // th.href = canvas.toDataURL({
+     //                 format: 'jpeg',
+     //                 quality: 0.8
+     //          });
+     // th.download = name+'.'+format
+     console.log(data)
+     if(canvas.getObjects().length>0){
             $.ajax({
               type: 'post',
               url: 'card-editor/file.php',
-              data: {name: name, data: data, format_image: format},
+              data: {data: data},
+              beforeSend:function(){
+                      $('.add-card-result').html('Аdded...');
+              },
               success: function(res){
                 console.log(res)
-                  $('.downloade-res').html(res)
+                  $('.add-card-result').html(res)
                     // var a = document.createElement('a');
                     // a.href ='card-editor/'+ res;
                     // a.download = name;
@@ -421,4 +664,156 @@ $('#lnkDownload').click(function(e){
                     // document.body.removeChild(a);
               }
             })
+          }
+          else{
+                $('.add-card-result').html('You do not have opject')
+          }
         })
+// -------------------save project----------------------------------------
+
+$('#saveProject').click(function(){
+     var filedata = JSON.stringify(canvas.toDatalessJSON()); 
+     var th=this
+         canvas.renderAll();
+     // var data=canvas.toDataURL({
+     //                 width: canvas.lowerCanvasEl.width-canvas.width/2.23,
+     //                 height: canvas.lowerCanvasEl.height-canvas.height/2.23})
+     var data=canvas.toDataURL()
+     var u_id=$('#user_id').val()
+     var w=canvas.width
+     var h=canvas.height
+   
+     if(canvas.getObjects().length>0){
+         $.ajax({
+              type: 'post',
+              url: 'card-editor/projects_json.php',
+              data: {myjson: filedata, data: data, user_id: u_id, width: w, height: h},
+              success: function(res){
+                console.log(res)
+                  $('.json-res').html(res)
+                  setTimeout(function(){
+                      $('.json-res').html('')
+                  },1500)
+              }
+          })
+      }
+  })
+
+// ---------------------------json----Add project----------------
+
+$(".project-div").click(function() {
+  canvas.clear()
+    
+   canvas.isDrawingMode = false;
+       
+    var project=$(this).attr('data-project')
+    var wd=$(this).attr('data-width')
+    var hg=$(this).attr('data-height')
+console.log(hg)
+    var json="card-editor/"+project
+    var jsonResponse = $.getJSON( json )
+
+    jsonResponse.then(function (data) {
+        var new_o=JSON.stringify(data)
+        var object = JSON.parse( new_o)
+
+         canvas.loadFromJSON(new_o, function(){
+               canvas.width = wd;
+               canvas.height = hg;
+         });
+    })
+    $('#divHabilitSelectors').remove()
+    $('.canvas-cont').removeClass('hide')
+    $('.bord-dotted').css({'width': 'max-content', 'height':'max-content'})
+
+// console.log(JSON.parse(jsonResponse))
+// var object = JSON.parse(jsonResponse)
+//     canvas.loadFromJSON(jsonResponse, function(){
+//                canvas.width = object.width;
+//                canvas.height = object.height;
+// });
+          canvas.setDimensions({width:wd, height:hg})
+          canvas.renderAll()
+
+});
+
+// --------------------test crop---------------------------
+let rect;
+$('.crop-item').click(function(){
+    $('.crop-item').removeClass('active-crop-item')
+    $(this).addClass('active-crop-item')
+
+    let c_width=$(this).attr('data-width')*1
+    let c_height=$(this).attr('data-height')*1
+console.log(c_width)
+  rect = new fabric.Rect({
+    
+    width: c_width,
+    height: c_height,
+    fill: 'rgb(0,0,0,0.7)'
+});
+  // rect.scaleToWidth(300);
+  canvas.centerObject(rect);
+  rect.visible = true;
+  canvas.add(rect);
+})
+$('#bradius').on('input', function(){
+   let r=$(this).val()
+   $(this).attr('data-radius', r)
+   rect.set({
+       stroke: '#6ea4ae',
+       strokeWidth: 3,
+       rx:r,
+       ry:r
+   })
+  canvas.renderAll()
+})
+$('#crop-image').click(function(){
+    canvas.remove(rect); 
+let cropWidth=rect.getWidth()
+let cropHeight=rect.getHeight()
+let cropLeft=rect.left
+let cropTop=rect.top
+let radius=$('#bradius').attr('data-radius')
+console.log(rect.angle+'----ngle')
+console.log(rect.width+'----width')
+
+    var cropped = new Image();
+       cropped.src = canvas.toDataURL({
+        left: cropLeft,
+        top: cropTop,
+        width: cropWidth,
+        height: cropHeight,
+    });
+        // console.log(cropped)
+
+    cropped.onload = function() {
+        canvas.clear();
+        let currentImage = new fabric.Image(cropped);
+        currentImage.left = 0;
+        currentImage.top = 0;
+        // currentImage.setCoords();
+        canvas.add(currentImage);
+        canvas.setDimensions({width: currentImage.width, height: currentImage.height})
+        canvas.renderAll();
+   }
+})
+
+
+// -------------drag drop-----------------------
+$(".input-file-trigger").on('dragenter', function (e){
+  e.preventDefault();
+  $(this).css('background', '#BBD5B8');
+  });
+
+  $(".input-file-trigger").on('dragover', function (e){
+  e.preventDefault();
+  });
+
+  $(".input-file-trigger").on('drop', function (e){
+      $(this).css('background', '#D8F9D3');
+      e.preventDefault()
+      var file = e.originalEvent.dataTransfer.files[0];
+      createFormData(file);
+  });
+

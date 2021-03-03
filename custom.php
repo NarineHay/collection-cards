@@ -1,14 +1,14 @@
 <?php
 include "header.php";
 include "config/con1.php";
+$href='';
 if(isset($_COOKIE['user']) || isset($_SESSION['user'])){
-	
+
 }else{
 	header('location:index.php');
 }
 $cbase = "SELECT * FROM `collections` ORDER BY `name_of_collection` ASC";
 $base = mysqli_query($con, $cbase);
-
 ?> 
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -61,7 +61,7 @@ $base = mysqli_query($con, $cbase);
 	            <div class="form-group">
 					<div class="choose_file">
 			        	<label class="file_label">
-				            <input type="file" name="file" required>
+				            <input class="img" type="file" name="file" required>
 				            <i class="fas fa-upload"></i>
 			        	</label>
 			    	</div>
@@ -84,11 +84,17 @@ $base = mysqli_query($con, $cbase);
 					</div>
 				</div>
 				<div class="form-group p-1">
-				            &nbsp&nbsp Upload your own checklist 
-				            <input type="file" name="import_excel" class="" />
-				        
+				        <div class="form-group">
+							<div class="choose_file">
+						      	<label class="file_label w-auto" >
+							        <input class="excel" type="file" name="import_excel">
+							        <i class="fas fa-upload"></i>
+						       	</label>
+						    </div>
+						   	<span class="excel-text" >Upload your own checklist</span>
+						</div>
 				         <div class="container">
-				        	<small><sup>*</sup>Plase note, that your checklist should be whit xlsx, xls, ods, or csv formats. You can download template from here 
+				        	<small><sup>*</sup>Please note, that your checklist should be with xlsx, xls, ods, or csv formats. You can download template from here 
 				        			<a class="text-info border border-info btn p-1 btn-sm" href='import/table.xlsx'> .xlsx </a>,&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.xls'> .xls </a>,&nbsp
 					                <a class="text-info border border-info btn p-1 btn-sm" href='import/table.csv'> .csv </a>&nbsp
@@ -98,9 +104,18 @@ $base = mysqli_query($con, $cbase);
 					            
 				        </div> 
 				    <div id="message" class="mt-1"></div>
-				</div>       
-    			<span class="err_msg"></span>
-				<button type="submit" name="btn_custom[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
+				</div>  
+				<div class="row">
+					<div class="err_msg col-md-6 col-sm-12"></div>
+					<div class="col-md-6 col-sm-12">
+						<button type="submit" name="btn_custom_edit[]" value='0' class="banner-button save-title float-right pt-1">Save</button>
+						<div class="alert alert-success float-right mr-5 tstitle">
+							Successfully added checklist.<?php echo $href; ?>
+							<span class="msg1"></span>
+							<input type="hidden" class="href_value" value="">
+						</div>
+					</div>
+				</div>
 				<input type="hidden" name="hid_val" class="hid_val" value="0">
 				<center>
 					<div class="gits pt-5"></div>
@@ -226,7 +241,7 @@ $base = mysqli_query($con, $cbase);
 				<div class="text-success ">
 					You have successfully added checklist
 					<br>
-					<a href='custom_checklist.php' class="text-info">Go to checklist?</a>
+					<span class="msg2"></span>
 				</div>
 			</div>
 			<br>
@@ -238,9 +253,13 @@ $base = mysqli_query($con, $cbase);
 include "footer.php";
 ?>
 <script>
-	$('.choose_file .file_label input').bind('change', function () {
+	$('.choose_file .file_label .img').bind('change', function () {
         var filename = $(this).val();
        $(".file-text").text(filename.replace("C:\\fakepath\\", ""));
+    })
+    $('.choose_file .file_label .excel').bind('change', function () {
+        var filename = $(this).val();
+       $(".excel-text").text(filename.replace("C:\\fakepath\\", ""));
     })
     $('.t1').keyup(function(){
     	var t1 = $('.t1').val()
@@ -340,7 +359,6 @@ $(document).on('click', '#add', function () {
 		  success:function(data)
 	      {
 	      	//location.href="custom_checklist.php";
-	      	$('.ee').css('display','block')
 	      	$('.err_msg').html(data)
 	      }
 		});
@@ -464,12 +482,28 @@ $(document).on('click', '#add', function () {
 		)
 	})
 	$('.save').click(function(){
+		$('err_msg').css('display','none')
 		$('.hid_val').val('1')
+		$('.tstitle').css('display','none')
+		setTimeout(function(){
+			$('.ee').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg2').html("<a href='customchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
 	})
 	$('.save-title').click(function(){
+		$('err_msg').css('display','none')
+		$('.ee').css('display','none')
 		$('.hrf').html('<a class="hrfa" style="display:none" >Select in releases</a>'); 
 		$('.hid_val').val('2')
+		setTimeout(function(){
+			$('.tstitle').css('display','block')
+		  	var cid = $('.cid').val();
+		  	$('.msg1').html("<a href='customchecklist.php?id="+cid+"' class='text-info gtc'>Go to checklist?</a>")
+		}, 500);
+	    
 	})
+	
 </script>
 </body>
 </html>
