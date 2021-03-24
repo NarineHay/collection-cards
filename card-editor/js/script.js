@@ -627,9 +627,9 @@ $('#add-sport-card').click(function(e){
      var th=this
 
      canvas.renderAll();
-      // var data=canvas.toDataURL({
-      //                 width: canvas.lowerCanvasEl.width-canvas.width/2.23,
-      //                height: canvas.lowerCanvasEl.height-canvas.height/2.23})
+     // var data=canvas.toDataURL({
+     //                 width: canvas.lowerCanvasEl.width-canvas.width/2.23,
+     //                 height: canvas.lowerCanvasEl.height-canvas.height/2.23})
      var data=canvas.toDataURL()
      // var name=$('#image-name').val()
      // var format=''

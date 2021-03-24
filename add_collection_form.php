@@ -115,7 +115,8 @@ session_start();
 
 		if (!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
 		{
-		    $sql = "UPDATE `new_collection_card` SET `name_of_collection`='$name_collection',`description`='$description' WHERE id='$id'";
+		   
+		    $sql = "UPDATE `new_collection_card` SET `name_of_collection`='$name_collection',`description`='$description' WHERE id='$id' AND `user_id`='$uid'";
 				$query = mysqli_query($con, $sql);
 				if($query){
 					header('location:collection_checklist.php?id='.$id.'');
@@ -128,7 +129,8 @@ session_start();
 		// if($size <= 200){
 		 	if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
 				move_uploaded_file($tmp, $chanaparh);
-				$sql = "UPDATE `new_collection_card` SET `name_of_collection`='$name_collection',`description`='$description',`image`='$name2' WHERE id='$id'";
+
+				$sql = "UPDATE `new_collection_card` SET `name_of_collection`='$name_collection',`description`='$description',`image`='$name2' WHERE id='$id' AND `user_id`='$uid'";
 				$query = mysqli_query($con, $sql);
 				if($query){
 					header('location:collection_checklist.php?id='.$id.'');
@@ -195,7 +197,13 @@ session_start();
 				$link='collection_checklist';
 			}
 			if($name_folder){
-				$file_name = $_FILES['file']['name'];
+		if(isset($_POST['add_first_folder'])){
+
+			$id= mysqli_real_escape_string($con, $_POST['id']);
+			$user_id = $_POST['uid'];
+			$name_collection = mysqli_real_escape_string($con, $_POST['first_folder']);
+			$description	 = mysqli_real_escape_string($con, $_POST['first_description']);
+			if($name_collection){
 				$tmp = $_FILES['file']['tmp_name'];
 				$type = $_FILES['file']['type'];
 				$size = $_FILES['file']['size'];
@@ -215,6 +223,31 @@ session_start();
 						if($query){
 						header('location:'.$link.'.php?id='.$id.'');
 						
+				if (!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
+					
+				{
+				    $sql = "INSERT INTO `collection_first_folder`
+					(`card_id`, `name_of_collection`, `description`) 
+					VALUES 
+					('$id','$name_collection','$description')";
+					$query = mysqli_query($con, $sql);
+					if($query){
+					header('location:collection_checklist.php?id='.$id.'');
+				}else {
+					echo "sxal";
+				}
+				}
+				else
+				{
+					if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+						move_uploaded_file($tmp, $chanaparh);
+						$sql = "INSERT INTO `collection_first_folder`
+						(`card_id`, `name_of_collection`, `description`, `image`) 
+						VALUES 
+						('$id','$name_collection','$description','$name2')";
+						$query = mysqli_query($con, $sql);
+						if($query){
+						header('location:collection_checklist.php?id='.$id.'');
 						/*$sqlid = "SELECT MAX(id) as id FROM custom_name_checklist";
 						$resid = mysqli_query($con, $sqlid);
 						$tox = mysqli_fetch_assoc($resid);
@@ -227,6 +260,9 @@ session_start();
 	}
 	else{
 		header('location:'.$link.'.php?id='.$id.'');
+	}
+			}
+			
 	}
 }
 
@@ -375,8 +411,9 @@ if(isset($_POST['btn_save_chenge_folder2'])){
 			
 	}
 }
- 
 	if(isset($_POST['add_card'])){
+
+	if(isset($_POST['add_second_folder2'])){
 			$id= mysqli_real_escape_string($con, $_POST['id']);
 			$user_id = $_POST['uid'];
 			$name_collection = mysqli_real_escape_string($con, $_POST['first_folder']);
@@ -434,6 +471,48 @@ if(isset($_POST['btn_save_chenge_folder2'])){
 					  
 			// 	// }
 			// }
+			if($name_collection){
+				$file_name = $_FILES['file']['name'];
+				$tmp = $_FILES['file']['tmp_name'];
+				$type = $_FILES['file']['type'];
+				$size = $_FILES['file']['size'];
+				$size = round($size/1024);
+				$test = explode('.', $file_name);
+				$extension = end($test);
+				$name2 = $file_name;
+				$chanaparh = 'img/'.$name2;
+				if (!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name'])) 
+				{
+				    $sql = "INSERT INTO `card2`
+					(`card_id`, `name_of_collection`, `description`) 
+					VALUES 
+					('$id','$name_collection','$description')";
+					$query = mysqli_query($con, $sql);
+					if($query){
+					header('location:first_folder.php?id='.$id.'');
+				}else {
+					echo "sxal";
+				}
+				}
+				else
+				{
+					if($extension=='png' || $extension=='jpg' || $extension=='jpeg'){
+						move_uploaded_file($tmp, $chanaparh);
+						$sql = "INSERT INTO `card2`
+						(`card_id`, `name_of_collection`, `description`, `image`) 
+						VALUES 
+						('$id','$name_collection','$description','$name2')";
+						$query = mysqli_query($con, $sql);
+						if($query){
+						header('location:first_folder.php?id='.$id.'');
+						/*$sqlid = "SELECT MAX(id) as id FROM custom_name_checklist";
+						$resid = mysqli_query($con, $sqlid);
+						$tox = mysqli_fetch_assoc($resid);
+						$cid = $tox['id'];*/
+					}
+					  
+				}
+			}
 			
 	}
 }

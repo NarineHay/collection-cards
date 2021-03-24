@@ -16,7 +16,7 @@ if(!empty($_SESSION['coll-id']) && !empty($_POST['folder_id'])){
 
 
 // ------------all_cards----------------------------
-elseif(isset($_POST['all_cards'])){
+else if(isset($_POST['all_cards'])){
 	$all_cards=$_POST['all_cards'];
 	$_SESSION['all_cards']=$all_cards;
 	echo $_SESSION['all_cards'];

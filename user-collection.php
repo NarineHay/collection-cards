@@ -49,26 +49,27 @@ if(!empty($_SESSION['folders_id_array'])){
     $conditions=array('coll_id' => $coll_id,
                        'folder_id' => $folders_id_array );
     $collection_row = $pagination->CollectionCardItems($con, $conditions);
+    $items=$pagination->checkRow($conditions);
 }
 else if(isset($_SESSION['all_cards'])){
     echo $_SESSION['all_cards'];
     echo 'sssss';
     $conditions=$coll_id;
     $all_cards= $pagination->AllCards($conditions);
-    // $collection_row=mysqli_query($con, $all_cards);
     $collection_row = $pagination->CollectionCardItems($con, $conditions);
+    $items=$pagination->AllCards($conditions);
 }
 else{
     $active_folder='';
+    echo "ppp";
     // $pagination= new Pagination();
     $pagination->tblName='card1';
     $conditions=array('coll_id' => $coll_id,
                        'user_id' => $user_id );
     $collection_row = $pagination->CollectionCardItems($con, $conditions);
+    $items=$pagination->checkRow($conditions);
 }
 
-
-$items=$pagination->checkRow($conditions);
 $res_items=mysqli_query($con, $items);
 
 if(mysqli_num_rows($res_items)<9 && isset($_GET['page']) && $_GET['page']>1){ ?> <script>location.href='user-collection.php'</script><?php }

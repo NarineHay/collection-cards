@@ -55,6 +55,11 @@
       $tox = mysqli_fetch_assoc($query);
       $img = $tox['image'];
       $del = "DELETE FROM `collection_second_folder` WHERE id=$id";
+      $sql = "SELECT * FROM `folder2` WHERE id=$id";
+      $query = mysqli_query($con, $sql);
+      $tox = mysqli_fetch_assoc($query);
+      $img = $tox['image'];
+      $del = "DELETE FROM `folder2` WHERE id=$id";
       $res = mysqli_query($con, $del);
       if($res){
           header('location:profile-page.php');

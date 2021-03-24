@@ -15,7 +15,7 @@
                   return $all_items_in_page;
             }
 
-            public function checkRow( $conditions = array()){
+            public function checkRow( $conditions ){
                     $sql = 'SELECT * FROM '. $this->tblName;
                     if(!empty($conditions) && is_array($conditions)){
                          $sql .= ' WHERE ';
@@ -33,6 +33,9 @@
                               }
                             $i++;
                           }
+                    }
+                    else{
+                      $sql="SELECT * FROM ". $this->tblName ." WHERE coll_id=$conditions";
                     }
                   return $sql;
              } 

@@ -49,15 +49,25 @@
     text-overflow: ellipsis;
 }
 .del{
+<<<<<<< HEAD
     position: relative;
     width: 24px;
+=======
+    position: absolute;
+    left: 83%;
+    width: 22px;
+>>>>>>> master
     height: 22px;
     border-radius: 50%;
     background: grey;
     color: #fff;
     text-align: center;
     font-size: 15px;
+<<<<<<< HEAD
     top: 2px;
+=======
+    top: 7px;
+>>>>>>> master
 }
 .hr {
     padding: 8px 20px;

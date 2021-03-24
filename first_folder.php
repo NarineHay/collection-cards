@@ -37,6 +37,16 @@ else{
     $row_folder = mysqli_num_rows($res_folder); 
   // $row_folder=0;
 }
+    $sql1 = "SELECT * FROM  folder2 WHERE card_id = $realise_id";
+    $res1 = mysqli_query($con,$sql1);
+    $row1 = mysqli_num_rows($res1);
+
+    $sql2 = "SELECT * FROM  card2 WHERE card_id = $realise_id";
+    $res2 = mysqli_query($con,$sql2);
+    $row2 = mysqli_num_rows($res2); 
+    
+}
+
    
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -130,6 +140,7 @@ else{
                         <div class="about">
 
                             <p><?php echo $tox['name_of_folder']?></p>
+                            <p><?php echo $tox['name_of_collection']?></p>
                             <p><?php echo $tox['description']?></p>
                         </div>
 
@@ -139,6 +150,8 @@ else{
                 <div style="display: inline-block;margin-left: 867px;margin-bottom: 19px">
                   <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;"  type="button" class="btn btn-primary add_folder" data-position="second_folder" data-toggle="modal" data-target="#add_folder">Add folder </button>
                   <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;" type="button" class="btn btn-primary add-card" data-name="card2" data-toggle="modal" data-target="#add_card">Add card</button>
+                  <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_first_folder">Add folder </button>
+                  <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_second_folder">Add card</button>
                 </div>
                 <br>
 
@@ -148,6 +161,7 @@ else{
         </section>
         <div class="discdiv">
           <section id="testimonials" class="folder top-collections">
+          <section id="testimonials" class="top-collections">
             <h4 class="text-center text-uppercase">FOLDERS</h4>
             <br>
             <div class="container">
@@ -159,6 +173,7 @@ else{
                         </div>';
                 }
                 elseif($row1 >= 5){
+                else{
               ?>
                <div class="owl-carousel testimonials-carousel">
                   <?php
@@ -174,6 +189,29 @@ else{
                                 </div>
                               </a>
                               <span class = "del first_folder" id="<?php echo $tox1['id']?>" data-toggle="modal" data-target="#FirstFolder">X</span>
+                    <div class="testimonial-item">
+                      <div class="row-d" >
+                        <div class="collect-card carusel-card">
+                          <div class="img-card">
+                            <span class = "del first_folder" id="<?php echo $tox1['id']?>" data-toggle="modal" data-target="#FirstFolder">X</span>
+                            <a href="second_folder.php?id=<?php echo $tox1['id']?>" class = "customLink"> <img src="img/<?php echo $tox1['image']?>"></a>
+                          </div>
+                          <div class="description-card" style="overflow: auto">
+                            <div class="d-flex justify-content-between">
+                              <span class="nameofCollection"><?php echo $tox1['name_of_collection']; ?></span>
+                              <div class="plus-icon">+</div>
+                            </div>
+                            <p  class="description"><?php echo $tox1['description']?></p>
+                          </div>
+                          <div class="d-flex collector-cad bd-highlight mb-3">
+                              <div class="author-avatar p-2 bd-highlight"></div>
+                                                  <div class="align-self-center ml-auto p-2 bd-highlight">
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                                  <span class="star"><i class="fa fa-star-o"></i></span>
+                              </div>
                           </div>
                         </div>
                       </div> 
@@ -231,6 +269,14 @@ else{
             <div class="container d-flex flex-wrap cards-cont justify-content-between" id="cards-cont">
               <?php
               if($row_folder == 0){
+                ?>
+        <div class="discdiv mt-3">
+          <section id="testimonials" class="top-collections" style="background: white">
+            <h4 class="text-center text-uppercase">CARDS</h4>
+            <br>
+            <div class="container">
+            <?php
+              if($row2 == 0){
                   echo ' <div class="discdiv text-center">
                           <img src="images/small-icon.png" class="img-responsive">
                           <p class="collect">NO CARDS</p>
@@ -246,6 +292,35 @@ else{
                     <div class="">
                       <img src="card-editor/cards-images/<?php echo $tox2['image']?>">
                    </div>
+                      while($tox2=mysqli_fetch_assoc($res2)){
+                  ?>
+                    
+                         <div class="col-md-12">
+                      <div class="row style">                     
+                          <div class="col-md-12">
+                              <div class="row parent">
+                                  <div class="col-md-3 col-sm-12 col-xs-12 contentimage">
+                                      <div class="releases-item-img">
+                                           <span class = "del second_folder" id="<?php echo $tox2['id']?>" data-toggle="modal" data-target="#SecondFolder">X</span>
+                                          <a href="card1.php?id=<?php echo $tox2['id']?>" class = "customLink"> <img src="img/<?php echo $tox2['image']?>"></a>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-8 col-sm-12 col-xs-12">
+                                       <div class="releases-item-text">
+                                            <div class="description-card" style="overflow: auto;padding: 0 0">
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="nameofCollection"><?php echo $tox2['name_of_collection']; ?></span>
+                                                </div>
+                                                <br>
+                                                
+                                            </div>
+                                            <div  class="description"><?php echo $tox2['description']?></div>
+                                       </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                </div>
 
                   <?php
                     }
@@ -287,6 +362,9 @@ else{
                                             </label>
                                         </div>
                                       <span class="file-text1" >Upload photo</span>
+                                    <label>Image</label>
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="form-control">
                                     </div>
                                     <br>
                                     <input type="hidden" name='id' value="<?php echo $tox['id']; ?>">
@@ -318,6 +396,74 @@ else{
             <?php  include "modal-add-card.php" ?>
 
             
+            <div class="modal fade" id="add_first_folder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <form action="add_collection_form.php" method="post" enctype="multipart/form-data">
+                        <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label>Name of Collection</label>
+                        <input type="text" class="form-control" name="first_folder">
+                        <br>
+                         <label>Description</label>
+                        <textarea name ="first_description"class="form-control"></textarea>
+                        <br>
+                        <label>Image</label>
+                        <input type="hidden" name='id' value="<?php echo $tox['id']; ?>">
+                        <input type="hidden" name='uid' value="<?php echo $_SESSION['user']; ?>">
+                        <input class="form-control" type="file" name="file">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" name="add_first_folder" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                  </form>
+              
+                </div>
+          </div>
+
+
+            <div class="modal fade" id="add_second_folder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <form action="add_collection_form.php" method="post" enctype="multipart/form-data">
+                        <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label>Name of Collection</label>
+                        <input type="text" class="form-control" name="first_folder">
+                        <br>
+                         <label>Description</label>
+                        <textarea name ="first_description"class="form-control"></textarea>
+                        <br>
+                        <label>Image</label>
+                        <input type="hidden" name='id' value="<?php echo $tox['id']; ?>">
+                        <input type="hidden" name='uid' value="<?php echo $_SESSION['user']; ?>">
+                        <input class="form-control" type="file" name="file">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" name="add_second_folder" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                  </form>
+              
+                </div>
+          </div>
     <?php
       include "footer.php";
     ?>
@@ -347,6 +493,8 @@ else{
             var filename = $(this).val();
             $(".file-text3").text("Photo uploaded");
           })
+    <script>
+        $(document).ready(function() {
           $('.first_folder').click(function(){
           var id = $(this).attr('id')
           var name = $(this).parents('.collect-card').find('.nameofCollection').text()

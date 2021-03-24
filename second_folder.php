@@ -30,7 +30,6 @@ if(isset($_GET['id'])){
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/base_checklist.css">
 <link rel="stylesheet" href="css/custom_checklist.css">
-<link href="carusel/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="carusel/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,10 +55,6 @@ if(isset($_GET['id'])){
     .img-card{
       position: relative;
     }
-
-    /*.social-div>a {
-    color: #133960;
-    }*/
 </style>
 </head>
     <body class="page_fix">
@@ -88,6 +83,7 @@ if(isset($_GET['id'])){
                 </div>
                 <div style="display: inline-block;margin-left: 867px;margin-bottom: 19px">
                   <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_card3">Add card</button>
+                  <button style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_second_folder">Add card</button>
                 </div>
                 <br>
 
@@ -97,6 +93,8 @@ if(isset($_GET['id'])){
         </section>
         <div class="discdiv my-5">
           <section id="testimonials" class="top-collections bg-white">
+        <div class="discdiv mt-3">
+          <section id="testimonials" class="top-collections" style="background: white">
             <h4 class="text-center text-uppercase">CARDS</h4>
             <br>
             <div class="container">
@@ -179,6 +177,9 @@ if(isset($_GET['id'])){
                                             </label>
                                         </div>
                                       <span class="file-text" >Upload photo</span>
+                                    <label>Image</label>
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="form-control">
                                     </div>
                                     <br>
                                     <input type="hidden" name='id' value="<?php echo $tox['id']; ?>">
@@ -188,6 +189,7 @@ if(isset($_GET['id'])){
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" name="chenge_second">Save changes</button>
+                        <button type="submit" class="btn btn-primary" name="btn_save_chenge">Save changes</button>
                     </div>
                   </form>
                 </div>
@@ -206,6 +208,7 @@ if(isset($_GET['id'])){
                         <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel"></h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -236,10 +239,12 @@ if(isset($_GET['id'])){
 
 
             <div class="modal fade" id="add_card3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="add_second_folder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <form action="add_collection_form.php" method="post" enctype="multipart/form-data">
                         <div class="modal-content">
                     <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -263,11 +268,16 @@ if(isset($_GET['id'])){
                               </label>
                           </div>
                         <span class="file-text" >Upload photo</span>
+                        <label>Image</label>
+                        <input type="hidden" name='id' value="<?php echo $tox['id']; ?>">
+                        <input type="hidden" name='uid' value="<?php echo $_SESSION['user']; ?>">
+                        <input class="form-control" type="file" name="file">
                       </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       <button type="submit" name="add_second_folder3" class="btn btn-primary" style="background: linear-gradient(180deg, rgba(252,217,0,1) 0%, rgba(251,196,0,1) 50%, rgba(250,174,0,1) 100%);border: rgba(252,217,0,1);color: black;padding: 5px 25px !important;">Add</button>
+                      <button type="submit" name="add_second_folder" class="btn btn-primary">Add</button>
                     </div>
                   </div>
                   </form>
