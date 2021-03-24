@@ -36,10 +36,7 @@
                     }
                   return $sql;
              } 
-            // public function CollectionCardItems($con, $data, $data_id, $user_id){
-            //       $all_items_in_page=mysqli_query($con, "SELECT * FROM $this->tblName WHERE $data=$data_id AND user_id=$user_id LIMIT $this->page_index, $this->limit");
-            //       return $all_items_in_page;
-            // }
+            
              public function AllCards($conditions){
                  
                  $sql="(SELECT id, name, image FROM card1 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card2 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card3 where coll_id=$conditions )";
@@ -57,13 +54,7 @@
                   $all_items_in_page=mysqli_query($con, $sel);
                   return $all_items_in_page;
             }
-            //  public function CollectionAllCards($con, $conditions){
-                 
-            //      $sql="(SELECT id, name, image FROM card1 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card2 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card3 where coll_id=$conditions )";
-            //      return $sql;
-            // }
             
-
             public function pages($con, $conditions ){
                 // $all_items=mysqli_query($con, "SELECT * FROM $this->tblName WHERE $data_coll=$coll_id AND $data_user=$user_id");
               if(is_array($conditions)){
