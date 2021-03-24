@@ -24,3 +24,13 @@
             }
         }
     })
+       
+
+$(".collection-item-a").on('click', function (e) {
+    let hr=$(location).attr('search').split('&')
+    let id='?coll-id='+$(this).attr('data-id')
+    if (hr[0]==id){
+        $(this).attr('href','user-collection.php'+hr[0]+'')
+    }
+    // let id=$(this).attr('data-id')
+});

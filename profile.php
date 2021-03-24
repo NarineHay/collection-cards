@@ -1,10 +1,13 @@
 <?php
 include "header.php";
 include "config/con1.php";
-/*if(isset($_COOKIE['user']) || isset($_SESSION['user'])){ // qcume er profile-page.php ejy
-  header('location:profile-page.php');
-}*/
-
+require_once "user-logedin.php";
+// if(!empty($_COOKIE['user']) || !empty($_SESSION['user'])){ // qcume er profile-page.php ejy
+// }
+// else{
+//   header('location:index.php');
+//   exit();
+// }
 ?>
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">

@@ -44,7 +44,7 @@ input[type='file']{
 	background: #6ea4ae;
 	border-radius: 10px
 }
-.add-collection{
+.add-collection, .add-folder, .add-card{
 	border-radius: 8px
 }
 .img-cont{
@@ -78,6 +78,9 @@ input[type='file']{
 	padding: 1px 9px;
     background: #6ea4ae;
     border-radius: 50%;
+}
+.active-collection{
+	box-shadow: 0px 4px 4px 6px #133960;
 }
 /*-----------------------max-width: 768px------------------*/
 @media(max-width: 768px){

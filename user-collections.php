@@ -1,10 +1,7 @@
 <?php
 include "header.php";
 include "config/con1.php";
-/*if(isset($_COOKIE['user']) || isset($_SESSION['user'])){ // qcume er profile-page.php ejy
-  header('location:profile-page.php');
-}*/
-
+require_once "user-logedin.php";
 ?>
 <link rel="stylesheet" type="text/css" href="css/navbar-body.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -14,29 +11,23 @@ include "config/con1.php";
 <body>
 <?php include "cookie.php"; ?>
 <?php
-//   if(isset($_SESSION['user'])){
-//       $id=$_SESSION['user'];
-//   }
-$id = $_SESSION['user'];
-$sql_user = "SELECT * FROM users where id = $id";
+$user_id = $_SESSION['user'];
+$row_user='';
+$sql_user = "SELECT * FROM users where id = $user_id";
 $res_user = mysqli_query($con, $sql_user);
 if(mysqli_num_rows($res_user)==1){
       $row_user= mysqli_fetch_assoc($res_user);
 }
-// ------------count all collection cards-----------------------------
-$sql_count_cards="SELECT sum(AllCount) AS Total_Count from ( (select count(user_id) AS AllCount from card1 WHERE user_id=$id) union all (select count(user_id) AS AllCount from card2 WHERE user_id=$id)union all select count(user_id) AS AllCount from card3 WHERE user_id=$id)t";
-$res_count_cards=mysqli_query($con, $sql_count_cards);
-$count_cards= mysqli_fetch_assoc($res_count_cards);
-// ---------------- collection -------------------------------------
-$sql_collections="SELECT * FROM new_collection_card WHERE user_id=$id";
-$res_collections = mysqli_query($con, $sql_collections);
+
+include "user_form/classes.php";
+isset($_GET['coll-id']) ? $row=Collections::Collection($con, $_GET['coll-id']) : $row=$row_user;
+isset($_GET['coll-id']) ? $count_cards=CountCards::Cards($con, $_GET['coll-id'], $user_id): $count_cards=CountCards::AllCards($con, $user_id);
 
 include "user_form/pagination.php";
 $pagination= new Pagination();
 $pagination->tblName='new_collection_card';
-$collections_row = $pagination->allItems($con, 'user_id', $id);
-// $pp= $pagination->pages($con, 'user_id', $id);
-
+$collections_row = $pagination->allItems($con, 'user_id', $user_id);
+// $pp= $pagination->pages($con, 'user_id', $user_id);
 ?>
 <section class="hidden"></section>
 <section>
@@ -48,29 +39,38 @@ $collections_row = $pagination->allItems($con, 'user_id', $id);
         <div class="d-flex big-container mt-2 mb-5 ">
             <div class="w-22 cont-left text-center">
                 <div>
-                     <img src="images_users/<?php echo $row_user['image']?>">
+                     <img src=" <?php echo isset($_GET['coll-id']) ? 'img/' : 'images_users/'; echo $row['image']; ?>">
                 </div>
-                <div class="my-3"><?php echo $row_user['name']?></div>
+                <div class="my-3"><?php echo $row['name']?></div>
                 <div class="rating">
                     <span class="mx-2"><i class="fa fa-star star"></i></span>
                     <span class="mx-2"> 64</span>
                 </div>
                 <div class="my-4">
                     <span class="mx-2"><i class="fa fa-star star"></i></span>
-                    <span><?php echo $count_cards['Total_Count']; ?></span>
+                    <span><?php echo $count_cards ?></span>
+                </div>
+                <div>
+                    <?php echo isset($_GET['coll-id']) ? $row['description'] : '' ?>
                 </div>
             </div>
             <div class="w-6 center-div mx-5"></div>
             <div class="w-72 cont-right">
                 <div class="d-flex flex-wrap justify-content-between">
                     <?php
+                    isset($_GET['page']) ? $uri_page='page='.$_GET['page'] : $uri_page='';
+
                          while($row=mysqli_fetch_assoc($collections_row)){
+                    // isset($_GET['coll-id'])==$row['id'] ? $active_class='active-collection' : $active_class='';
+
                     ?>
-                    <div class="w-22 collection-item">
-                        <div class="h-75 img-cont d-flex flex-column justify-content-center">
+                    <div class="w-22 collection-item" >
+                      <a href="<?php echo $_SERVER['PHP_SELF'].'?coll-id='.$row['id'].'&'.$uri_page ?>" class="collection-item-a" data-id="<?php echo $row['id']; ?>">
+                        <div class="h-75 img-cont d-flex flex-column justify-content-center <?php echo isset($_GET['coll-id']) && $_GET['coll-id']==$row['id'] ? 'active-collection' : '' ?>" >
                              <img src="img/<?php echo $row['image'] ?>" class="w-100">
                         </div>
-                        <div class=" text-center my-1 site-color fw-600"><?php echo $row['name_of_collection'] ?></div>
+                        <div class=" text-center mt-2 site-color fw-600"><?php echo $row['name_of_collection'] ?></div>
+                      </a>
                     </div>
                     <?php
                          }
@@ -80,7 +80,9 @@ $collections_row = $pagination->allItems($con, 'user_id', $id);
                 <div>
                     <nav aria-label="Page navigation ">
                         <ul class="pagination justify-content-center">
-                       <?php echo $pp= $pagination->pages($con, 'user_id', $id); ?>
+                       <?php 
+                       $conditions=array('user_id' => $user_id );
+                       echo $pp= $pagination->pages($con, $conditions); ?>
                         </ul>
                       </nav>
                 </div>
@@ -104,7 +106,7 @@ $collections_row = $pagination->allItems($con, 'user_id', $id);
                 <form method="post" enctype="multipart/form-data" id="" action="user_form/user_add_collection.php">
                     <div class="form-group">
                         <label>Name of collection card</label>
-                        <input type="hidden" value="<?php echo $id ?>" name='user_id' >
+                        <input type="hidden" value="<?php echo $user_id ?>" name='user_id' >
                         <input type="text" class="form-control namecoll" name="name-collection">
                     </div>
                     <div class="form-group">

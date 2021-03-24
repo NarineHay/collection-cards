@@ -1,32 +1,4 @@
 <?php  
-// include "config/con1.php";
-    // // count collections ( or cards) in one page
-    // $limit = 8;       
-    // isset($_GET["page"])) ? $page  = $_GET["page"] : $page=1;    
-    // $page_index = ($page-1) * $limit;   
-    // // all collections or cards
-    // $all_items="SELECT * FROM new_collection_card limit $page_index, $limit");
-    // while($row=mysqli_fetch_array($all_items))
-    // {
-    //     //show  data in table or where you want..
-    // }
-    // $all_data=mysqli_query($con,"select count(*) from users");
-    // $user_count = mysqli_fetch_row($all_data);   // say total count 9  
-    // $total_records = $user_count[0];   //9
-    // $total_pages = ceil($total_records / $limit);    // 9/3=  3
-    // if($page >= 2){
-    //     echo "<a href='blog.php?page=".($page-1)."' class='btn 
-    //  customBtn2'>Previous</a>";
-    //   }
-    
-    // if($page<$total_pages) {
-    //     echo "<a href='blog.php?page=".($page+1)."' class='btn customBtn2'>NEXT</a>";   
-    // }   
-
-    // -------------------------------
-    /**
-         * 
-         */
         class Pagination {
             public $tblName='';
             public $limit=8;
@@ -43,9 +15,66 @@
                   return $all_items_in_page;
             }
 
-            public function pages($con, $data, $data_id){
-                $all_items=mysqli_query($con, "SELECT * FROM $this->tblName WHERE $data='$data_id'");
+            public function checkRow( $conditions = array()){
+                    $sql = 'SELECT * FROM '. $this->tblName;
+                    if(!empty($conditions) && is_array($conditions)){
+                         $sql .= ' WHERE ';
+                         $i = 0;
+                         foreach($conditions as $key => $value){
+                              $pre = ($i > 0) ? ' AND ':'';
+                              if(is_array($value)){
+                                    foreach($value as $j => $v) {
+                                        $pre = ($j > 0) ? ' OR ' : ' AND ';
+                                        $sql .= $pre.$key." = '".$v."'";
+                                    } 
+                              }
+                              else{
+                                   $sql .= $pre.$key." = '".$value."'";
+                              }
+                            $i++;
+                          }
+                    }
+                  return $sql;
+             } 
+            // public function CollectionCardItems($con, $data, $data_id, $user_id){
+            //       $all_items_in_page=mysqli_query($con, "SELECT * FROM $this->tblName WHERE $data=$data_id AND user_id=$user_id LIMIT $this->page_index, $this->limit");
+            //       return $all_items_in_page;
+            // }
+             public function AllCards($conditions){
+                 
+                 $sql="(SELECT id, name, image FROM card1 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card2 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card3 where coll_id=$conditions )";
+                 return $sql;
+            }
+            
+             public function CollectionCardItems($con, $conditions = array()){
+                 if(is_array($conditions)){
+                     $sel_items=$this->checkRow($conditions);
+                 }
+                 else{
+                  $sel_items=$this->AllCards($conditions);
+                 }
+                  $sel=$sel_items." LIMIT $this->page_index, $this->limit";
+                  $all_items_in_page=mysqli_query($con, $sel);
+                  return $all_items_in_page;
+            }
+            //  public function CollectionAllCards($con, $conditions){
+                 
+            //      $sql="(SELECT id, name, image FROM card1 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card2 where coll_id=$conditions ) UNION ALL ( SELECT id, name, image FROM card3 where coll_id=$conditions )";
+            //      return $sql;
+            // }
+            
+
+            public function pages($con, $conditions ){
+                // $all_items=mysqli_query($con, "SELECT * FROM $this->tblName WHERE $data_coll=$coll_id AND $data_user=$user_id");
+              if(is_array($conditions)){
+                   $select=$this->checkRow( $conditions );
+              }
+              else{
+                   $select=$this->AllCards( $conditions );
+              }
+                $all_items=mysqli_query($con, $select);
                 $data_count = mysqli_num_rows($all_items); 
+                if($data_count>8){
                 $total_pages = ceil($data_count / $this->limit);  
                 ?>
                     <li class="<?php echo $this->page <= 1 ? 'disabled' : ''; ?>">
@@ -93,6 +122,7 @@
                 </li>
    
 <?php
+              }
             }
         }    
 ?>
